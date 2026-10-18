@@ -2,1099 +2,240 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, noai, noimageai">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Retail Product Council</title>
-<meta name="description" content="A multi-agent product council for retail, running in Claude Code. Expert panels, a layered knowledge base, global case studies and a self-learning loop, set up for any project with /start.">
+<meta name="description" content="A council of retail expert panels for every product decision, grounded in evidence from every region.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003D4F'/%3E%3Cpath d='M18 6h5l-9 20H9z' fill='%23F2617A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --wave:#003D4F; --pink:#F2617A; --jade:#6B9E78; --turmeric:#CC850A; --sapphire:#47A1AD; --amethyst:#634F7D;
-  --bg:#FFFFFF; --surface:#EDF1F3; --ink:#111B1F; --muted:#53666C; --line:#CFDBDF; --code:#F3F7F8; --bar:#003D4F;
-  --head:"Bitter",Georgia,serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  box-sizing:border-box;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08222B;--surface:#0F2E38;--ink:#EAF2F4;--muted:#A3B8BE;--line:#1F4652;--code:#0B2831;--bar:#00303E;}}
-:root[data-theme="dark"]{--bg:#08222B;--surface:#0F2E38;--ink:#EAF2F4;--muted:#A3B8BE;--line:#1F4652;--code:#0B2831;--bar:#00303E;}
-*,*::before,*::after{box-sizing:inherit}
-html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-text-size-adjust:100%}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--body);overflow-x:hidden}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
-.skip{position:absolute;left:-9999px;background:var(--pink);color:#fff;padding:10px 16px;z-index:60}
-.skip:focus{left:12px;top:12px}
-
-.topbar{position:sticky;top:0;z-index:40;background:var(--bar);color:#fff}
-.topbar .inner{display:flex;align-items:center;gap:14px;min-height:58px;padding:0 clamp(16px,3vw,28px)}
-.mark{display:flex;align-items:baseline;gap:2px;font:700 18px/1 var(--head);color:#fff;text-decoration:none}
-.mark .slash{color:var(--pink)}
-.mark small{font:500 12px var(--body);color:#B9D2D8;margin-left:10px}
-.topbar .spacer{margin-left:auto}
-.topbar button,.topbar .gh{background:none;border:1px solid rgba(255,255,255,.35);color:inherit;font:500 13px var(--body);padding:6px 12px;cursor:pointer;text-decoration:none}
-#menuBtn{display:none}
-
-.shell{display:grid;grid-template-columns:272px minmax(0,1fr)}
-.sidebar{border-right:1px solid var(--line);background:var(--bg);position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto;padding:26px 18px 60px}
-.sidebar h4{font:600 12.5px var(--body);color:var(--muted);margin:20px 0 6px;padding-left:10px}
-.sidebar h4:first-child{margin-top:0}
-.sidebar a{display:block;text-decoration:none;font-size:14.5px;padding:6px 10px;border-left:3px solid transparent;color:var(--ink)}
-.sidebar a:hover{background:var(--surface)}
-.sidebar a.active{border-left-color:var(--pink);background:var(--surface);font-weight:600}
-main{min-width:0;padding:0 clamp(18px,4vw,64px) 90px;--col:1120px}
-main>section,main>footer{max-width:var(--col);margin-left:auto;margin-right:auto}
-
-.hero{background:var(--wave);color:#fff;margin:0 calc(-1 * clamp(18px,4vw,64px));padding:clamp(40px,6vw,72px) clamp(18px,4vw,64px) clamp(32px,4vw,52px)}
-.hero-in{max-width:var(--col);margin:0 auto}
-.hero h1{font:700 clamp(30px,5vw,52px)/1.08 var(--head);margin:0;max-width:24ch}
-.hero h1 span{display:block}
-.hero .eyebrow{font:600 13px var(--body);letter-spacing:.12em;text-transform:uppercase;color:#F8B4C0;margin:0 0 14px}
-.hero p{font-size:clamp(16px,1.8vw,19px);color:#D6E5E8;max-width:62ch;margin:20px 0 0}
-.hero .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-.hero .cta a{font:600 15px var(--body);text-decoration:none;padding:11px 18px;border:2px solid #fff}
-.hero .cta a.primary{background:var(--pink);border-color:var(--pink)}
-.stats{display:flex;flex-wrap:wrap;margin-top:34px;border-top:1px solid rgba(255,255,255,.22)}
-.stats div{flex:1 1 130px;padding:18px 20px;border-left:1px solid rgba(255,255,255,.22)}
-.stats div:first-child{border-left:0;padding-left:0}
-.stats b{display:block;font:700 30px/1 var(--head);color:var(--pink);margin-bottom:6px}
-.stats span{font-size:13.5px;color:#C9DCE0}
-
-section{padding-top:clamp(40px,5vw,64px);scroll-margin-top:76px}
-h2{font:700 clamp(24px,3.2vw,34px)/1.18 var(--head);margin:0 0 10px}
-h3{font:700 clamp(18px,2.2vw,22px)/1.3 var(--head);margin:30px 0 10px}
-.rule{height:6px;width:58px;background:var(--pink);margin-bottom:20px}
-p.intro{color:var(--muted);max-width:68ch;margin:0 0 20px}
-p{max-width:72ch}
-.lead{font-size:17.5px}
-
-table{border-collapse:collapse;width:100%;font-size:15.5px;margin:6px 0 4px}
-th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:#fff;background:var(--wave);font-weight:600}
-td:first-child{font-weight:600}
-caption{caption-side:bottom;text-align:left;font-size:13.5px;color:var(--muted);padding:8px 0 0;line-height:1.5}
-@media (max-width:760px){
-  table,thead,tbody,tr,th,td{display:block;width:100%}
-  caption{display:block}
-  thead{position:absolute;left:-9999px}
-  tr{border:1px solid var(--line);border-left:6px solid var(--sapphire);margin-bottom:12px;background:var(--surface)}
-  td{border:0;border-bottom:1px solid var(--line)}
-  tr td:last-child{border-bottom:0}
-  td::before{content:attr(data-label);display:block;font:600 12px var(--body);color:var(--muted);margin-bottom:3px}
-}
-
-code{font:.92em var(--mono);background:var(--code);border:1px solid var(--line);padding:1px 5px}
-.code{position:relative;margin:14px 0}
-.code pre{margin:0;background:var(--code);border:1px solid var(--line);padding:14px 16px;overflow-x:auto;font:14px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word}
-.code button{position:absolute;top:8px;right:8px;font:500 12px var(--body);background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:5px 10px;cursor:pointer}
-
-.note{background:var(--surface);border-left:6px solid var(--turmeric);padding:14px 18px;margin:14px 0;max-width:80ch}
-.note b{display:block;margin-bottom:2px}
-.blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-.blocks div{padding:20px;color:#fff}
-.blocks b{display:block;font:700 17px var(--head);margin-bottom:5px}
-.blocks span{font-size:14.5px;opacity:.94}
-.b1{background:#54666C}.b2{background:var(--sapphire)}.b3{background:var(--wave)}.b4{background:var(--amethyst)}
-.loop{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.loop div{background:var(--surface);padding:15px 17px;border-top:6px solid var(--c)}
-.loop b{display:block;margin-bottom:3px}
-.flow{list-style:none;padding:0;margin:0;counter-reset:step;display:grid;gap:10px}
-.flow li{counter-increment:step;display:grid;grid-template-columns:34px minmax(0,1fr);gap:16px;align-items:start;background:var(--surface);padding:16px 20px 16px 18px;border-left:6px solid var(--wave)}
-.flow li::before{content:counter(step);font:700 22px/1.2 var(--head);color:var(--pink);text-align:right;padding-top:1px}
-.flow strong{display:block;margin-bottom:2px}
-@media (max-width:520px){.flow li{grid-template-columns:24px minmax(0,1fr);gap:12px;padding:14px 16px 14px 12px}.flow li::before{font-size:19px}}
-@media (max-width:560px){.stats div{padding-left:0;border-left:0}}
-
-.persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.panelcard{border-top:6px solid var(--c);background:var(--surface);padding:16px 18px}
-.panelcard h4{font:700 17px var(--head);margin:0 0 4px}
-.panelcard .role{font-size:13.5px;color:var(--muted);margin:0 0 10px}
-.panelcard ul{margin:0;padding-left:18px;font-size:14.5px}
-.panelcard li{margin-bottom:3px}
-
-.finder{background:var(--surface);padding:18px;margin:8px 0 20px}
-.finder label{display:block;font-weight:600;margin-bottom:9px}
-.finder input{width:100%;font:500 17px var(--body);padding:13px 15px;border:2px solid var(--wave);background:var(--bg);color:var(--ink)}
-.finder input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 3px rgba(242,97,122,.3)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.chip{font:500 13.5px var(--body);border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:7px 13px;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--wave);border-color:var(--wave);color:#fff}
-.count{font-size:13.5px;color:var(--muted);margin-top:10px}
-.group{margin-top:28px}
-.group h3{display:flex;align-items:center;gap:12px;margin:0 0 12px}
-.group h3 i{width:30px;height:6px;background:var(--c);display:inline-block}
-.cmd{border-left:6px solid var(--c,var(--wave));background:var(--surface);padding:16px 18px;margin-bottom:12px}
-.cmd-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px}
-.cmd-name{font:600 17px var(--mono);word-break:break-word}
-.cmd-tag{font:600 12px var(--body);color:var(--muted);border:1px solid var(--line);background:var(--bg);padding:2px 9px}
-.cmd dl{display:grid;grid-template-columns:132px minmax(0,1fr);gap:7px 16px;margin:12px 0 0;font-size:15.5px}
-.cmd dt{font-weight:600;color:var(--muted)}
-.cmd dd{margin:0;min-width:0}
-.empty{display:none;background:var(--surface);padding:18px;border-left:6px solid var(--pink)}
-
-.fig{margin:14px 0 22px}
-.fig .scroll{overflow-x:auto;border:1px solid var(--line);background:var(--bg);padding:12px}
-.fig svg{display:block;width:100%;min-width:640px;height:auto}
-.fig figcaption{font-size:13.5px;color:var(--muted);padding-top:8px;max-width:72ch}
-svg .box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
-svg .box-base{fill:var(--wave)}
-svg .t{font:600 14px var(--body);fill:var(--ink)}
-svg .t-w{font:600 14px var(--body);fill:#fff}
-svg .s{font:400 12.5px var(--body);fill:var(--muted)}
-svg .s-w{font:400 12.5px var(--body);fill:#D6E5E8}
-svg .arrow{stroke:var(--ink);stroke-width:2;fill:none}
-svg .arrow-back{stroke:var(--pink);stroke-width:2;fill:none;stroke-dasharray:6 5}
-svg .lbl{font:600 12.5px var(--body);fill:var(--pink)}
-svg .lbl-i{font:500 12.5px var(--body);fill:var(--muted)}
-
-.panelcard{display:flex;flex-direction:column}
-.card-cta{margin-top:auto;align-self:flex-start;font:600 14px var(--body);color:var(--ink);background:var(--bg);border:2px solid var(--c,var(--wave));padding:9px 14px;cursor:pointer;margin-top:16px}
-.panelcard ul{margin-bottom:4px}
-.card-cta:hover{background:var(--c,var(--wave));color:#fff}
-.card-cta.inline{margin:0 0 0 8px;--c:var(--wave)}
-.card-cta,.dlg-close{text-decoration:none;display:inline-block}
-.panelcard:has(.card-cta){position:relative;cursor:pointer;transition:box-shadow .15s}
-.panelcard .card-cta::after{content:"";position:absolute;inset:0}
-.panelcard:has(.card-cta):hover{box-shadow:0 6px 18px rgba(0,0,0,.12)}
-.panelcard:has(.card-cta):hover .card-cta{background:var(--c,var(--wave));color:#fff}
-.card-cta:focus-visible{outline:3px solid var(--c,var(--wave));outline-offset:3px}
-.panel-dialog:target{display:block;position:fixed;inset:0;margin:auto;height:fit-content;z-index:200;box-shadow:0 0 0 100vmax rgba(0,30,40,.6),0 20px 60px rgba(0,0,0,.35)}
-body:has(.panel-dialog:target){overflow:hidden}
-.lead-cta{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-.panel-dialog{border:0;padding:0;width:min(1080px,94vw);max-height:88vh;background:var(--bg);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
-.panel-dialog::backdrop{background:rgba(0,30,40,.6)}
-.dlg-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;background:var(--wave);color:#fff;padding:14px 20px;border-bottom:6px solid var(--pink)}
-.dlg-head h3{margin:0;font:700 20px var(--head);color:#fff}
-.dlg-close{margin-left:auto;background:none;border:1px solid rgba(255,255,255,.5);color:#fff;font:500 13px var(--body);padding:6px 12px;cursor:pointer}
-.dlg-body{padding:8px 22px 26px;overflow:auto;max-height:calc(88vh - 70px)}
-.dlg-body h3{margin-top:22px}
-body:has(dialog[open]){overflow:hidden}
-@media (max-width:760px){.panel-dialog,.panel-dialog:target{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0}.dlg-body{max-height:calc(100dvh - 64px);padding:4px 14px 30px}}
-@media print{.panel-dialog{display:block;position:static;box-shadow:none;width:auto;max-height:none}.dlg-body{max-height:none}.card-cta{display:none}}
-footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
-
-@media (max-width:980px){
-  .shell{grid-template-columns:1fr}
-  #menuBtn{display:inline-block}
-  .sidebar{position:fixed;inset:58px 0 0 0;height:auto;z-index:35;display:none;border-right:0;padding:18px 20px 80px}
-  .sidebar.open{display:block}
-}
-@media (max-width:560px){.cmd dl{grid-template-columns:1fr;gap:2px}.cmd dt{margin-top:7px}.stats div{flex:1 1 44%}.topbar .gh{display:none}}
-@media print{.topbar,.sidebar,.finder,.code button{display:none}.shell{display:block}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/chrome.css">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/retail.css">
+<script>try{var t=localStorage.getItem("council-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 </head>
 <body>
-<a class="skip" href="#overview">Skip to content</a>
-<header class="topbar">
-  <div class="inner">
-    <a class="mark" href="#top"><span class="slash">/</span>council<small>The Retail Product Council</small></a>
-    <span class="spacer"></span>
-    <a class="gh" href="#contribute" id="ghLink" hidden>GitHub</a>
-    <button type="button" id="menuBtn" aria-expanded="false" aria-controls="sidebar">Contents</button>
-    <button type="button" id="themeBtn">Theme</button>
+<a class="gh-skip" href="#content">Skip to content</a>
+<header class="gh">
+  <div class="gh-in">
+    <a class="gh-brand" href="index.html"><span class="gh-slash">/</span>The Retail Product Council</a>
+    <button type="button" class="gh-btn gh-menu" id="ghMenu" aria-expanded="false" aria-controls="ghNav">Menu</button>
+    <nav class="gh-nav" id="ghNav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="use.html">Use it</a>
+      <a href="commands.html">Commands</a>
+      <a href="behaviour.html">How it behaves</a>
+      <a href="knowledge.html">Knowledge</a>
+      <a href="diagrams.html">Diagrams</a>
+      <a href="technical.html">Technical</a>
+      <a href="reference.html">Reference</a>
+      <a href="retail.html">Retail base</a>
+    </nav>
+    <button type="button" class="gh-btn" id="themeBtn" aria-label="Switch light or dark theme">Theme</button>
   </div>
 </header>
+<div class="shell home">
 
-<div class="shell">
-  <nav class="sidebar" id="sidebar" aria-label="Documentation sections">
-    <h4>Understand</h4>
-    <a href="#overview">What the council is</a>
-    <a href="#benefits">Benefits</a>
-    <a href="#how">How a decision runs</a>
-    <a href="#architecture">Architecture</a>
-    <a href="#panels">The expert panels</a>
-    <h4>The retail base</h4>
-    <a href="#retail-areas">Thirteen retail areas</a>
-    <a href="#case-studies">Global case studies</a>
-    <a href="#failures">Failure library</a>
-    <h4>Context engineering</h4>
-    <a href="#layers">Knowledge layers</a>
-    <a href="#evidence">Evidence and conflicts</a>
-    <a href="#ingest">Adding knowledge</a>
-    <h4>Self-learning</h4>
-    <a href="#learning">The learning loop</a>
-    <a href="#checks">Automatic checks</a>
-    <a href="#evals">Behaviour tests</a>
-    <h4>Set up a project</h4>
-    <a href="#requirements">What you need</a>
-    <a href="#start">Start with /start</a>
-    <a href="#fork">Base and client forks</a>
-    <a href="#jira">Jira and Confluence</a>
-    <a href="#vscode">Terminal or VS Code</a>
-    <h4>Use it</h4>
-    <a href="#which-command">Which command do I need?</a>
-    <a href="#commands">Command reference</a>
-    <a href="#modes">Modes and cost tiers</a>
-    <h4>Reference</h4>
-    <a href="#files">Repository map</a>
-    <a href="#tags">Verdicts and tags</a>
-    <a href="#contribute">Contributing and limits</a>
-  </nav>
-
-  <main id="top">
-<div class="hero"><div class="hero-in">
-  <p class="eyebrow">The Retail Product Council</p>
-  <h1><span>A council of retail experts</span><span>for every product decision</span></h1>
-  <p>Expert panels that know retail, from marketplaces and retail media to quick commerce and payments, argue your product decision out in front of you. They are grounded in your own evidence and in sourced case studies from around the world. You leave with a pick, a path and a document you can build on.</p>
-  <div class="cta"><a class="primary" href="#start">Start a project</a><a href="#overview">What it is</a></div>
-  <div class="stats">
-    <div><b>13</b><span>retail areas</span></div>
-    <div><b>6</b><span>expert panels</span></div>
-    <div><b>84</b><span>personas</span></div>
-    <div><b>40+</b><span>global case studies</span></div>
-    <div><b>9</b><span>commands</span></div>
+  <main id="content">
+<div class="hero3"><div class="hero3-in">
+  <div class="hero3-copy">
+    <p class="kicker"><span class="slant"></span>The Retail Product Council by Thoughtworks</p>
+    <h1>A council of retail experts for every product decision</h1>
+    <p class="hero3-lede">Six expert panels ask what only you know, ask for the numbers that decide it, check how the problem was solved or failed in other markets, and argue the decision out in front of you. You leave with a pick, a path and a document you can build on.</p>
+    <div class="hero-actions"><a class="btn" href="use.html#quick-start">Get started</a><a class="btn ghost light" href="#how">See how a decision is made</a></div>
   </div>
+  <figure class="hero3-art">
+    <svg class="ring" viewBox="0 0 460 460" role="group" aria-label="The six expert panels around your question"><circle class="orbit" cx="230" cy="230" r="160"/><line class="spoke" style="--d:0.20s;--c:#F2617A" x1="230" y1="230" x2="230.0" y2="70.0"/><line class="spoke" style="--d:0.35s;--c:#CC850A" x1="230" y1="230" x2="368.6" y2="150.0"/><line class="spoke" style="--d:0.50s;--c:#6B9E78" x1="230" y1="230" x2="368.6" y2="310.0"/><line class="spoke" style="--d:0.65s;--c:#47A1AD" x1="230" y1="230" x2="230.0" y2="390.0"/><line class="spoke" style="--d:0.80s;--c:#634F7D" x1="230" y1="230" x2="91.4" y2="310.0"/><line class="spoke" style="--d:0.95s;--c:#EDF1F3" x1="230" y1="230" x2="91.4" y2="150.0"/><g class="core"><circle cx="230" cy="230" r="66"/><text x="230" y="224" text-anchor="middle" class="t1">Your</text><text x="230" y="250" text-anchor="middle" class="t1">question</text></g><g class="node" tabindex="0" role="button" data-p="board" data-q="Is this worth doing, and how does it fail?" data-n="Board of Advisors" aria-label="Board of Advisors: Is this worth doing, and how does it fail?" style="--d:0.50s"><circle cx="230.0" cy="70.0" r="44" fill="#F2617A"/><text x="230.0" y="75.0" text-anchor="middle" style="fill:#FFFFFF">Board</text></g><g class="node" tabindex="0" role="button" data-p="leaders" data-q="Is this the right product bet, and how do we measure it?" data-n="Product Leaders" aria-label="Product Leaders: Is this the right product bet, and how do we measure it?" style="--d:0.65s"><circle cx="368.6" cy="150.0" r="44" fill="#CC850A"/><text x="368.6" y="155.0" text-anchor="middle" style="fill:#FFFFFF">Product</text></g><g class="node" tabindex="0" role="button" data-p="tech" data-q="Can we build and run it well?" data-n="Tech Council" aria-label="Tech Council: Can we build and run it well?" style="--d:0.80s"><circle cx="368.6" cy="310.0" r="44" fill="#6B9E78"/><text x="368.6" y="315.0" text-anchor="middle" style="fill:#FFFFFF">Tech</text></g><g class="node" tabindex="0" role="button" data-p="sme" data-q="How does retail actually work here, in this region?" data-n="Retail experts" aria-label="Retail experts: How does retail actually work here, in this region?" style="--d:0.95s"><circle cx="230.0" cy="390.0" r="44" fill="#47A1AD"/><text x="230.0" y="395.0" text-anchor="middle" style="fill:#FFFFFF">Retail</text></g><g class="node" tabindex="0" role="button" data-p="comp" data-q="Has anyone solved this, and where?" data-n="Competitor Intel" aria-label="Competitor Intel: Has anyone solved this, and where?" style="--d:1.10s"><circle cx="91.4" cy="310.0" r="44" fill="#634F7D"/><text x="91.4" y="315.0" text-anchor="middle" style="fill:#FFFFFF">Players</text></g><g class="node" tabindex="0" role="button" data-p="users" data-q="Would shoppers, sellers and staff succeed and be satisfied?" data-n="User Panel" aria-label="User Panel: Would shoppers, sellers and staff succeed and be satisfied?" style="--d:1.25s"><circle cx="91.4" cy="150.0" r="44" fill="#EDF1F3"/><text x="91.4" y="155.0" text-anchor="middle" style="fill:#003D4F">Users</text></g></svg>
+    <figcaption id="ringCap" aria-live="polite"><b>Six independent panels</b><span>Select a panel to see the question it answers.</span></figcaption>
+  </figure>
 </div></div>
+
+
+<section id="stats" class="mosaic-wrap" aria-labelledby="statsH">
+  <h2 id="statsH" class="vh">At a glance</h2>
+  <div class="mosaic">
+    <div style="--c:#F2617A"><b>13</b><span>retail areas</span></div>
+    <div style="--c:#47A1AD"><b>84</b><span>personas</span></div>
+    <div style="--c:#6B9E78"><b>42</b><span>global case studies</span></div>
+    <div style="--c:#CC850A"><b>9</b><span>commands</span></div>
+  </div>
+</section>
 
 <section id="overview">
   <div class="rule"></div>
   <h2>What the council is</h2>
-  <p class="lead">The Retail Product Council is a multi-agent system that runs inside Claude Code, in a terminal or in VS Code. You bring a problem, an idea or a proposal. A Product Lead orchestrator frames it, checks what the knowledge base already knows, asks you only what it cannot answer, calls the expert panels that matter, makes them challenge each other, and ends with two or three options, one named pick and an iteration path.</p>
-  <p>This repository is the <strong>Retail domain base</strong>. It holds what is true across retail: thirteen retail areas, retail expert personas, benchmark companies, sourced case studies from every major region, a failure library and a retail glossary. Each client project starts from a copy of it with one command, <code>/start</code>, and adds its own product context.</p>
-  <h3>The problem it solves</h3>
-  <table>
-    <caption>What changes when product decisions go through the council.</caption>
-    <thead><tr><th>Without it</th><th>With it</th></tr></thead>
-    <tbody>
-      <tr><td>Decisions reflect whoever was in the meeting</td><td>Independent expert panels, chosen for the question</td></tr>
-      <tr><td>Retail expertise is scattered across people and projects</td><td>Fourteen retail expert personas and a shared base every project starts from</td></tr>
-      <tr><td>"Has anyone solved this?" goes unanswered</td><td>A problem index of who solved or failed at it, in which region, and whether it transfers</td></tr>
-      <tr><td>Evidence lives in decks, workbooks and heads</td><td>One knowledge base, with the source's own words behind every fact</td></tr>
-      <tr><td>Premortems run on imagination</td><td>A premortem built from real retail failures</td></tr>
-      <tr><td>The same mistakes repeat</td><td>Each correction becomes a rule the system follows next time</td></tr>
-    </tbody>
-  </table>
-  <h3>What it is not</h3>
-  <p>It does not replace user research. Its simulated users produce hypotheses to test, not findings. It does not own decisions. People do. It is only as good as the context you give it, and it says "not in context" rather than inventing a fact.</p>
-</section>
-
-<section id="benefits">
-  <div class="rule"></div>
-  <h2>Benefits</h2>
-  <p class="intro">What each role gets from it.</p>
-  <div class="persona-grid">
-    <div class="panelcard" style="--c:var(--wave)"><h4>Product managers and BAs</h4><p class="role">Better decisions, faster</p><ul><li>Expert review in minutes, not after a week of meetings</li><li>Questions only about what the evidence cannot answer</li><li>A one-page analysis and a PRD from the same decision</li></ul></div>
-    <div class="panelcard" style="--c:var(--pink)"><h4>New joiners</h4><p class="role">Retail context on day one</p><ul><li>A glossary of over 100 retail terms</li><li>Case studies from India, China, Southeast Asia, Europe, the Americas, Africa and more</li><li>Ask anything with <code>/ask</code> and get the source</li></ul></div>
-    <div class="panelcard" style="--c:var(--jade)"><h4>Delivery and tech leads</h4><p class="role">Feasibility before commitment</p><ul><li>A Tech Council that names effort, risks and boundaries</li><li>Diagrams of every flow a decision touches</li><li>Drafts that sync to Jira and Confluence when connected</li></ul></div>
-    <div class="panelcard" style="--c:var(--amethyst)"><h4>Account and practice leads</h4><p class="role">Knowledge that compounds</p><ul><li>Every project starts from the same retail base</li><li>Learning from one project flows back to the base</li><li>Decisions recorded with outcomes, so you can see what held up</li></ul></div>
+  <p class="lead">The Retail Product Council is a multi-agent system that runs inside Claude Code, in a terminal or in VS Code. You bring a problem, an idea or a proposal. A Product Lead orchestrator frames it, checks what the knowledge base already knows, asks you only what it cannot answer, calls the panels that matter, makes them challenge each other, and ends with a short decision, an iteration path and, if you want one, a clean analysis document.</p>
+  <p>It is a <strong>base for all Thoughtworks retail work</strong>. The base holds what is true across retail: the areas, the experts, the reference players, the case studies, the failures and the vocabulary. Each client project starts from a copy of it and adds its own product.</p>
+  <div class="contrast">
+    <div class="contrast-head"><span>Without it</span><span>With it</span></div>
+    <ul>
+      <li><span class="was">Decisions reflect whoever was in the meeting</span><span class="now">Six independent panels, chosen for the question</span></li>
+      <li><span class="was">Retail expertise is scattered across people and projects</span><span class="now">Fourteen retail experts and one shared base every project starts from</span></li>
+      <li><span class="was">"Amazon does it" ends the argument</span><span class="now">Every borrowed idea names its region and passes a transfer check</span></li>
+      <li><span class="was">Premortems are guesses</span><span class="now">The failure story is built from how comparable retail ventures actually died</span></li>
+      <li><span class="was">Decisions rest on opinion</span><span class="now">Every panel names the figures it needs, and the pick says what each one would change</span></li>
+      <li><span class="was">The thinking is lost after the meeting</span><span class="now">An analysis document, kept current through the chat, that you can share and build on</span></li>
+      <li><span class="was">The same mistakes repeat</span><span class="now">Each correction becomes a rule the system follows</span></li>
+    </ul>
   </div>
+  <aside class="note"><b>What it is not</b><p>It does not replace user research, and its simulated users produce hypotheses to test rather than findings. It does not own decisions. People do. In the base it knows retail, not your product, and it says so when a fact is missing rather than inventing one.</p></aside>
 </section>
 
 <section id="how">
   <div class="rule"></div>
-  <h2>How a decision runs</h2>
-  <ol class="flow">
-    <li><div><strong>You ask</strong>A question, a problem, a proposal, or a file to add to the knowledge base.</div></li>
-    <li><div><strong>The council looks first, then asks</strong>A scout reads everything your request names and reports what is already known, with sources, for you to correct. Then it asks up to four click-to-answer questions about only the gaps, each with a recommended default.</div></li>
-    <li><div><strong>Panels answer, then ask back</strong>Each panel works in its own context and judges the idea for users, the business and stakeholders. It checks how the problem was solved, or failed, elsewhere in the world. Its questions and the figures it needs come back to you once, merged.</div></li>
-    <li><div><strong>Disagreements are forced into the open</strong>Panels that conflict see each other's argument and must hold, revise or concede, with evidence.</div></li>
-    <li><div><strong>You get a short decision</strong>Two or three approaches including doing nothing, one named pick, an iteration path from the smallest viable version, the data that would flip it, and a diagram when the pick changes how something works.</div></li>
-    <li><div><strong>The system learns</strong>Your corrections become rules. Decisions become records whose outcomes you log later with <code>/check outcome</code>.</div></li>
+  <h2>How a decision gets made</h2>
+  <p class="intro">Six steps from your question to a decision you can defend. Simple questions stop after the first answer.</p>
+  <ol class="path">
+    <li><div><strong>You ask</strong>A question, a problem, a proposal or a file to ingest.</div></li>
+    <li><div><strong>The orchestrator looks it up, then asks</strong>It separates problem from solution and looks up everything your request names, in the knowledge base, past sessions and the global case studies. It tells you what it already knows, then asks only about the gaps, each question with a default.</div></li>
+    <li><div><strong>Panels answer, then ask back</strong>Each panel thinks in its own context and judges the idea for shoppers, the business and stakeholders. Their questions and the figures they need are checked against the knowledge base, and only what it cannot answer comes back to you.</div></li>
+    <li><div><strong>Disagreements are forced into the open</strong>Panels that conflict get each other's argument and must hold, revise or concede.</div></li>
+    <li><div><strong>You get a short decision</strong>Two or three different approaches, each with a verdict, one named pick, an iteration path from the smallest viable version, what data would flip it, and a diagram when the pick changes how something works.</div></li>
+    <li><div><strong>The system learns</strong>Corrections become rules. Decisions become records whose outcomes you track later. What a project learns about retail flows back to the base.</div></li>
   </ol>
 </section>
 
-<section id="architecture">
+<section id="outcomes">
   <div class="rule"></div>
-  <h2>Architecture</h2>
-  <p class="intro">You, the agents, and the knowledge base they read from.</p>
-  <div class="code"><pre>You (product manager, BA or lead)
-        |
-Product Lead orchestrator             main Claude Code session
-        |-- context-scout             finds the facts a request needs, runs first and alone
-        |-- six expert panels         each in its own context
-        |-- problem-radar             finds problems and gaps across all evidence
-        |-- knowledge-curator         ingestion, cleaning, conflict and duplicate scans
-        |-- scripts/diagram.py        renders diagrams, no model tokens
-        |
-Knowledge base (context/)
- 00-sources  ->  10-processed  ->  20-curated  ->  30-working  ->  Confluence, Jira (optional)
- raw files       evidence          agreed truth     drafts</pre><button type="button">Copy</button></div>
-  <p>Panels run as separate subagents on purpose. A panel cannot see another panel's answer, so agreement between two panels means something. Everything passes through the orchestrator, which is the only voice that talks to you.</p>
+  <h2>What you walk away with</h2>
+  <p class="intro">Every full session ends in something you can act on and share, not a transcript of opinions.</p>
+  <div class="bento">
+    <a class="tile big" href="behaviour.html#flow"><b>A decision you can defend</b><span>Two or three real options, a verdict on each, one named pick, the smallest first step, and the data that would change the call.</span><i aria-hidden="true">Read more</i></a>
+    <a class="tile " href="behaviour.html#analysis"><b>A one-page analysis</b><span>Plain language, kept current through the chat, ready to share.</span><i aria-hidden="true">Read more</i></a>
+    <a class="tile " href="diagrams.html"><b>Every flow drawn</b><span>Each user flow, workflow and system the pick touches, today against the option.</span><i aria-hidden="true">Read more</i></a>
+    <a class="tile " href="commands.html"><b>Delivery artifacts</b><span>A PRD, epics and stories. Synced to Confluence and Jira after your approval when connected, saved as files when not.</span><i aria-hidden="true">Read more</i></a>
+    <a class="tile " href="retail/cases.html"><b>The global view</b><span>Who solved or failed at this problem, in which region, and whether it transfers.</span><i aria-hidden="true">Read more</i></a>
+    <a class="tile wide" href="behaviour.html#loop"><b>A council that learns</b><span>Every correction becomes a rule for the next session, and what one project learns about retail reaches the next.</span><i aria-hidden="true">Read more</i></a>
+  </div>
 </section>
 
 <section id="panels">
   <div class="rule"></div>
-  <h2>The expert panels</h2>
-  <p class="intro">Six panels, 84 personas, plus the Product Lead who runs the room. Open any card to see every persona on that panel, how it thinks, and why it is here. Named public figures are reasoning lenses, never quoted. Retail experts are archetypes, never real people.</p>
-  <div class="persona-grid">
-    <div class="panelcard" style="--c:var(--wave)"><h4>Board of Advisors</h4><p class="role">9 thinking principles. Is this worth doing, and how does it fail?</p><ul><li>First Principles, Skin in the Game, Contrarian</li><li>Outsider, Inversion, Executor</li><li>Occam's Razor, Expansionist, Premortem</li></ul><a class="card-cta" href="#dlg-board" data-dialog="dlg-board" role="button" aria-haspopup="dialog">See all 9 advisors <span aria-hidden="true">&rarr;</span></a></div>
-    <div class="panelcard" style="--c:var(--pink)"><h4>Product Leaders</h4><p class="role">6 lenses. Is this the right product bet?</p><ul><li>Focus and craft, primitives and coherence</li><li>Strategy and leverage, outcome selling</li><li>Ecosystems at scale, growth and retention</li></ul><a class="card-cta" href="#dlg-product" data-dialog="dlg-product" role="button" aria-haspopup="dialog">See all 6 product leaders <span aria-hidden="true">&rarr;</span></a></div>
-    <div class="panelcard" style="--c:var(--jade)"><h4>Tech Council</h4><p class="role">5 lenses. Can we build and run it well?</p><ul><li>Domain modelling, data and failure modes</li><li>Boundaries and operations</li><li>Simplicity, feedback, evolutionary design</li></ul><a class="card-cta" href="#dlg-tech" data-dialog="dlg-tech" role="button" aria-haspopup="dialog">See all 5 tech lenses <span aria-hidden="true">&rarr;</span></a></div>
-    <div class="panelcard" style="--c:var(--turmeric)"><h4>Retail Experts</h4><p class="role">14 archetypes across 13 retail areas. How does retail actually work here?</p><ul><li>Marketplaces, retail media (commercial and programmatic), performance marketing, payments</li><li>Fulfilment and quick commerce, supply chain and control tower</li><li>Search and discovery, catalogue, stores, pricing, loyalty, brands</li></ul><a class="card-cta" href="#dlg-retail" data-dialog="dlg-retail" role="button" aria-haspopup="dialog">See all 14 experts and their lenses <span aria-hidden="true">&rarr;</span></a></div>
-    <div class="panelcard" style="--c:var(--sapphire)"><h4>Competitor Intel</h4><p class="role">36 reference players. Has anyone solved this?</p><ul><li>Amazon, Walmart, Flipkart, Meesho, Mercado Libre, Shopee, Coupang</li><li>Criteo, The Trade Desk, JioStar, Instacart, Blinkit, Zepto</li><li>Speaks only from an evidence pack. No pack, no voice</li></ul><a class="card-cta" href="#dlg-competitors" data-dialog="dlg-competitors" role="button" aria-haspopup="dialog">See all 36 reference players <span aria-hidden="true">&rarr;</span></a></div>
-    <div class="panelcard" style="--c:var(--amethyst)"><h4>User Panel</h4><p class="role">14 simulated users. Would people succeed and be satisfied?</p><ul><li>Shoppers, quick commerce shoppers, store shoppers</li><li>Sellers, brand managers, advertisers, delivery partners</li><li>Store, warehouse, planning, support and CRM teams</li></ul><a class="card-cta" href="#dlg-users" data-dialog="dlg-users" role="button" aria-haspopup="dialog">See all 14 simulated users <span aria-hidden="true">&rarr;</span></a></div>
-  </div>
-  <p class="lead-cta">Who runs the room? <a class="card-cta inline" href="#dlg-lead" data-dialog="dlg-lead" role="button" aria-haspopup="dialog">Meet the Product Lead <span aria-hidden="true">&rarr;</span></a></p>
-  <p style="margin-top:16px">Retail experts draw on published work from people such as Daniel Tunkelang (search), Bill Gurley and Andrei Hagiu (marketplaces), Andrew Lipsman and Ari Paparo (retail media and ad tech), Les Binet, Peter Field and Avinash Kaushik (performance marketing), Lora Cecere and Yossi Sheffi (supply chain), Byron Sharp (brands) and Peter Fader (customer value). Each archetype lists its lenses with a link.</p>
-<dialog class="panel-dialog" id="dlg-lead" aria-labelledby="dlg-lead-title">
-  <div class="dlg-head"><h3 id="dlg-lead-title">The Product Lead</h3><a class="dlg-close" href="#panels" role="button" aria-label="Close The Product Lead">Close</a></div>
-  <div class="dlg-body">
-  <table>
-    <caption>The one voice that talks to you.</caption>
-    <thead><tr><th>Role</th><th>What it does</th><th>Who it is</th><th>Why it is on the council</th></tr></thead>
-    <tbody>
-      <tr><td>Product Lead</td><td>The orchestrator. Frames the problem, picks the fewest panels that can answer, runs the room and makes the call</td><td>A composite senior product leader, not a real person</td><td>Someone has to turn many voices into one decision, with the reasoning and dissent written down</td></tr>
-    </tbody>
-  </table>
-  </div>
-</dialog>
-<dialog class="panel-dialog" id="dlg-board" aria-labelledby="dlg-board-title">
-  <div class="dlg-head"><h3 id="dlg-board-title">Board of Advisors</h3><a class="dlg-close" href="#panels" role="button" aria-label="Close Board of Advisors">Close</a></div>
-  <div class="dlg-body">
-  <p>Nine thinking principles, not people. Each tests the idea from one angle and gives a verdict.</p>
-  <table>
-    <caption>The nine advisors and the question each one asks.</caption>
-    <thead><tr><th>Advisor</th><th>The question it asks</th><th>Why it is on the council</th></tr></thead>
-    <tbody>
-      <tr><td>First Principles</td><td>Is the problem real and worth solving, from verified facts only?</td><td>Stops the council solving a problem nobody has</td></tr>
-      <tr><td>Skin in the Game</td><td>Has anyone shown commitment by behaviour: workarounds, tickets, lost deals, money spent?</td><td>Separates real demand from polite interest</td></tr>
-      <tr><td>Contrarian</td><td>What risks has nobody found yet: consumer protection, privacy, payments rules, operations load, churn?</td><td>Every room needs someone paid to disagree</td></tr>
-      <tr><td>Outsider</td><td>How would another industry solve this, and which habits are only habits?</td><td>Retail insiders stop seeing their own jargon and assumptions</td></tr>
-      <tr><td>Inversion</td><td>What conditions would guarantee failure, and which assumption holds the whole idea up?</td><td>Finding the load-bearing assumption is cheaper before launch</td></tr>
-      <tr><td>Executor</td><td>What is the smallest real-user test this week, with a success and a kill signal?</td><td>Turns debate into a test that can run now</td></tr>
-      <tr><td>Occam's Razor</td><td>What is the fewest moving parts that still proves the idea, including non-software options?</td><td>Retail teams over-build. This voice cuts scope</td></tr>
-      <tr><td>Expansionist</td><td>What is the three-year upside: reach, data flywheel, switching costs?</td><td>Keeps a small first step from hiding a big opportunity</td></tr>
-      <tr><td>Premortem</td><td>It failed 12 months after launch. What happened, when did it become inevitable, and what warned us?</td><td>Grounded in the failure library, so the story comes from how real retail ventures died</td></tr>
-    </tbody>
-  </table>
-  </div>
-</dialog>
-<dialog class="panel-dialog" id="dlg-product" aria-labelledby="dlg-product-title">
-  <div class="dlg-head"><h3 id="dlg-product-title">Product Leaders</h3><a class="dlg-close" href="#panels" role="button" aria-label="Close Product Leaders">Close</a></div>
-  <div class="dlg-body">
-  <p>Six product leaders used as reasoning lenses. The council reasons the way their public work suggests. They are never quoted and have no involvement.</p>
-  <table>
-    <caption>The six product lenses, what each is known for, and why each is here.</caption>
-    <thead><tr><th>Lens</th><th>Their thinking</th><th>Known for</th><th>Why on this council</th></tr></thead>
-    <tbody>
-      <tr><td>Mike Krieger</td><td>Focus through subtraction: find the one behaviour users love and cut the rest</td><td>Co-founded Instagram, which grew out of a pivot from the check-in app Burbn, and later the news app Artifact</td><td>Retail apps drown in features. He asks what the one loved behaviour is</td></tr>
-      <tr><td>Ivan Zhao</td><td>Primitives over features: a few building blocks that combine into many solutions</td><td>Co-founder and CEO of Notion</td><td>Stops one-off features for every client request and pushes reusable building blocks</td></tr>
-      <tr><td>Shreyas Doshi</td><td>Leverage and impact over busy execution, and strategy before execution</td><td>Product leader at Stripe, Twitter, Google and Yahoo, widely followed for his writing on product sense and prioritisation</td><td>Separates high-leverage work from work that only looks productive</td></tr>
-      <tr><td>Stewart Butterfield</td><td>Sell the transformation, not the feature. The first experience decides adoption</td><td>Co-founded Flickr and Slack, and wrote the memo "We Don't Sell Saddles Here"</td><td>Retail buyers and sellers adopt outcomes, not dashboards</td></tr>
-      <tr><td>Neal Mohan</td><td>Every side of the ecosystem must win, and responsibility is part of the product</td><td>CEO of YouTube since 2023, and earlier a builder of Google's display and video ads business</td><td>Marketplaces and retail media are multi-sided ecosystems at scale</td></tr>
-      <tr><td>Lenny Rachitsky</td><td>Retention is the truth. Activation, and supply first in two-sided markets</td><td>Former product lead at Airbnb, author of Lenny's Newsletter and host of Lenny's Podcast</td><td>Brings growth and marketplace benchmarks, and checks whether they transfer</td></tr>
-    </tbody>
-  </table>
-  </div>
-</dialog>
-<dialog class="panel-dialog" id="dlg-tech" aria-labelledby="dlg-tech-title">
-  <div class="dlg-head"><h3 id="dlg-tech-title">Tech Council</h3><a class="dlg-close" href="#panels" role="button" aria-label="Close Tech Council">Close</a></div>
-  <div class="dlg-body">
-  <p>Five engineering lenses. Martin Fowler joins as an equal participant, not a chair.</p>
-  <table>
-    <caption>The five engineering lenses.</caption>
-    <thead><tr><th>Lens</th><th>Their thinking</th><th>Known for</th><th>Why on this council</th></tr></thead>
-    <tbody>
-      <tr><td>Eric Evans</td><td>Model the domain faithfully and make boundaries between models explicit</td><td>Author of Domain-Driven Design (2003), which named bounded contexts and ubiquitous language</td><td>Retail domains such as catalogue, order and inventory collide constantly. He draws the lines</td></tr>
-      <tr><td>Martin Kleppmann</td><td>Correctness under failure, and explicit consistency guarantees</td><td>Author of Designing Data-Intensive Applications, and a researcher in distributed systems and local-first software</td><td>Orders, payments and stock must stay correct when systems fail</td></tr>
-      <tr><td>Sam Newman</td><td>Incremental, reversible change, with service boundaries that match team boundaries</td><td>Author of Building Microservices and Monolith to Microservices</td><td>Most retail platforms are migrating off a monolith. He plans the safe path</td></tr>
-      <tr><td>Kent Beck</td><td>The smallest change that could possibly work, and reversibility over prediction</td><td>Created Extreme Programming, popularised test-driven development, co-created JUnit and signed the Agile Manifesto</td><td>Keeps the first build small enough to learn from</td></tr>
-      <tr><td>Martin Fowler</td><td>Evolutionary design: keep the hard-to-change decisions few, and refactor continuously</td><td>Chief Scientist at Thoughtworks, author of Refactoring and Patterns of Enterprise Application Architecture, and an Agile Manifesto signatory</td><td>Weighs architecture choices as an equal participant, and keeps internal quality high</td></tr>
-    </tbody>
-  </table>
-  </div>
-</dialog>
-<dialog class="panel-dialog" id="dlg-retail" aria-labelledby="dlg-retail-title">
-  <div class="dlg-head"><h3 id="dlg-retail-title">Retail Experts</h3><a class="dlg-close" href="#panels" role="button" aria-label="Close Retail Experts">Close</a></div>
-  <div class="dlg-body">
-  <p>Fourteen archetypes, one per retail area and two for retail media. Each is a composite of operating experience, never a real person. Each draws on the published work of the people in the second table.</p>
-  <table>
-    <caption>The fourteen retail expert archetypes.</caption>
-    <thead><tr><th>Area</th><th>Archetype</th><th>How they think</th><th>Draws on</th></tr></thead>
-    <tbody>
-      <tr><td>T01</td><td>Former head of digital commerce, multi-brand retailer and D2C brand group</td><td>Choose the platform you can run on day two. Checkout and payment choice drive conversion</td><td>Web Smith</td></tr>
-      <tr><td>T02</td><td>Former catalogue and listing quality lead, large marketplace</td><td>Bad product data shows up as bad search, bad filters and returns. Fix data before ranking</td><td>None yet, general practice</td></tr>
-      <tr><td>T03</td><td>Former search, browse and discovery lead</td><td>Understand the query before tuning the ranking. Treat empty searches as lost demand</td><td>Daniel Tunkelang</td></tr>
-      <tr><td>T04</td><td>Former marketplace general manager</td><td>Not every market suits a marketplace. Whoever owns demand can commoditise supply</td><td>Bill Gurley, Andrei Hagiu, Ben Thompson</td></tr>
-      <tr><td>T05</td><td>Former retail media network commercial lead</td><td>Retail media is built on loyalty data and closed-loop proof. Ask whether spend is new or moved from trade</td><td>Andrew Lipsman</td></tr>
-      <tr><td>T05</td><td>Former programmatic ad tech product lead, DSP and SSP</td><td>Every intermediary takes a fee. Map the supply path, and own the data offsite</td><td>Ari Paparo</td></tr>
-      <tr><td>T06</td><td>Former head of payments, multi-market platform</td><td>Lead with the market's dominant rail, such as UPI, Pix or mobile money. Authorisation rate is revenue</td><td>Nandan Nilekani, Simon Taylor</td></tr>
-      <tr><td>T07</td><td>Former head of fulfilment and last mile</td><td>Density decides cost per order. Stores are often the cheapest nodes. Automation needs volume</td><td>Marc Wulfraat</td></tr>
-      <tr><td>T08</td><td>Former supply chain planning and control tower lead</td><td>A control tower is worth what it changes. Resilience costs money, so spend it where it matters</td><td>Lora Cecere, Yossi Sheffi</td></tr>
-      <tr><td>T09</td><td>Former CPG brand and ecommerce director</td><td>Brands grow by being easy to think of and easy to buy. Watch for channel conflict</td><td>Byron Sharp, Mark Ritson</td></tr>
-      <tr><td>T10</td><td>Former store operations and omnichannel director</td><td>Associate time is the store's scarcest resource. Inventory accuracy makes omnichannel work</td><td>Steve Dennis, Doug Stephens, Natalie Berg</td></tr>
-      <tr><td>T11</td><td>Former pricing, promotions and merchandising lead</td><td>Price is usually the strongest profit lever. Promotions train shoppers to wait</td><td>Hermann Simon</td></tr>
-      <tr><td>T12</td><td>Former loyalty, CRM and personalisation lead</td><td>Customers are not equal in value. Loyalty is a data programme first</td><td>Peter Fader, Clive Humby and Edwina Dunn</td></tr>
-      <tr><td>T13</td><td>Former head of performance marketing, multi-brand marketplace seller and brand aggregator</td><td>Catalogue before ads. Diagnose cost, conversion and stock before touching bids. Read ACOS next to TACoS, and keep some budget for brand building</td><td>Les Binet and Peter Field, Avinash Kaushik</td></tr>
-    </tbody>
-  </table>
-  <table>
-    <caption>The public figures behind the retail lenses. Facts are from their public work, linked in each persona file.</caption>
-    <thead><tr><th>Lens</th><th>Known for</th><th>What it gives the council</th></tr></thead>
-    <tbody>
-      <tr><td>Web Smith</td><td>Founder of 2PM, writing on D2C and modern commerce strategy</td><td>D2C economics and brand-led commerce</td></tr>
-      <tr><td>Daniel Tunkelang</td><td>Search consultant and a founding member of Endeca, known for his work on query understanding</td><td>Query understanding before ranking</td></tr>
-      <tr><td>Bill Gurley</td><td>Venture capitalist at Benchmark, early investor in marketplaces such as Uber, Zillow and OpenTable, and author of "All Markets Are Not Created Equal"</td><td>When a marketplace can work at all</td></tr>
-      <tr><td>Andrei Hagiu</td><td>Economist who researches multi-sided platforms, formerly at Harvard Business School</td><td>Platform against reseller choices</td></tr>
-      <tr><td>Ben Thompson</td><td>Author of Stratechery and of Aggregation Theory</td><td>Why whoever owns demand wins</td></tr>
-      <tr><td>Andrew Lipsman</td><td>Retail media analyst, founder of Media, Ads + Commerce</td><td>Where retail media is heading, including offsite and TV</td></tr>
-      <tr><td>Ari Paparo</td><td>Ad tech veteran and former Google executive, author of Yield</td><td>How ad tech fees and intermediaries really work</td></tr>
-      <tr><td>Nandan Nilekani</td><td>Co-founder of Infosys, founding chairman of Aadhaar, and a key architect of India Stack and UPI</td><td>Public digital rails as commerce infrastructure</td></tr>
-      <tr><td>Simon Taylor</td><td>Author of the Fintech Brainfood newsletter</td><td>Fintech and payments trends</td></tr>
-      <tr><td>Marc Wulfraat</td><td>Founder of MWPVL International, known for tracking Amazon's logistics network</td><td>Fulfilment network design</td></tr>
-      <tr><td>Lora Cecere</td><td>Founder of Supply Chain Insights</td><td>Demand-driven planning and supply chain maturity</td></tr>
-      <tr><td>Yossi Sheffi</td><td>MIT professor and author of The Resilient Enterprise</td><td>Supply chain resilience</td></tr>
-      <tr><td>Byron Sharp</td><td>Director of the Ehrenberg-Bass Institute, author of How Brands Grow</td><td>Mental and physical availability</td></tr>
-      <tr><td>Mark Ritson</td><td>Marketing professor and columnist, founder of the Mini MBA in Marketing</td><td>Evidence-based brand strategy</td></tr>
-      <tr><td>Steve Dennis</td><td>Retail strategist, author of Remarkable Retail</td><td>What makes physical retail worth visiting</td></tr>
-      <tr><td>Doug Stephens</td><td>Retail futurist known as the Retail Prophet, author of Resurrecting Retail</td><td>The future role of the store</td></tr>
-      <tr><td>Natalie Berg</td><td>Retail analyst, co-author with Miya Knights of a book on Amazon</td><td>How Amazon reshapes retail</td></tr>
-      <tr><td>Hermann Simon</td><td>Co-founder of the pricing consultancy Simon-Kucher, author of Confessions of the Pricing Man</td><td>Pricing power</td></tr>
-      <tr><td>Peter Fader</td><td>Wharton professor, author of Customer Centricity</td><td>Customer lifetime value</td></tr>
-      <tr><td>Clive Humby and Edwina Dunn</td><td>Founders of dunnhumby, which built the analytics behind Tesco Clubcard. Humby is credited with "data is the new oil"</td><td>Loyalty data as a business</td></tr>
-      <tr><td>Les Binet and Peter Field</td><td>Effectiveness researchers whose 2013 IPA report, The Long and the Short of It, compared brand building with sales activation</td><td>Balance long-term brand building with short-term activation</td></tr>
-      <tr><td>Avinash Kaushik</td><td>Digital analytics author and writer of the Occam's Razor blog, creator of the See, Think, Do, Care framework</td><td>Plan and measure marketing by audience intent</td></tr>
-    </tbody>
-  </table>
-  </div>
-</dialog>
-<dialog class="panel-dialog" id="dlg-competitors" aria-labelledby="dlg-competitors-title">
-  <div class="dlg-head"><h3 id="dlg-competitors-title">Competitor Intel</h3><a class="dlg-close" href="#panels" role="button" aria-label="Close Competitor Intel">Close</a></div>
-  <div class="dlg-body">
-  <p>Thirty-six reference players. Each speaks only from an evidence pack, and none has a pack yet, so today they point to case studies.</p>
-  <table>
-    <caption>The reference players and what each is a benchmark for.</caption>
-    <thead><tr><th>Company</th><th>Region</th><th>Benchmark for</th></tr></thead>
-    <tbody>
-      <tr><td>Amazon</td><td>Global</td><td>Third-party marketplace fees, retail media at scale, owned DSP</td></tr>
-      <tr><td>Walmart</td><td>North America</td><td>Store-fulfilled ecommerce, Walmart Connect, buying screens with Vizio</td></tr>
-      <tr><td>Flipkart</td><td>India</td><td>Marketplace advertising as a core revenue line</td></tr>
-      <tr><td>Meesho</td><td>India</td><td>Zero-commission marketplace funded by logistics and ads</td></tr>
-      <tr><td>ONDC</td><td>India</td><td>Open commerce network, and why demand does not follow a protocol</td></tr>
-      <tr><td>Mercado Libre</td><td>Latin America</td><td>Commerce, payments and logistics built as one system</td></tr>
-      <tr><td>Sea Limited (Shopee)</td><td>Southeast Asia</td><td>Commerce and payments group reaching profitable scale</td></tr>
-      <tr><td>Coupang</td><td>Korea</td><td>Owned logistics as the marketplace moat</td></tr>
-      <tr><td>Rakuten</td><td>Japan</td><td>One points currency across many services</td></tr>
-      <tr><td>Alibaba</td><td>China</td><td>Instant commerce subsidy wars</td></tr>
-      <tr><td>PDD Holdings (Temu)</td><td>China and global</td><td>Cross-border model exposed to a trade rule</td></tr>
-      <tr><td>Shein</td><td>China and global</td><td>On-demand fashion supply chain (case still to be sourced)</td></tr>
-      <tr><td>Jumia</td><td>Africa</td><td>Narrowing to core markets to reach profit</td></tr>
-      <tr><td>Wildberries</td><td>Russia</td><td>Two-player marketplace concentration</td></tr>
-      <tr><td>Ozon</td><td>Russia</td><td>Two-player marketplace concentration</td></tr>
-      <tr><td>Zalando</td><td>Europe</td><td>Platform infrastructure sold to brands as a service</td></tr>
-      <tr><td>noon</td><td>Middle East</td><td>Sovereign-backed entry against global incumbents</td></tr>
-      <tr><td>Target</td><td>North America</td><td>Stores as fulfilment hubs</td></tr>
-      <tr><td>Tesco</td><td>UK</td><td>Loyalty data as the foundation of retail media</td></tr>
-      <tr><td>Kroger</td><td>North America</td><td>Retail media, insights and loyalty in one unit, and the Ocado scale-back</td></tr>
-      <tr><td>Albertsons</td><td>North America</td><td>A blocked merger and local competition rules</td></tr>
-      <tr><td>Lowe's</td><td>North America and India</td><td>In-house retail technology through a global capability centre</td></tr>
-      <tr><td>Inditex (Zara)</td><td>Europe</td><td>Short lead times and proximity sourcing</td></tr>
-      <tr><td>Abercrombie &amp; Fitch</td><td>North America</td><td>A culture-led brand turnaround</td></tr>
-      <tr><td>Loblaw</td><td>Canada</td><td>Consolidated retail media and data</td></tr>
-      <tr><td>Criteo</td><td>Europe and global</td><td>Commerce media vendor exposed to client concentration</td></tr>
-      <tr><td>The Trade Desk</td><td>North America and global</td><td>Independent DSP under price pressure</td></tr>
-      <tr><td>Magnite</td><td>North America</td><td>Sell-side growth in streaming TV (headline only so far)</td></tr>
-      <tr><td>JioStar (JioHotstar)</td><td>India</td><td>Streaming consolidation and premium video inventory</td></tr>
-      <tr><td>Instacart</td><td>North America</td><td>Renting retail media technology to grocers</td></tr>
-      <tr><td>Blinkit</td><td>India</td><td>Ten-minute delivery from dark stores</td></tr>
-      <tr><td>Zepto</td><td>India</td><td>Advertising as a quick commerce profit driver</td></tr>
-      <tr><td>Swiggy Instamart</td><td>India</td><td>Quick commerce from a food delivery platform</td></tr>
-      <tr><td>Ocado</td><td>UK</td><td>Automated fulfilment technology licensed to grocers</td></tr>
-      <tr><td>Shopify</td><td>Canada and global</td><td>Merchant platform growing through services around the storefront</td></tr>
-      <tr><td>Nike</td><td>Global</td><td>The D2C push and the return to wholesale</td></tr>
-    </tbody>
-  </table>
-  </div>
-</dialog>
-<dialog class="panel-dialog" id="dlg-users" aria-labelledby="dlg-users-title">
-  <div class="dlg-head"><h3 id="dlg-users-title">User Panel</h3><a class="dlg-close" href="#panels" role="button" aria-label="Close User Panel">Close</a></div>
-  <div class="dlg-body">
-  <p>Fourteen simulated users. Their output is always labelled SIMULATED: a hypothesis to test with real users, never a finding.</p>
-  <table>
-    <caption>The simulated users and what each one tests.</caption>
-    <thead><tr><th>Persona</th><th>Group</th><th>What they test</th></tr></thead>
-    <tbody>
-      <tr><td>Online shopper</td><td>End users</td><td>Whether browsing, search, checkout and delivery actually work for someone buying for themselves</td></tr>
-      <tr><td>Quick commerce shopper</td><td>End users</td><td>Speed against price, substitutions and trust in a ten-minute promise</td></tr>
-      <tr><td>Store and click and collect shopper</td><td>End users</td><td>Whether online and in-store journeys join up</td></tr>
-      <tr><td>Marketplace seller</td><td>Supply</td><td>What a change costs a seller in time, fees and listing effort</td></tr>
-      <tr><td>Brand ecommerce manager</td><td>Supply</td><td>Content, digital shelf, retail media and channel conflict from the brand side</td></tr>
-      <tr><td>Delivery partner or rider</td><td>Supply</td><td>Whether the delivery promise is workable on the street</td></tr>
-      <tr><td>Advertiser or agency media buyer</td><td>Customers</td><td>Whether retail media proves results worth renewing</td></tr>
-      <tr><td>Category manager or merchandiser</td><td>Internal</td><td>Range, price, promotion and supplier impact</td></tr>
-      <tr><td>Catalogue and content operations specialist</td><td>Internal</td><td>The real effort behind every new attribute or listing rule</td></tr>
-      <tr><td>Store associate</td><td>Internal</td><td>What a change adds to a busy shift</td></tr>
-      <tr><td>Warehouse or dark store associate</td><td>Internal</td><td>Pick, pack and dispatch effort at peak</td></tr>
-      <tr><td>Supply chain planner</td><td>Internal</td><td>Exceptions, lead times and who acts on an alert</td></tr>
-      <tr><td>Customer support agent</td><td>Internal</td><td>Where orders, deliveries, payments and returns go wrong</td></tr>
-      <tr><td>CRM and loyalty manager</td><td>Internal</td><td>Consent, segments and what customers get for their data</td></tr>
-    </tbody>
-  </table>
-  </div>
-</dialog>
-</section>
-
-<section id="retail-areas">
-  <div class="rule"></div>
-  <h2>Thirteen retail areas</h2>
-  <p class="intro">The scope of the base. Each area has its own expert. A project keeps the areas it touches.</p>
-  <table>
-    <caption>The thirteen retail areas and what each covers.</caption>
-    <thead><tr><th>Area</th><th>Covers</th></tr></thead>
-    <tbody>
-      <tr><td>T01 Commerce platforms and D2C</td><td>Storefront, cart, accounts, headless and composable commerce, D2C, B2B commerce</td></tr>
-      <tr><td>T02 Catalogue and listing</td><td>Product data, attributes, taxonomy, listing quality, content syndication</td></tr>
-      <tr><td>T03 Search, browse and discovery</td><td>Search, browse, product listing pages, product detail pages, recommendations</td></tr>
-      <tr><td>T04 Marketplaces and aggregators</td><td>Third-party sellers, take rates, open networks, aggregator apps</td></tr>
-      <tr><td>T05 Retail media and ad tech</td><td>Sponsored products, offsite and CTV, DSP, SSP, clean rooms, closed-loop measurement</td></tr>
-      <tr><td>T06 Payments and checkout</td><td>Checkout, local payment rails such as UPI and Pix, wallets, BNPL, fraud</td></tr>
-      <tr><td>T07 Fulfilment and delivery</td><td>Order management, delivery options, last mile, shipping aggregators, returns, dark stores</td></tr>
-      <tr><td>T08 Supply chain and control tower</td><td>Planning, inventory, sourcing, end-to-end visibility, exception management</td></tr>
-      <tr><td>T09 Brands and consumer products</td><td>CPG, trade, digital shelf, D2C economics, retailer partnerships</td></tr>
-      <tr><td>T10 Stores and omnichannel</td><td>Store operations, POS, click and collect, ship from store</td></tr>
-      <tr><td>T11 Pricing, promotions and merchandising</td><td>Price, markdown, promotions, assortment, category management</td></tr>
-      <tr><td>T12 Customer, loyalty and personalisation</td><td>Loyalty, CRM, customer data, personalisation, service</td></tr>
-      <tr><td>T13 Performance marketing</td><td>The advertiser's side: campaigns on marketplace ads, Meta and Google, and quick commerce, bidding, keywords, attribution, guardrails and advisory agents</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section id="case-studies">
-  <div class="rule"></div>
-  <h2>Global case studies</h2>
-  <p class="intro">A problem solved in one region may or may not work in another. The council always checks, and always says which region a pattern comes from.</p>
-  <p>Over 40 sourced case studies cover India, China, Southeast Asia, Korea, Japan, the Middle East, Africa, Europe, the UK, Russia, Latin America, the US and Canada. Each one has the facts with the source's own words, a lesson marked as an inference, and a <strong>transfer check</strong> that says where it will not apply.</p>
-  <table>
-    <caption>A sample of the problem index. The full index maps 20 retail problems to their cases.</caption>
-    <thead><tr><th>Problem</th><th>Where it was solved, or failed</th></tr></thead>
-    <tbody>
-      <tr><td>Build a retail media network</td><td>Tesco and dunnhumby (UK), Kroger and Loblaw (North America), Walmart Connect, Flipkart Ads (India), Instacart Carrot Ads</td></tr>
-      <tr><td>Run fast delivery profitably</td><td>Blinkit, Zepto and Instamart (India), Getir's exits (Europe, US), Dunzo (India), Target's stores as hubs</td></tr>
-      <tr><td>Launch or scale a marketplace</td><td>Amazon, Meesho (India), Mercado Libre (Latin America), Zalando (Europe), Jumia (Africa)</td></tr>
-      <tr><td>Integrate payments into commerce</td><td>Mercado Libre, Pix (Brazil), UPI (India), M-Pesa (East Africa)</td></tr>
-      <tr><td>Balance D2C against retail partners</td><td>Nike's return to wholesale, Dollar Shave Club</td></tr>
-    </tbody>
-  </table>
-  <div class="note"><b>Sources age.</b>Every source carries its date. Anything older than six months is marked stale, and a source read as a headline only can never carry a verdict alone.</div>
-</section>
-
-<section id="failures">
-  <div class="rule"></div>
-  <h2>Failure library</h2>
-  <p class="intro">The Premortem tells the story of how an idea failed 12 months after launch. In this council, that story starts from how comparable ventures actually died.</p>
-  <h3>Seven antipatterns</h3>
-  <p>Loot Drop's analysis of about 1,700 failed startups sorts every failure into one of seven antipatterns. In retail and marketplaces two dominate: being out-competed, and unit economics that never worked. Demand is rarely the problem, and marketplaces usually die after early traction, not at launch. The Premortem answers seven self-test questions, one per antipattern, before it writes anything.</p>
-  <div class="loop">
-    <div style="--c:var(--pink)"><b>The Crushed</b>Outgunned or outspent. About half of all failures.</div>
-    <div style="--c:var(--turmeric)"><b>The Math Problem</b>Every sale lost money, at scale.</div>
-    <div style="--c:var(--wave)"><b>The Bonfire</b>Spent as if revenue were a formality.</div>
-    <div style="--c:var(--sapphire)"><b>The Hallucination</b>Built for a customer who did not exist.</div>
-    <div style="--c:var(--amethyst)"><b>The Outlaw</b>Regulation was immovable. Kills slowest.</div>
-    <div style="--c:var(--jade)"><b>The Lemon and The Civil War</b>The product failed, or the team did.</div>
-  </div>
-  <h3>Sixteen retail failure modes</h3>
-  <p>Inside those antipatterns sit sixteen retail mechanisms, each backed by real cases. Examples include scaling before the first market works (Webvan, Getir, TaniHub), automation or warehouses before order density (Kroger and Ocado, Missfresh), subsidised demand mistaken for real demand (Xingsheng Youxuan, Dingdong Maicai, ONDC), a model exported without local fit (Poshmark UK), inflated metrics (Zilingo), and a platform or public rail that removes your role (PayMate after UPI).</p>
-  <h3>Failures by region</h3>
-  <p>Over 40 hand-checked retail failures are grouped by region (China, India, Southeast Asia, Europe and the UK, North America and more), drawn from a classified list of 278 retail failures. A premortem picks its nearest case from the same region as the idea.</p>
-  <div class="note"><b>Directional, not proof.</b>Loot Drop is AI-assisted and its counts differ between pages. It ranks causes and supplies real cases, but never supplies a number to a verdict.</div>
-</section>
-
-<section id="layers">
-  <div class="rule"></div>
-  <h2>Knowledge layers</h2>
-  <p class="intro">Context engineering is the heart of the council. Knowledge moves through four layers, and each layer has its own rules.</p>
-  <div class="blocks">
-    <div class="b1"><b>00 Sources</b><span>Raw files, exactly as received. Never edited, so you can always go back to what was actually said.</span></div>
-    <div class="b2"><b>10 Processed</b><span>Cleaned transcripts, source reviews and research notes. Evidence, quoted.</span></div>
-    <div class="b3"><b>20 Curated</b><span>Agreed truth: glossary, key facts, decisions, case studies. Changes only with your go.</span></div>
-    <div class="b4"><b>30 Working</b><span>Drafts, PRDs, epics and stories, built from curated truth.</span></div>
-  </div>
-  <h3>Read order and cost</h3>
-  <p>Agents read curated first, processed as evidence, and working files only for the task in hand. A self-building index and compact persona cards keep each request cheap. Raw sources are read only during ingestion.</p>
-</section>
-
-<section id="evidence">
-  <div class="rule"></div>
-  <h2>Evidence and conflicts</h2>
-  <h3>Every claim is tagged</h3>
-  <p>Verified claims carry the source's own words, for example <code>[V: S-261011-LC "62% of units sold in Q4 2024"]</code>. Inferred claims are tagged <code>[I]</code> with their reasoning. Unknowns are tagged <code>[U]</code>. A hook checks every quote against its file when a session is saved, so an invented quote is caught.</p>
-  <h3>Conflicts stop the work</h3>
-  <p>When two sources disagree, the council stops and asks you which to follow. Your answer goes in the decisions ledger, so the same conflict is never asked twice.</p>
-  <h3>Context before questions</h3>
-  <p>The council never asks you something the knowledge base already answers. It tells you what it knows, with sources, and asks only about the gaps.</p>
-</section>
-
-<section id="ingest">
-  <div class="rule"></div>
-  <h2>Adding knowledge</h2>
-  <ol class="flow">
-    <li><div><strong>Drop files in the inbox</strong>Documents, decks, spreadsheets, transcripts, into <code>context/00-sources/inbox/</code>. Or point at a web page.</div></li>
-    <li><div><strong>Type /ingest</strong><code>/ingest context/00-sources/inbox/</code> registers each source, cleans transcripts, and writes a source review.</div></li>
-    <li><div><strong>Conflicts and duplicates come to you</strong>Every fact is checked against what is already known.</div></li>
-    <li><div><strong>You approve curated changes</strong>Proposed changes to agreed truth wait for your go. Otherwise the source stays as evidence only.</div></li>
-  </ol>
-</section>
-
-<section id="learning">
-  <div class="rule"></div>
-  <h2>The learning loop</h2>
-  <p class="intro">The council gets better the more you correct it.</p>
-  <div class="loop">
-    <div style="--c:var(--wave)"><b>1. It produces</b>A decision, a draft or a source review.</div>
-    <div style="--c:var(--pink)"><b>2. You correct</b>"That was only a proposal." "Wrong definition."</div>
-    <div style="--c:var(--jade)"><b>3. It writes a lesson</b>Mistake, root cause and a testable rule. Saved only with your yes.</div>
-    <div style="--c:var(--amethyst)"><b>4. Every session reads it</b>Active lessons load at the start of every session as rules.</div>
-  </div>
-  <p style="margin-top:16px">A correction that happens twice is counted as a recurrence. <code>/check lesson</code> reviews lessons monthly to promote, merge or retire them. <code>/check outcome</code> records how a past decision turned out, so verdict quality is measured over time.</p>
-</section>
-
-<section id="checks">
-  <div class="rule"></div>
-  <h2>Automatic checks</h2>
-  <p class="intro">Hooks run without being asked. A failed check goes back to Claude to fix before it tells you the work is done.</p>
-  <table>
-    <caption>The six automatic checks and when they run.</caption>
-    <thead><tr><th>When</th><th>What happens</th></tr></thead>
-    <tbody>
-      <tr><td>Session start</td><td>Rebuilds the index and lessons digest, briefs you on lessons, open items and un-ingested sources</td></tr>
-      <tr><td>Before an edit</td><td>Blocks changes to raw sources, and edits to shared knowledge on the main branch</td></tr>
-      <tr><td>Before a question</td><td>Checks every click-to-answer question is clear: one decision, your words, short, real options</td></tr>
-      <tr><td>After an edit</td><td>Rebuilds the index, checks every quoted citation, keeps analysis documents to one page, renders diagrams</td></tr>
-      <tr><td>After each turn</td><td>Adds the ID legend, makes sure the analysis question was asked, logs token usage</td></tr>
-      <tr><td>Before a commit</td><td>Blocks invalid context files and shared-knowledge commits on main</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section id="evals">
-  <div class="rule"></div>
-  <h2>Behaviour tests</h2>
-  <p>Golden cases test how the council behaves, not just whether files are valid. Retail cases check that it names the region a solution came from, grounds the premortem in real failures, treats a headline as a lead rather than evidence, and never fakes a Jira sync. Answers vary from run to run, so the cases are run repeatedly. All four passed their latest runs on 12 October 2026.</p>
-  <div class="code"><pre>python3 scripts/selftest.py        # every automatic check, on a throwaway copy
-python3 scripts/run_evals.py       # golden cases through Claude, graded (asks first, uses tokens)</pre><button type="button">Copy</button></div>
-</section>
-
-<section id="requirements">
-  <div class="rule"></div>
-  <h2>What you need</h2>
-  <table>
-    <caption>Everything a new user needs before typing /start.</caption>
-    <thead><tr><th>Need</th><th>Why</th></tr></thead>
-    <tbody>
-      <tr><td>A Claude plan with Claude Code (Pro, Max, Team or Enterprise) or a Claude Console account</td><td>The council runs inside Claude Code</td></tr>
-      <tr><td>Claude Code in a terminal, or VS Code 1.94 or later with the Claude Code extension</td><td>Where you talk to the council</td></tr>
-      <tr><td>Python 3.8 or later</td><td>The automatic checks and /start are small Python scripts with no dependencies</td></tr>
-      <tr><td>Git</td><td>Keeps a history of what the council learns</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section id="start">
-  <div class="rule"></div>
-  <h2>Start with /start</h2>
-  <p class="intro">From a fresh copy to a working council in about ten minutes. You do not edit any file by hand.</p>
-  <ol class="flow">
-    <li><div><strong>Get your own copy</strong>On GitHub click <em>Use this template</em> and clone your new repository, or download the zip and unzip it into a folder named for your project.</div></li>
-    <li><div><strong>Open the folder</strong>Terminal: <code>cd</code> into it and run <code>claude</code>. VS Code: File, Open Folder, trust it, then open the Claude panel.</div></li>
-    <li><div><strong>Type /start</strong>Answer a few questions. Click an answer or type your own.</div></li>
-    <li><div><strong>Add what you know</strong>Drop files into <code>context/00-sources/inbox/</code> and type <code>/ingest context/00-sources/inbox/</code>.</div></li>
-    <li><div><strong>Ask</strong><code>/council Should we add same-day delivery for our top 50 SKUs?</code></div></li>
-  </ol>
-  <h3>What /start asks</h3>
-  <table>
-    <caption>The /start questions. Every one has a default, and nothing else is needed.</caption>
-    <thead><tr><th>Question</th><th>Answers</th></tr></thead>
-    <tbody>
-      <tr><td>What should this project be called?</td><td>Typed</td></tr>
-      <tr><td>What does the product do, and for whom?</td><td>One or two sentences, kept in your words</td></tr>
-      <tr><td>Which parts of retail does this product cover?</td><td>Shopping experience, Marketplace and advertising, Operations and delivery, Catalogue and merchandising</td></tr>
-      <tr><td>Where will the product launch first?</td><td>India, Southeast Asia, Europe and UK, North America, or any other region</td></tr>
-      <tr><td>Who pays, and who uses it day to day?</td><td>Two separate clickable questions</td></tr>
-      <tr><td>Does this team plan its work in Jira or Confluence?</td><td>Not now (keep drafts local), Already connected, Help me connect</td></tr>
-    </tbody>
-  </table>
-  <h3>What /start does</h3>
-  <p>It checks Python and git, sets up the repository, keeps the retail areas your product touches and archives the rest, writes the configuration and the product line, offers to connect Atlassian, and moves you to a working branch so adding knowledge is never blocked. Then it shows a readiness report.</p>
-  <h3>The readiness report</h3>
-  <p>Type <code>/start status</code> at any time.</p>
-  <table>
-    <caption>An example readiness report right after /start. The next step is always the first red row.</caption>
-    <thead><tr><th>Part</th><th>Status</th><th>Detail</th></tr></thead>
-    <tbody>
-      <tr><td>Project set up</td><td>GREEN</td><td>Acme Quick Commerce</td></tr>
-      <tr><td>Product context</td><td>AMBER</td><td>4 of 5 lines still to confirm</td></tr>
-      <tr><td>Retail experts</td><td>AMBER</td><td>7 experts, not yet checked by a practitioner</td></tr>
-      <tr><td>Simulated users</td><td>RED</td><td>Templates with no real research behind them</td></tr>
-      <tr><td>Project sources</td><td>RED</td><td>None yet. Drop files in the inbox and run /ingest</td></tr>
-      <tr><td>Jira and Confluence</td><td>GREY</td><td>Not used. Drafts stay local</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section id="fork">
-  <div class="rule"></div>
-  <h2>Base and client forks</h2>
-  <p class="intro">One base holds what is true across retail. Each project gets its own copy and adds its own product.</p>
-  <figure class="fig">
-    <div class="scroll">
-      <svg viewBox="0 0 900 300" role="img" aria-labelledby="forkTitle forkDesc">
-        <title id="forkTitle">Retail base and client forks</title>
-        <desc id="forkDesc">The retail domain base on the left holds retail areas, experts, case studies, failure library and glossary. Arrows labelled /start lead to three client projects on the right, each adding its product, sources, Jira and personas. Dashed arrows labelled pull request lead back from the projects to the base, carrying new case studies, failures and terms.</desc>
-        <defs>
-          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
-        </defs>
-        <rect class="box-base" x="20" y="70" width="270" height="160"/>
-        <text class="t-w" x="40" y="104">Retail domain base</text>
-        <text class="s-w" x="40" y="130">13 retail areas and 14 experts</text>
-        <text class="s-w" x="40" y="152">36 reference players</text>
-        <text class="s-w" x="40" y="174">Case studies and failure library</text>
-        <text class="s-w" x="40" y="196">Retail glossary</text>
-        <g>
-          <rect class="box" x="600" y="20" width="280" height="70"/>
-          <text class="t" x="618" y="48">Client project A</text>
-          <text class="s" x="618" y="70">Its product, sources, Jira, users</text>
-          <rect class="box" x="600" y="115" width="280" height="70"/>
-          <text class="t" x="618" y="143">Client project B</text>
-          <text class="s" x="618" y="165">Its product, sources, Jira, users</text>
-          <rect class="box" x="600" y="210" width="280" height="70"/>
-          <text class="t" x="618" y="238">Client project C</text>
-          <text class="s" x="618" y="260">Its product, sources, Jira, users</text>
-        </g>
-        <g style="color:var(--ink)">
-          <path class="arrow" d="M290 120 C 420 120, 470 55, 596 55" marker-end="url(#ah)"/>
-          <path class="arrow" d="M290 150 L 596 150" marker-end="url(#ah)"/>
-          <path class="arrow" d="M290 180 C 420 180, 470 245, 596 245" marker-end="url(#ah)"/>
-        </g>
-        <text class="lbl-i" x="400" y="142">/start</text>
-        <g style="color:var(--pink)">
-          <path class="arrow-back" d="M600 80 C 520 100, 380 210, 294 214" marker-end="url(#ah)"/>
-        </g>
-        <text class="lbl" x="300" y="275">pull request: new cases, failures, terms</text>
-      </svg>
+  <h2>Who is in the room</h2>
+  <p class="intro">Six independent expert panels and the Product Lead who runs the room. The council calls only the panels your question needs. No panel sees another's answer, so when two agree it means something. Select a name to see how that persona thinks.</p>
+  <div class="panels">
+    <div class="ptabs" role="tablist" aria-label="Expert panels">
+      <button type="button" role="tab" id="pt-board" aria-controls="pp-board" aria-selected="true" tabindex="0" style="--c:#F2617A"><i></i>Board of Advisors</button>
+      <button type="button" role="tab" id="pt-leaders" aria-controls="pp-leaders" aria-selected="false" tabindex="-1" style="--c:#CC850A"><i></i>Product Leaders</button>
+      <button type="button" role="tab" id="pt-tech" aria-controls="pp-tech" aria-selected="false" tabindex="-1" style="--c:#6B9E78"><i></i>Tech Council</button>
+      <button type="button" role="tab" id="pt-sme" aria-controls="pp-sme" aria-selected="false" tabindex="-1" style="--c:#47A1AD"><i></i>Retail experts</button>
+      <button type="button" role="tab" id="pt-comp" aria-controls="pp-comp" aria-selected="false" tabindex="-1" style="--c:#634F7D"><i></i>Competitor Intel</button>
+      <button type="button" role="tab" id="pt-users" aria-controls="pp-users" aria-selected="false" tabindex="-1" style="--c:#003D4F"><i></i>User Panel</button>
     </div>
-    <figcaption>Client material never goes into the base. Learning that is true across retail comes back through a pull request, so every project benefits.</figcaption>
-  </figure>
-</section>
-
-<section id="jira">
-  <div class="rule"></div>
-  <h2>Jira and Confluence</h2>
-  <p class="intro">Optional. Not every team uses them, and the council never assumes they are connected.</p>
-  <p>Without them, decisions, PRDs, epics and stories are saved as files. With them, <code>/draft</code> searches first so it never duplicates a page or ticket, shows the exact changes, and syncs only after your go.</p>
-  <ol class="flow">
-    <li><div><strong>Type /start connect</strong>It adds Atlassian's official server to the project and asks for your Jira project key and Confluence space.</div></li>
-    <li><div><strong>Sign in once</strong>Terminal: run <code>claude</code> again, approve the "atlassian" server if asked, type <code>/mcp</code>, choose atlassian, sign in in the browser. VS Code: open a new conversation, type <code>/mcp</code>, choose atlassian, sign in.</div></li>
-    <li><div><strong>Check</strong><code>/start status</code> shows the Jira row. If sign-in fails, your Atlassian site admin may need to allow the server. Drafts stay local until then.</div></li>
-  </ol>
-</section>
-
-<section id="vscode">
-  <div class="rule"></div>
-  <h2>Terminal or VS Code</h2>
-  <table>
-    <caption>The council works the same in both. These are the differences worth knowing.</caption>
-    <thead><tr><th>Topic</th><th>Terminal</th><th>VS Code extension</th></tr></thead>
-    <tbody>
-      <tr><td>Start</td><td><code>claude</code> in the project folder</td><td>Open the folder, open the Claude panel</td></tr>
-      <tr><td>Slash commands</td><td>All</td><td>A subset shows in the <code>/</code> list. Type the request in words if one is missing, or switch the extension to terminal mode</td></tr>
-      <tr><td>Checks without typing</td><td>Run the Python scripts</td><td>Terminal, Run Task, then any "Council:" task</td></tr>
-      <tr><td>Windows</td><td colspan="2">The automatic checks call <code>python3</code>. If only <code>py</code> works, ask IT to put <code>python3</code> on the PATH, or use WSL. VS Code tasks already use <code>py -3</code></td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section id="which-command">
-  <div class="rule"></div>
-  <h2>Which command do I need?</h2>
-  <table>
-    <caption>Start from what you want to do.</caption>
-    <thead><tr><th>I want to</th><th>Type</th></tr></thead>
-    <tbody>
-      <tr><td>Set up a new project</td><td><code>/start</code></td></tr>
-      <tr><td>See what is ready and what to add next</td><td><code>/start status</code></td></tr>
-      <tr><td>Get a product decision</td><td><code>/council &lt;question&gt;</code></td></tr>
-      <tr><td>Look something up, or get one expert's view</td><td><code>/ask &lt;question&gt;</code> or <code>/ask premortem: &lt;idea&gt;</code></td></tr>
-      <tr><td>Add a document, transcript or web page</td><td><code>/ingest &lt;file, folder or url&gt;</code></td></tr>
-      <tr><td>Draw the flows a feature touches</td><td><code>/diagram &lt;request&gt;</code></td></tr>
-      <tr><td>Turn a decision into a PRD or stories</td><td><code>/draft prd &lt;decision&gt;</code></td></tr>
-      <tr><td>Brief designers on each option</td><td><code>/handoff &lt;decision&gt;</code></td></tr>
-      <tr><td>Check the health of the knowledge base</td><td><code>/check</code></td></tr>
-      <tr><td>Share my changes for review</td><td><code>/open-pr</code></td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section id="commands">
-  <div class="rule"></div>
-  <h2>Command reference</h2>
-  <p class="intro">Slash commands run inside Claude Code. Terminal commands run in a terminal or as a VS Code task. Search by name or by what you want to do.</p>
-  <div class="finder" role="search">
-    <label for="q">Find a command</label>
-    <input id="q" type="search" placeholder="Try: jira, competitor, PRD, premortem, readiness" autocomplete="off">
-    <div class="chips" id="chips" aria-label="Filter by group"></div>
-    <div class="count" id="count" aria-live="polite"></div>
+    <div class="pane" role="tabpanel" id="pp-board" aria-labelledby="pt-board" style="--c:#F2617A">
+      <p class="pq">Is this worth doing, and how does it fail?</p>
+      <dl><dt>Who is inside</dt><dd>Nine thinking principles: first principles, skin in the game, contrarian, outsider, inversion, executor, Occam's razor, expansionist and premortem. The Premortem builds its failure story from real retail failures.</dd><dt>Called for</dt><dd>Validating an idea, brainstorming, checking the problem is real.</dd></dl>
+      <h4 class="pmeet">Meet the panel</h4><div class="pchips"><button type="button" class="pchip" data-persona="board:0">First Principles Thinker</button><button type="button" class="pchip" data-persona="board:1">Skin in the Game</button><button type="button" class="pchip" data-persona="board:2">The Contrarian</button><button type="button" class="pchip" data-persona="board:3">The Outsider</button><button type="button" class="pchip" data-persona="board:4">Inversion</button><button type="button" class="pchip" data-persona="board:5">The Executor</button><button type="button" class="pchip" data-persona="board:6">Occam&#x27;s Razor</button><button type="button" class="pchip" data-persona="board:7">The Expansionist</button><button type="button" class="pchip" data-persona="board:8">Premortem Analyser</button></div>
+    </div>
+    <div class="pane" role="tabpanel" id="pp-leaders" aria-labelledby="pt-leaders" style="--c:#CC850A" hidden>
+      <p class="pq">Is this the right product bet, and how do we measure it?</p>
+      <dl><dt>Who is inside</dt><dd>Six product minds with equal voices, used as reasoning lenses and never quoted: focus and craft, primitives, leverage, first experience, ecosystems, retention.</dd><dt>Called for</dt><dd>Strategy, prioritisation and metrics.</dd></dl>
+      <h4 class="pmeet">Meet the panel</h4><div class="pchips"><button type="button" class="pchip" data-persona="leaders:0">Ivan Zhao</button><button type="button" class="pchip" data-persona="leaders:1">Lenny Rachitsky</button><button type="button" class="pchip" data-persona="leaders:2">Mike Krieger</button><button type="button" class="pchip" data-persona="leaders:3">Neal Mohan</button><button type="button" class="pchip" data-persona="leaders:4">Shreyas Doshi</button><button type="button" class="pchip" data-persona="leaders:5">Stewart Butterfield</button></div>
+    </div>
+    <div class="pane" role="tabpanel" id="pp-tech" aria-labelledby="pt-tech" style="--c:#6B9E78" hidden>
+      <p class="pq">Can we build and run it well?</p>
+      <dl><dt>Who is inside</dt><dd>Five software architects, no chair: domain models, data and failure, migration and operations, the smallest reversible step, evolvability.</dd><dt>Called for</dt><dd>Feasibility and architecture.</dd></dl>
+      <h4 class="pmeet">Meet the panel</h4><div class="pchips"><button type="button" class="pchip" data-persona="tech:0">Eric Evans</button><button type="button" class="pchip" data-persona="tech:1">Kent Beck</button><button type="button" class="pchip" data-persona="tech:2">Martin Fowler</button><button type="button" class="pchip" data-persona="tech:3">Martin Kleppmann</button><button type="button" class="pchip" data-persona="tech:4">Sam Newman</button></div>
+    </div>
+    <div class="pane" role="tabpanel" id="pp-sme" aria-labelledby="pt-sme" style="--c:#47A1AD" hidden>
+      <p class="pq">How does retail actually work here, in this region?</p>
+      <dl><dt>Who is inside</dt><dd>Fourteen archetypes across thirteen retail areas, from marketplaces, retail media and performance marketing to payments, quick commerce, supply chain and stores. Each draws on the public work of named practitioners and researchers.</dd><dt>Called for</dt><dd>Market, operating model and regional questions.</dd></dl>
+      <h4 class="pmeet">Meet the panel</h4><div class="pchips"><button type="button" class="pchip" data-persona="sme:0">Former head of digital commerce, multi-brand retailer and D2C brand group</button><button type="button" class="pchip" data-persona="sme:1">Former catalogue and listing quality lead, large marketplace</button><button type="button" class="pchip" data-persona="sme:2">Former search, browse and discovery lead, global ecommerce company</button><button type="button" class="pchip" data-persona="sme:3">Former marketplace general manager, multi-region marketplace and aggregator</button><button type="button" class="pchip" data-persona="sme:4">Former programmatic ad tech product lead, DSP and SSP side</button><button type="button" class="pchip" data-persona="sme:5">Former retail media network commercial lead, grocery and mass retailer</button><button type="button" class="pchip" data-persona="sme:6">Former head of payments, multi-market commerce platform</button><button type="button" class="pchip" data-persona="sme:7">Former head of fulfilment and last mile, grocery and general merchandise</button><button type="button" class="pchip" data-persona="sme:8">Former supply chain planning and control tower lead, global retailer</button><button type="button" class="pchip" data-persona="sme:9">Former CPG brand and ecommerce director, global consumer products company</button><button type="button" class="pchip" data-persona="sme:10">Former store operations and omnichannel director, mass and specialty retail</button><button type="button" class="pchip" data-persona="sme:11">Former pricing, promotions and merchandising lead, grocery and general merchandise</button><button type="button" class="pchip" data-persona="sme:12">Former loyalty, CRM and personalisation lead, grocer and marketplace</button><button type="button" class="pchip" data-persona="sme:13">Former head of performance marketing, multi-brand marketplace seller and brand aggregator</button></div>
+    </div>
+    <div class="pane" role="tabpanel" id="pp-comp" aria-labelledby="pt-comp" style="--c:#634F7D" hidden>
+      <p class="pq">Has anyone solved this, and where?</p>
+      <dl><dt>Who is inside</dt><dd>Thirty-six reference players from India, China, Southeast Asia, Korea, Japan, the Middle East, Africa, Europe, Russia and the Americas. Benchmarks, not rivals. With no evidence pack, a player stays silent.</dd><dt>Called for</dt><dd>Benchmark questions and evidence checks.</dd></dl>
+      <h4 class="pmeet">Meet the panel</h4><div class="pchips"><button type="button" class="pchip" data-persona="comp:0">Abercrombie &amp; Fitch expert</button><button type="button" class="pchip" data-persona="comp:1">Albertsons expert</button><button type="button" class="pchip" data-persona="comp:2">Alibaba expert</button><button type="button" class="pchip" data-persona="comp:3">Amazon expert</button><button type="button" class="pchip" data-persona="comp:4">Blinkit expert</button><button type="button" class="pchip" data-persona="comp:5">Coupang expert</button><button type="button" class="pchip" data-persona="comp:6">Criteo expert</button><button type="button" class="pchip" data-persona="comp:7">Flipkart expert</button><button type="button" class="pchip" data-persona="comp:8">Inditex (Zara) expert</button><button type="button" class="pchip" data-persona="comp:9">Instacart expert</button><button type="button" class="pchip" data-persona="comp:10">JioStar (JioHotstar) expert</button><button type="button" class="pchip" data-persona="comp:11">Jumia expert</button><button type="button" class="pchip" data-persona="comp:12">Kroger expert</button><button type="button" class="pchip" data-persona="comp:13">Loblaw expert</button><button type="button" class="pchip" data-persona="comp:14">Lowe&#x27;s expert</button><button type="button" class="pchip" data-persona="comp:15">Magnite expert</button><button type="button" class="pchip" data-persona="comp:16">Meesho expert</button><button type="button" class="pchip" data-persona="comp:17">Mercado Libre expert</button><button type="button" class="pchip" data-persona="comp:18">Nike expert</button><button type="button" class="pchip" data-persona="comp:19">noon expert</button><button type="button" class="pchip" data-persona="comp:20">Ocado expert</button><button type="button" class="pchip" data-persona="comp:21">ONDC (open network) expert</button><button type="button" class="pchip" data-persona="comp:22">Ozon expert</button><button type="button" class="pchip" data-persona="comp:23">PDD Holdings (Temu) expert</button><button type="button" class="pchip" data-persona="comp:24">Rakuten expert</button><button type="button" class="pchip" data-persona="comp:25">Sea Limited (Shopee) expert</button><button type="button" class="pchip" data-persona="comp:26">Shein expert</button><button type="button" class="pchip" data-persona="comp:27">Shopify expert</button><button type="button" class="pchip" data-persona="comp:28">Swiggy Instamart expert</button><button type="button" class="pchip" data-persona="comp:29">Target expert</button><button type="button" class="pchip" data-persona="comp:30">Tesco expert</button><button type="button" class="pchip" data-persona="comp:31">The Trade Desk expert</button><button type="button" class="pchip" data-persona="comp:32">Walmart expert</button><button type="button" class="pchip" data-persona="comp:33">Wildberries expert</button><button type="button" class="pchip" data-persona="comp:34">Zalando expert</button><button type="button" class="pchip" data-persona="comp:35">Zepto expert</button></div>
+    </div>
+    <div class="pane" role="tabpanel" id="pp-users" aria-labelledby="pt-users" style="--c:#003D4F" hidden>
+      <p class="pq">Would shoppers, sellers and staff succeed and be satisfied?</p>
+      <dl><dt>Who is inside</dt><dd>Fourteen simulated users: shoppers, quick commerce shoppers, sellers, brand managers, advertisers, delivery partners, store, warehouse, planning, support and CRM teams. Always labelled simulated.</dd><dt>Called for</dt><dd>Usability and adoption questions.</dd></dl>
+      <h4 class="pmeet">Meet the panel</h4><div class="pchips"><button type="button" class="pchip" data-persona="users:0">Advertiser or agency media buyer</button><button type="button" class="pchip" data-persona="users:1">Brand ecommerce manager</button><button type="button" class="pchip" data-persona="users:2">Catalogue and content operations specialist</button><button type="button" class="pchip" data-persona="users:3">Category manager or merchandiser</button><button type="button" class="pchip" data-persona="users:4">CRM and loyalty manager</button><button type="button" class="pchip" data-persona="users:5">Customer support agent</button><button type="button" class="pchip" data-persona="users:6">Delivery partner or rider</button><button type="button" class="pchip" data-persona="users:7">Warehouse or dark store associate</button><button type="button" class="pchip" data-persona="users:8">Marketplace seller</button><button type="button" class="pchip" data-persona="users:9">Store and click and collect shopper</button><button type="button" class="pchip" data-persona="users:10">Online shopper</button><button type="button" class="pchip" data-persona="users:11">Quick commerce shopper</button><button type="button" class="pchip" data-persona="users:12">Store associate</button><button type="button" class="pchip" data-persona="users:13">Supply chain planner</button></div>
+    </div>
   </div>
-  <div id="cmdList"></div>
-  <div class="empty" id="empty">No command matches that search. Try a shorter word, or clear the search.</div>
+  <p class="more"><a class="link" href="technical.html#personas">See every persona</a></p>
 </section>
 
-<section id="modes">
+<section id="usecases">
   <div class="rule"></div>
-  <h2>Modes and cost tiers</h2>
-  <p class="intro">You never pick a mode. The council infers it, says which one it chose, and you correct it in a few words.</p>
-  <table>
-    <caption>The five modes. Override with --mode.</caption>
-    <thead><tr><th>Your request sounds like</th><th>Mode</th></tr></thead>
-    <tbody>
-      <tr><td>"Ideas for X", no solution yet</td><td>brainstorm</td></tr>
-      <tr><td>"The checkout flow is clunky", a named feature</td><td>improve</td></tr>
-      <tr><td>"Shoppers abandon at payment", a symptom</td><td>solve</td></tr>
-      <tr><td>"Should we build X", a proposal or PRD</td><td>validate</td></tr>
-      <tr><td>"What are we missing"</td><td>radar</td></tr>
-    </tbody>
-  </table>
-  <table style="margin-top:22px">
-    <caption>Cost tiers. The council picks the cheapest tier that can answer.</caption>
-    <thead><tr><th>Tier</th><th>What runs</th><th>Reply</th></tr></thead>
-    <tbody>
-      <tr><td>0</td><td>A lookup from context</td><td>Under 150 words</td></tr>
-      <tr><td>1</td><td>One persona or panel, compact</td><td>Under 250 words</td></tr>
-      <tr><td>2</td><td>The one or two most relevant panels, two question rounds</td><td>Decision under 300 words</td></tr>
-      <tr><td>3</td><td>Three to six panels, full personas, challenge rounds (<code>--deep</code>)</td><td>Decision under 450 words</td></tr>
-    </tbody>
-  </table>
-  <p>Useful flags: <code>--panels board</code>, <code>--only premortem</code>, <code>--deep</code>, <code>--thorough</code>, <code>--fast</code>, <code>--analysis &lt;slug&gt;</code>, <code>--segment &lt;segment&gt;</code>, <code>--diagram</code>, <code>--no-diagram</code>. <code>/council help</code> lists them all.</p>
+  <h2>When to use it</h2>
+  <p class="intro">Type what you want in plain words. The council picks the mode, the depth and the panels, and tells you what it chose.</p>
+  <div class="uses3">
+    <div class="use3" style="--c:#F2617A"><b>Test an idea before you build it</b><div class="code"><pre>/council validate add 10-minute delivery for our top 200 SKUs</pre><button type="button">Copy</button></div></div>
+    <div class="use3" style="--c:#47A1AD"><b>See how other regions solved it</b><div class="code"><pre>/council how did other markets make quick commerce profitable?</pre><button type="button">Copy</button></div></div>
+    <div class="use3" style="--c:#6B9E78"><b>Get a quick fact or one expert view</b><div class="code"><pre>/ask what does TACoS mean?</pre><button type="button">Copy</button></div></div>
+    <div class="use3" style="--c:#634F7D"><b>Stress-test with real failures</b><div class="code"><pre>/council --panels board --only premortem a zero-commission marketplace for home decor</pre><button type="button">Copy</button></div></div>
+    <div class="use3" style="--c:#CC850A"><b>Turn a decision into delivery</b><div class="code"><pre>/draft prd sessions/2026-10-18-substitution-7F.md</pre><button type="button">Copy</button></div></div>
+    <div class="use3" style="--c:#003D4F"><b>Add your project's evidence</b><div class="code"><pre>/ingest context/00-sources/inbox/</pre><button type="button">Copy</button></div></div>
+  </div>
+  <p class="more"><a class="link" href="use.html#which-command">Which command do I need?</a></p>
 </section>
 
-<section id="files">
+<section id="trust">
   <div class="rule"></div>
-  <h2>Repository map</h2>
-  <table>
-    <caption>Where everything lives.</caption>
-    <thead><tr><th>Path</th><th>What it holds</th></tr></thead>
-    <tbody>
-      <tr><td><code>QUICKSTART.md</code></td><td>The first page a new user reads</td></tr>
-      <tr><td><code>CLAUDE.md</code></td><td>Global rules, loaded every turn</td></tr>
-      <tr><td><code>engagement.config.md</code></td><td>Every path and setting</td></tr>
-      <tr><td><code>.claude/skills/</code>, <code>.claude/agents/</code></td><td>The nine commands, six panels and three helper agents</td></tr>
-      <tr><td><code>personas/</code></td><td>Persona files and compact cards</td></tr>
-      <tr><td><code>context/</code></td><td>The layered knowledge base, with the source manifest and a self-building index</td></tr>
-      <tr><td><code>context/20-curated/case-studies/</code></td><td>Global case studies and the problem index</td></tr>
-      <tr><td><code>context/20-curated/failure-library/</code></td><td>Antipatterns, failure modes and failures by region for the Premortem</td></tr>
-      <tr><td><code>sessions/</code>, <code>analysis/</code>, <code>diagrams/</code></td><td>Saved decisions, one-page analyses and their diagrams</td></tr>
-      <tr><td><code>lessons-log/</code>, <code>evals/</code></td><td>The learning loop and behaviour tests</td></tr>
-      <tr><td><code>scripts/</code></td><td>Hooks, /start, index, lint, citations, diagrams, health, evals</td></tr>
-      <tr><td><code>.vscode/</code></td><td>Recommended extension and "Council:" tasks</td></tr>
-      <tr><td><code>docs/</code></td><td>This page</td></tr>
-    </tbody>
-  </table>
+  <h2>Why you can trust the answer</h2>
+  <p class="intro">The council is only as good as its evidence, so it is strict about where every statement comes from.</p>
+  <div class="trust3">
+    <ol class="principles">
+      <li><b>Every fact has a source</b><span>A claim the decision rests on carries the source's own words, and a check confirms each quote really appears in the file it cites.</span></li>
+      <li><b>It says when it does not know</b><span>A missing fact is reported as "not in context", never filled with a guess. In the base, product facts stay "to confirm" until a project fills them.</span></li>
+      <li><b>Every case names its region</b><span>A solution from another market comes with its region and a transfer check, because density, labour cost, payment rails and regulation differ.</span></li>
+      <li><b>Simulated means simulated</b><span>User Panel answers are hypotheses to test with real users, and always labelled.</span></li>
+    </ol>
+    <figure class="evidence">
+      <figcaption>How a claim is tagged</figcaption>
+      <p class="claim">Target's stores handled 97.6% of merchandise sales in Q1 2026 <span class="tag v">V</span></p>
+      <p class="quote">source file, plus its own words in quotes</p>
+      <p class="claim">Store fulfilment keeps fast delivery affordable <span class="tag i">I</span></p>
+      <p class="quote">inferred from the evidence, with the reasoning stated</p>
+      <p class="claim">How many of your shoppers would pay for same-day <span class="tag u">U</span></p>
+      <p class="quote">unknown: the council asks you for the figure</p>
+      <p class="legend"><span class="tag v">V</span> verified <span class="tag i">I</span> inferred <span class="tag u">U</span> unknown</p>
+    </figure>
+  </div>
+  <p class="more"><a class="link" href="knowledge.html">How knowledge and context work</a></p>
 </section>
 
-<section id="tags">
-  <div class="rule"></div>
-  <h2>Verdicts and tags</h2>
-  <table>
-    <caption>The labels you will see in council output.</caption>
-    <thead><tr><th>Label</th><th>Means</th></tr></thead>
-    <tbody>
-      <tr><td><code>[V: source "words"]</code></td><td>Verified, with the source's own words. Checked against the file on save</td></tr>
-      <tr><td><code>[I]</code></td><td>Inferred, with the reasoning stated</td></tr>
-      <tr><td><code>[U]</code></td><td>Unknown. Not in context</td></tr>
-      <tr><td>SIMULATED</td><td>Output from the simulated users. A hypothesis to test, not a finding</td></tr>
-      <tr><td>BUILD, BUILD WITH CONDITIONS, NEEDS EVIDENCE, KILL</td><td>The verdict on each option. NEEDS EVIDENCE names the cheapest test</td></tr>
-      <tr><td>GREEN, AMBER, RED</td><td>Panel verdicts and readiness status</td></tr>
-      <tr><td>Stale</td><td>A source older than six months</td></tr>
-    </tbody>
-  </table>
+<section id="retail-teaser" class="band">
+  <div class="band-in">
+    <div class="rule"></div>
+    <h2>The retail base</h2>
+    <p class="intro">What every project inherits on day one, built from public sources with the date of each one. Facts older than six months are marked stale.</p>
+    <div class="comp3 c4">
+    <a href="retail/areas.html" style="--c:#003D4F"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="8" width="20" height="20"/><rect x="36" y="8" width="20" height="20"/><rect x="8" y="36" width="20" height="20"/><rect x="36" y="36" width="20" height="20"/></svg><b>Thirteen retail areas</b><span>From commerce platforms and catalogue to retail media, performance marketing, payments, fulfilment and stores. Each with its own expert.</span></a>
+    <a href="retail/cases.html" style="--c:#6B9E78"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="22"/><path d="M10 32h44M32 10c7 7 7 37 0 44M32 10c-7 7-7 37 0 44"/></svg><b>42 global case studies</b><span>Sourced cases from every major region, each with its quoted evidence, the lesson and a transfer check.</span></a>
+    <a href="retail/failures.html" style="--c:#F2617A"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 8 58 54H6z"/><path d="M32 26v14M32 46v2"/></svg><b>Failure library</b><span>Seven antipatterns, sixteen retail failure modes and 76 real failures, read by the Premortem.</span></a>
+    <a href="retail/glossary.html" style="--c:#CC850A"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 10h30l10 10v34H12z"/><path d="M20 28h24M20 36h24M20 44h16"/></svg><b>135 retail terms</b><span>From GMV and take rate to ACOS, dark stores and clean rooms, each with its usage and source.</span></a>
+    </div>
+  </div>
 </section>
 
-<section id="contribute">
-  <div class="rule"></div>
-  <h2>Contributing and limits</h2>
-  <h3>Improving the base</h3>
-  <p>Work on a branch, then open a pull request with <code>/open-pr</code>. Good contributions are new sourced case studies, failures, glossary terms, evidence packs for reference players, and practitioner reviews of the retail experts.</p>
-  <h3>Known limits</h3>
-  <ul>
-    <li>The retail experts are drafts that no practitioner has checked yet.</li>
-    <li>Reference players have no evidence packs yet, so the competitor panel can only point to case studies.</li>
-    <li>Catalogue, control tower and pricing have no sourced case study yet. Most sources are older than six months.</li>
-    <li>The simulated users are templates until real research fills them.</li>
-  </ul>
+<section id="start" class="cta3">
+  <div class="cta3-in">
+    <h2>Start with one question</h2>
+    <p>Copy the base, type <code>/start</code>, answer a few clickable questions. After that, every retail product question is one command away.</p>
+    <div class="cta-actions"><a class="btn dark" href="use.html#quick-start">Get started</a><a class="btn ghost" href="commands.html">Browse commands</a></div>
+  </div>
 </section>
 
-<footer>
-  <p>The Retail Product Council. Built on the Product Council v3.7.3 engine for Claude Code. Case study facts come from public sources listed in <code>context/MANIFEST.md</code>, each with its date. Public figures named here are reasoning lenses and have no involvement with this project.</p>
-</footer>
+<nav class="pager" aria-label="Previous and next page"><span></span><a class="next" href="use.html"><small>Next</small>Use it</a></nav>
   </main>
 </div>
-
-<script>
-const GROUPS = {
-  setup: { label: "Set up", color: "#CC850A" },
-  decide: { label: "Decide", color: "#003D4F" },
-  knowledge: { label: "Build the knowledge base", color: "#6B9E78" },
-  deliver: { label: "Deliver and track", color: "#634F7D" },
-  terminal: { label: "Terminal commands", color: "#47A1AD" }
-};
-const CMDS = [
-  { g:"setup", name:"/start", tag:"New project",
-    what:"Sets up a new project from the retail base. Checks Python and git, asks one round of clickable questions, keeps the retail areas your product touches, writes the configuration, and offers to connect Jira and Confluence.",
-    when:"The first time you open a fresh copy of the base.",
-    usage:"/start [project name]\n/start status\n/start connect\n/start help",
-    out:"A set-up project on a working branch, and a readiness report with the next step.",
-    ex:"/start Acme Quick Commerce\n/start status\n/start connect",
-    keys:"setup new project begin onboarding readiness status ready jira confluence atlassian connect mcp" },
-  { g:"decide", name:"/council", tag:"Session, mode inferred",
-    what:"The one way in for decisions. Reads your request, infers the mode, picks the cheapest tier and the fewest panels, asks a short round of questions, brings back the panels' questions and figures, then returns options with a pick and an iteration path.",
-    when:"Any product question that needs more than a lookup.",
-    usage:"/council [flags] <anything>\n/council --analysis <slug> <next question>",
-    out:"A short decision reply, the full record in sessions/, a diagram when the pick changes how something works, and an analysis document if you want one.",
-    ex:"/council Should we add same-day delivery for our top 50 SKUs?\n/council --mode validate launch sponsored products in search\n/council --panels board --only premortem a retail media network without loyalty data\n/council --deep should we open our marketplace to cross-border sellers?",
-    keys:"decision brainstorm improve solve validate radar premortem options pick iteration diagram analysis deep thorough fast" },
-  { g:"decide", name:"/ask", tag:"Tier 0 or 1, not saved",
-    what:"The cheapest way to use the council. Answers a quick question from context, or gets one persona's or panel's short view.",
-    when:"Lookups, definitions, one expert's take, or a follow-up.",
-    usage:"/ask <question>\n/ask <persona or panel>: <question>",
-    out:"A short answer with sources, or a note that the fact is not in context.",
-    ex:"/ask what does take rate mean?\n/ask premortem: a mid-size grocer launching a retail media network\n/ask Has anyone made 10-minute grocery delivery work outside India?",
-    keys:"lookup quick question glossary definition persona expert premortem case study region" },
-  { g:"decide", name:"/diagram", tag:"No model tokens to render",
-    what:"Draws every flow a feature touches on one static page: user flows, workflows, sequences, data flows, lifecycles, architecture, and today against an option.",
-    when:"You want to see a journey, a system or a change before deciding.",
-    usage:"/diagram <request>\n/diagram demo",
-    out:"An HTML page in diagrams/ with PNG, SVG and PDF export.",
-    ex:"/diagram the checkout flow with UPI and cash on delivery\n/diagram compare store pickup today against ship from store",
-    keys:"diagram flow journey sequence architecture lifecycle compare picture draw export png svg pdf" },
-  { g:"knowledge", name:"/ingest", tag:"Asks before changing truth",
-    what:"Adds a source to the knowledge base: a file, a folder, a web page or a Confluence page. Registers it, cleans transcripts, writes a source review, checks conflicts and duplicates, and proposes curated changes for your go.",
-    when:"Whenever you have new material, or to build a competitor evidence pack.",
-    usage:"/ingest <file | folder | url>\n/ingest --competitor <company>",
-    out:"A source review, any conflicts as questions, and proposed curated changes.",
-    ex:"/ingest context/00-sources/inbox/\n/ingest https://example.com/annual-report\n/ingest --competitor flipkart",
-    keys:"add knowledge source transcript document deck pdf url web confluence competitor evidence pack inbox" },
-  { g:"knowledge", name:"/check", tag:"Every two weeks",
-    what:"The state of the council in one report: a staleness score, knowledge base health, conflicts and duplicates, usage and cost, and whether past verdicts held up. Also records outcomes and reviews lessons.",
-    when:"Every two weeks, or when you ask how the council is doing.",
-    usage:"/check\n/check health\n/check usage\n/check outcome <session>\n/check decision <session>\n/check lesson\n/check fix",
-    out:"A short report and the three fixes that matter most.",
-    ex:"/check\n/check outcome sessions/2026-10-11-same-day-delivery.md\n/check lesson",
-    keys:"health staleness conflicts duplicates usage cost outcome verdict lessons learning fix lint" },
-  { g:"deliver", name:"/draft", tag:"Local, or synced when connected",
-    what:"Turns a decision into a discovery package, a twelve-section PRD, epics or stories. Syncs to Confluence and Jira only after your approval, and only when Atlassian is connected. Otherwise saves locally.",
-    when:"After a BUILD or BUILD WITH CONDITIONS decision.",
-    usage:"/draft package | prd | epics | stories <decision or analysis>",
-    out:"Drafts in context/30-working/, and pages and tickets if connected.",
-    ex:"/draft prd same-day-delivery\n/draft stories sessions/2026-10-11-same-day-delivery.md",
-    keys:"prd epics stories jira confluence delivery draft package sync atlassian" },
-  { g:"deliver", name:"/handoff", tag:"For designers",
-    what:"One self-contained design brief per option, each with its user flow drawn and a paste-ready prompt for the design-variants project.",
-    when:"After a decision, when you want designs for each option.",
-    usage:"/handoff <decision>",
-    out:"Briefs in the handoff folder.",
-    ex:"/handoff same-day-delivery",
-    keys:"design brief designer options prototype handoff" },
-  { g:"deliver", name:"/open-pr", tag:"Team working",
-    what:"Prepares your branch for review: checks files and IDs, summarises every curated change, decision and lesson, commits, pushes, and opens the pull request if a CLI is available.",
-    when:"You changed shared knowledge, rules, lessons or personas.",
-    usage:"/open-pr",
-    out:"A pull request with a readable summary.",
-    ex:"/open-pr",
-    keys:"pull request review share team branch commit push github contribute base" },
-  { g:"terminal", name:"python3 scripts/start_project.py status", tag:"Also a VS Code task",
-    what:"The readiness report without opening Claude Code. Also doctor (checks Python and git) and branch (starts a working branch).",
-    when:"Any time.",
-    usage:"python3 scripts/start_project.py status | doctor | branch <topic>",
-    out:"A table of what is ready and the next step.",
-    ex:"python3 scripts/start_project.py status\npython3 scripts/start_project.py branch pricing-review",
-    keys:"readiness status doctor branch windows terminal task" },
-  { g:"terminal", name:"python3 scripts/selftest.py", tag:"No tokens",
-    what:"Checks every automatic check on a throwaway copy of the repository.",
-    when:"After an upgrade, or when a hook seems to misbehave.",
-    usage:"python3 scripts/selftest.py",
-    out:"A pass or fail line per check.",
-    ex:"python3 scripts/selftest.py",
-    keys:"test hooks selftest check verify upgrade" },
-  { g:"terminal", name:"python3 scripts/run_evals.py", tag:"Uses tokens, asks first",
-    what:"Runs the golden behaviour cases through Claude Code and grades them.",
-    when:"After changing rules, personas or commands.",
-    usage:"python3 scripts/run_evals.py [--case EV-007] [--dry-run] [--no-baseline]",
-    out:"A report in evals/runs/ and a summary row in evals/results.md.",
-    ex:"python3 scripts/run_evals.py --dry-run\npython3 scripts/run_evals.py --case EV-007",
-    keys:"evals golden tests behaviour regression grade" }
-];
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const list=document.getElementById("cmdList");
-function card(c){
-  const el=document.createElement("article");
-  el.className="cmd"; el.dataset.group=c.g;
-  el.dataset.text=[c.name,c.tag,c.what,c.when,c.usage,c.out,c.ex,c.keys].join(" ").toLowerCase();
-  el.innerHTML=`<div class="cmd-head"><span class="cmd-name">${esc(c.name)}</span><span class="cmd-tag">${esc(c.tag)}</span></div>
-    <p>${esc(c.what)}</p>
-    <dl><dt>Use when</dt><dd>${esc(c.when)}</dd><dt>Syntax</dt><dd><code>${esc(c.usage).replace(/\n/g,"<br>")}</code></dd>${c.out?`<dt>You get</dt><dd>${esc(c.out)}</dd>`:""}</dl>
-    <div class="code"><pre>${esc(c.ex)}</pre><button type="button">Copy</button></div>`;
-  return el;
-}
-const groupWraps={};
-Object.entries(GROUPS).forEach(([k,g])=>{
-  const wrap=document.createElement("div");
-  wrap.className="group"; wrap.style.setProperty("--c",g.color);
-  wrap.innerHTML=`<h3><i></i>${g.label}</h3>`;
-  CMDS.filter(c=>c.g===k).forEach(c=>{const el=card(c);el.style.setProperty("--c",g.color);wrap.appendChild(el);});
-  list.appendChild(wrap); groupWraps[k]=wrap;
-});
-const chips=document.getElementById("chips");
-let activeGroup="all";
-[["all","All"],...Object.entries(GROUPS).map(([k,g])=>[k,g.label])].forEach(([k,label])=>{
-  const b=document.createElement("button");
-  b.type="button"; b.className="chip"; b.textContent=label; b.dataset.g=k;
-  b.setAttribute("aria-pressed",k==="all"?"true":"false");
-  b.addEventListener("click",()=>{activeGroup=k;chips.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x.dataset.g===k?"true":"false"));filter();});
-  chips.appendChild(b);
-});
-const q=document.getElementById("q"),count=document.getElementById("count"),empty=document.getElementById("empty");
-function filter(){
-  const terms=q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
-  let shown=0;
-  list.querySelectorAll(".cmd").forEach(el=>{
-    const ok=(activeGroup==="all"||el.dataset.group===activeGroup)&&terms.every(t=>el.dataset.text.includes(t));
-    el.hidden=!ok; if(ok)shown++;
-  });
-  Object.values(groupWraps).forEach(w=>{w.hidden=!w.querySelector(".cmd:not([hidden])");});
-  empty.style.display=shown?"none":"block";
-  count.textContent=`${shown} of ${CMDS.length} commands`;
-}
-q.addEventListener("input",filter);
-filter();
-
-document.querySelectorAll("table").forEach(t=>{
-  const heads=[...t.querySelectorAll("thead th")].map(th=>th.textContent.trim());
-  t.querySelectorAll("tbody tr").forEach(tr=>{[...tr.children].forEach((td,i)=>{if(heads[i])td.setAttribute("data-label",heads[i]);});});
-});
-document.addEventListener("click",e=>{
-  const b=e.target.closest(".code button"); if(!b)return;
-  const text=b.parentElement.querySelector("pre").innerText;
-  const done=()=>{b.textContent="Copied";setTimeout(()=>(b.textContent="Copy"),1500);};
-  if(navigator.clipboard)navigator.clipboard.writeText(text).then(done).catch(()=>{});
-  else{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();done();}
-});
-const menuBtn=document.getElementById("menuBtn"),sidebar=document.getElementById("sidebar");
-menuBtn.addEventListener("click",()=>{const open=sidebar.classList.toggle("open");menuBtn.setAttribute("aria-expanded",open?"true":"false");menuBtn.textContent=open?"Close":"Contents";});
-sidebar.addEventListener("click",e=>{if(e.target.tagName==="A"&&sidebar.classList.contains("open")){sidebar.classList.remove("open");menuBtn.setAttribute("aria-expanded","false");menuBtn.textContent="Contents";}});
-const navLinks=[...sidebar.querySelectorAll("a")];
-const byId=Object.fromEntries(navLinks.map(a=>[a.getAttribute("href").slice(1),a]));
-const spy=new IntersectionObserver(entries=>{entries.forEach(en=>{const link=byId[en.target.id];if(!link)return;if(en.isIntersecting){navLinks.forEach(a=>a.classList.remove("active"));link.classList.add("active");}});},{rootMargin:"-76px 0px -70% 0px",threshold:0});
-document.querySelectorAll("section[id]").forEach(s=>spy.observe(s));
-// On GitHub Pages, link the top bar to the repository this page is served from.
-(()=>{const h=location.hostname,m=h.match(/^([^.]+)\.github\.io$/);if(!m)return;const repo=location.pathname.split('/').filter(Boolean)[0];const a=document.getElementById('ghLink');a.href='https://github.com/'+m[1]+'/'+(repo||'');a.hidden=false;})();
-// Panel popups: each card opens its full persona list. Without scripts the links still open them through the URL hash.
-const openPanel=id=>{const d=document.getElementById(id);if(!d||!d.showModal)return false;if(!d.open)d.showModal();d.querySelector(".dlg-body").scrollTop=0;return true;};
-document.querySelectorAll("[data-dialog]").forEach(a=>{
-  a.addEventListener("click",e=>{if(openPanel(a.dataset.dialog))e.preventDefault();});
-});
-document.querySelectorAll(".panel-dialog").forEach(d=>{
-  d.querySelector(".dlg-close").addEventListener("click",e=>{if(d.open){e.preventDefault();d.close();}});
-  d.addEventListener("click",e=>{if(e.target===d)d.close();});
-  d.addEventListener("close",()=>{if(location.hash==="#"+d.id)history.replaceState(null,"",location.pathname+location.search);});
-});
-if(/^#dlg-/.test(location.hash)){const id=location.hash.slice(1);history.replaceState(null,"",location.pathname+location.search);openPanel(id);}
-const root=document.documentElement,themeBtn=document.getElementById("themeBtn");
-try{const saved=localStorage.getItem("council-theme");if(saved)root.dataset.theme=saved;}catch(e){}
-themeBtn.addEventListener("click",()=>{
-  const dark=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
-  root.dataset.theme=dark?"light":"dark";
-  try{localStorage.setItem("council-theme",root.dataset.theme);}catch(e){}
-});
-</script>
+<footer class="gf">
+  <div class="gf-in">
+    <div class="gf-brand"><span class="gh-slash">/</span>The Retail Product Council<p>Expert panels for retail product decisions, grounded in evidence from every region.</p></div>
+    <div><h2>Use</h2><a href="use.html">Get started</a><a href="commands.html">Commands</a><a href="behaviour.html">How it behaves</a><a href="diagrams.html">Diagrams</a></div>
+    <div><h2>Understand</h2><a href="knowledge.html">Knowledge and context</a><a href="technical.html">Technical</a><a href="reference.html">Reference</a></div>
+    <div><h2>Retail base</h2><a href="retail/areas.html">Thirteen areas</a><a href="retail/cases.html">Global case studies</a><a href="retail/failures.html">Failure library</a><a href="retail/glossary.html">Glossary</a></div>
+  </div>
+  <p class="gf-note">The Retail Product Council 1.0 on the Product Council v3.7.3 engine, updated 18 October 2026. The repository is the source of truth: update these pages in the same pull request as a skill, agent, persona or curated change. Built by Thoughtworks with Claude Code. Public figures named on these pages are reasoning lenses, never quoted and not involved.</p>
+</footer>
+<script src="assets/chrome.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/personas.js"></script>
 </body>
 </html>

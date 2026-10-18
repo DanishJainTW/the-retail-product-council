@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stock guard for ads: every touchpoint</title><meta name="generator" content="Product Council diagram.py">
+<style>
+:root{--bg:#FFFFFF;--surface:#EDF1F3;--ink:#14262E;--muted:#5B6E76;--line:#C9D3D8;
+--wave:#003D4F;--pink:#F2617A;--jade:#6B9E78;--turmeric:#CC850A;--sapphire:#47A1AD;--amethyst:#634F7D;
+--node:#FFFFFF;--node-stroke:#003D4F;--lane:#F7F9FA;--lane-alt:#EEF3F5;--lane-head:#E3EBEE;--edge:#3D5560;--label-bg:#FFFFFF;--note:#FFF4DD}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,"Segoe UI",system-ui,-apple-system,sans-serif}
+.page-head{display:flex;gap:14px;align-items:flex-start;padding:22px clamp(16px,4vw,48px);border-bottom:4px solid var(--wave);flex-wrap:wrap}
+.mark{width:12px;height:30px;background:var(--pink);transform:skewX(-18deg);margin-top:4px}
+.page-head .tt{flex:1;min-width:220px}
+h1{font:700 26px/1.2 Bitter,Georgia,serif;color:var(--wave);margin:0}
+h2{font:700 20px/1.25 Bitter,Georgia,serif;color:var(--wave);margin:0}
+h4{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.q{margin:4px 0 0;color:var(--ink)}.meta{margin:4px 0 0;color:var(--muted);font-size:13px}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+button{font:inherit;font-size:13px;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:6px 12px;cursor:pointer;border-radius:0}
+button:hover{border-color:var(--wave)}button:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+main{padding:8px clamp(16px,4vw,48px) 60px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--wave);color:#fff;font-weight:600}
+caption{caption-side:bottom;text-align:left;color:var(--muted);font-size:12.5px;padding-top:6px}
+.summary a{color:var(--wave)}
+.flow{padding-top:28px;margin-top:20px;border-top:1px solid var(--line)}
+.flow-head{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;margin-bottom:12px}
+.num{display:grid;place-items:center;min-width:34px;height:34px;background:var(--wave);color:#fff;font:700 16px Bitter,Georgia,serif}
+.ft{flex:1;min-width:220px}
+.canvas{overflow-x:auto;border:1px solid var(--line);background:var(--bg);-webkit-overflow-scrolling:touch}
+.canvas svg{display:block;margin:0 auto;width:100%;height:auto}
+.facts{margin-top:12px}
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted)}
+.legend>div{display:flex;align-items:center;gap:6px}
+.evline{margin:0;font-size:12.5px;display:flex;gap:12px;flex-wrap:wrap}
+.ev{display:inline-flex;align-items:center;gap:5px;font-size:12.5px}
+.ev b{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;color:#fff;font-size:10.5px}
+.ev-V b{background:var(--jade)}.ev-I b{background:var(--turmeric)}.ev-U b{background:var(--muted)}
+.lists{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 24px;margin-top:12px;background:var(--surface);padding:12px 16px}
+.lists ul,.changes ul{margin:0;padding-left:18px;font-size:14px}
+.changes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 24px;background:var(--surface);padding:12px 16px;margin-bottom:8px}
+.hint{color:var(--muted);font-size:12.5px;margin:4px 0}
+.notes td:first-child{font-weight:600;width:26%}.notes td:nth-child(2){white-space:nowrap}.path{color:var(--muted);font-size:12px}
+footer{padding:20px clamp(16px,4vw,48px);color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+/* svg */
+.lane-bg{fill:var(--lane)}.lane.alt .lane-bg{fill:var(--lane-alt)}.lane-head{fill:var(--lane-head)}
+.lane-label{font:600 13px Inter,system-ui,sans-serif;fill:var(--wave)}
+.node .shape{fill:var(--node);stroke:var(--node-stroke);stroke-width:1.6}
+.node .shape-line{fill:none;stroke:var(--node-stroke);stroke-width:1.4}
+.node .bar{fill:var(--sapphire)}.node .pip{fill:var(--bg)}.node .dot{fill:var(--node-stroke)}
+.node .label{font:500 13px Inter,system-ui,sans-serif;fill:var(--ink)}
+.k-decision .shape{stroke:var(--turmeric);stroke-width:2}
+.k-store .shape,.k-store .shape-line{stroke:var(--sapphire)}
+.k-external .shape{stroke-dasharray:5 4;stroke:var(--muted)}
+.k-start .shape{fill:var(--wave);stroke:var(--wave)}.k-start .label{fill:var(--bg)}
+.k-end .shape{fill:var(--surface);stroke:var(--wave);stroke-width:2.4}
+.k-error .shape{stroke:var(--pink);stroke-width:2}
+.k-manual .bar,.k-client .bar{fill:var(--amethyst)}.k-system .bar{fill:var(--sapphire)}
+.k-source .bar{fill:var(--jade)}.k-sink .bar{fill:var(--amethyst)}
+.k-terminal .shape,.k-terminal .shape-line{stroke:var(--wave);stroke-width:1.6}
+.node.ev-U .shape{stroke-dasharray:5 4}
+.badge circle{fill:var(--muted);stroke:var(--bg);stroke-width:2}.badge text{font:700 10px Inter,system-ui,sans-serif;fill:#fff}
+.ev-V .badge circle{fill:var(--jade)}.ev-I .badge circle{fill:var(--turmeric)}
+.notedot{fill:var(--sapphire)}
+.edge .line{fill:none;stroke:var(--edge);stroke-width:1.6}.edge .hit{display:none}
+.ah{fill:var(--edge);stroke:var(--edge);stroke-width:1.2}.ah-async,.ah-return{fill:none}
+.ek-failure .line{stroke:var(--pink);stroke-dasharray:7 5}.ah-failure{fill:var(--pink);stroke:var(--pink)}
+.ek-async .line{stroke-dasharray:2 5;stroke-linecap:round}
+.ek-optional .line{stroke-dasharray:8 6;opacity:.75}
+.ek-data .line{stroke:var(--sapphire);stroke-width:2}.ah-data{fill:var(--sapphire);stroke:var(--sapphire)}
+.edge.ev-U .line{stroke:var(--muted);stroke-dasharray:4 4}
+.elabel-bg{fill:var(--label-bg);opacity:.92}.elabel{font:500 11.5px Inter,system-ui,sans-serif;fill:var(--muted)}
+.ek-failure .elabel,.pii .elabel{fill:var(--pink)}.pii .elabel{font-weight:700}
+.frag-box{fill:none;stroke:var(--line);stroke-width:1.4}.frag-tab{fill:var(--surface);stroke:var(--line)}
+.frag-label{font:600 11.5px Inter,system-ui,sans-serif;fill:var(--muted)}.frag-else{stroke:var(--line);stroke-dasharray:6 4}
+.lifeline{stroke:var(--line);stroke-width:1.4;stroke-dasharray:5 5}
+.part .shape{fill:var(--node);stroke:var(--node-stroke);stroke-width:1.6}.part .label{font:600 13px Inter,system-ui,sans-serif;fill:var(--ink)}
+.part .bar{fill:var(--sapphire)}.part .dot{fill:var(--amethyst)}.pk-external .shape{stroke-dasharray:5 4;stroke:var(--muted)}
+.part.ev-U .shape{stroke-dasharray:5 4}
+.msg .line{fill:none;stroke:var(--edge);stroke-width:1.6}.msg .hit{display:none}
+.mk-return .line{stroke-dasharray:6 5}.mk-async .line{stroke-dasharray:2 5;stroke-linecap:round}.mk-failure .line{stroke:var(--pink)}
+.ah-sync{fill:var(--edge)}
+.mlabel{font:500 12px Inter,system-ui,sans-serif;fill:var(--ink)}.mk-failure .mlabel{fill:var(--pink)}
+.msg.ev-U .line{stroke:var(--muted);stroke-dasharray:4 4}
+.num circle{fill:var(--wave)}.num text{font:700 10px Inter,system-ui,sans-serif;fill:var(--bg)}
+.note rect{fill:var(--note);stroke:var(--turmeric)}.note text{font:12px Inter,system-ui,sans-serif;fill:var(--ink)}
+.st-added .shape{stroke:var(--jade);stroke-width:2.6}.st-added.edge .line{stroke:var(--jade);stroke-width:2.2}
+.st-removed{opacity:.6}.st-removed .shape{stroke:var(--pink);stroke-dasharray:4 4}.st-removed.edge .line{stroke:var(--pink);stroke-dasharray:4 4}
+.st-changed .shape{stroke:var(--turmeric);stroke-width:2.6}.st-changed.edge .line{stroke:var(--turmeric)}
+td{overflow-wrap:anywhere}
+@media (max-width:640px){h1{font-size:22px}.notes thead{display:none}.notes,.notes tbody,.notes tr,.notes td{display:block;width:100%!important}.notes tr{border:1px solid var(--line);border-left:5px solid var(--sapphire);margin-bottom:10px}.notes td{border:0}.notes td:empty{display:none}.notes td::before{content:attr(data-l);display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}}
+@media print{.tools{display:none}.canvas{overflow:visible;border:0}.canvas svg{width:100%!important;min-width:0!important;height:auto!important}
+.flow{break-inside:avoid;page-break-inside:avoid}.page-head{border-bottom-width:2px}body{font-size:12px}}
+</style></head><body>
+<header class="page-head"><div class="mark"></div><div class="tt"><h1>Stock guard for ads: every touchpoint</h1>
+<p class="q">Which flows change if ads pause on their own when a product is about to run out (option A)? An illustrative example, not a client decision.</p><p class="meta">3 flows · generated 2026-10-18</p></div>
+<div class="tools"><button type="button" data-x="pdf">Print or PDF</button><button type="button" data-x="json">Spec (JSON)</button></div></header>
+<main><table class="summary"><caption>Every flow on this page, with how many unknowns each carries.</caption><thead><tr><th>#</th><th>Flow</th><th>Type</th><th>Unknowns</th></tr></thead><tbody><tr><td>1</td><td><a href="#flow-1">Brand ads team: today against option A</a></td><td>comparison</td><td>4</td></tr><tr><td>2</td><td><a href="#flow-2">Performance marketer: the stock alert</a></td><td>userflow</td><td>2</td></tr><tr><td>3</td><td><a href="#flow-3">System: who tells whom</a></td><td>sequence</td><td>1</td></tr></tbody></table><section class="flow" id="flow-1" data-title="Brand ads team: today against option A"><div class="flow-head"><span class="num">1</span><div class="ft"><h2>Brand ads team: today against option A</h2><p class="q">What changes for the ads team when stock runs low?</p><p class="meta">comparison, workflow</p></div><div class="tools"><button type="button" data-png="1">PNG</button><button type="button" data-svg="1">SVG</button></div></div><div class="canvas" id="canvas-1"><svg style="max-width:1678px;min-width:1174px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1678 648" width="1678" height="648" role="img" aria-label="Brand ads team: today against option A"><defs><marker id="f1-ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-flow" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f1-ah-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-failure" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f1-ah-async" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-async" d="M0,0 L10,5 L0,10"/></marker><marker id="f1-ah-optional" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-optional" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f1-ah-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-data" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f1-ah-sync" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-sync" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f1-ah-return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-return" d="M0,0 L10,5 L0,10"/></marker></defs><g><g class="lane" data-lane="stock"><rect class="lane-bg" x="0" y="12.0" width="1677.7746000000002" height="114"/><rect class="lane-head" x="0" y="12.0" width="136" height="114"/><text class="lane-label" x="16" y="69.0" dominant-baseline="middle"><tspan x="16" dy="0">Inventory</tspan></text></g><g class="lane alt" data-lane="ads"><rect class="lane-bg" x="0" y="126.0" width="1677.7746000000002" height="236"/><rect class="lane-head" x="0" y="126.0" width="136" height="236"/><text class="lane-label" x="16" y="244.0" dominant-baseline="middle"><tspan x="16" dy="0">Ads platform</tspan></text></g><g class="lane" data-lane="team"><rect class="lane-bg" x="0" y="362.0" width="1677.7746000000002" height="230"/><rect class="lane-head" x="0" y="362.0" width="136" height="230"/><text class="lane-label" x="16" y="469.0" dominant-baseline="middle"><tspan x="16" dy="0">Performance</tspan><tspan x="16" dy="16">marketer</tspan></text></g><g class="edges"><g class="edge ek-flow st-added" data-edge="e0" data-from="low" data-to="guard"><path class="hit" d="M324.0,56.5 C364.0,56.5 368.0,201.0 408.0,201.0"/><path class="line" d="M324.0,56.5 C364.0,56.5 368.0,201.0 408.0,201.0" marker-end="url(#f1-ah-flow)"/></g><g class="edge ek-flow st-added" data-edge="e1" data-from="guard" data-to="alert"><path class="hit" d="M534.0,179.5 C590.7,179.5 603.3,201.0 660.0,201.0"/><path class="line" d="M534.0,179.5 C590.7,179.5 603.3,201.0 660.0,201.0" marker-end="url(#f1-ah-flow)"/><rect class="elabel-bg" x="581.0" y="179.8" width="32.1" height="21.0" rx="3"/><text class="elabel" x="597.0" y="192.8" text-anchor="middle"><tspan x="597.0" dy="0">yes</tspan></text></g><g class="edge ek-flow st-added" data-edge="e2" data-from="guard" data-to="watch"><path class="hit" d="M534.0,222.5 C834.9,262.5 901.7,228.5 1202.6,188.5"/><path class="line" d="M534.0,222.5 C834.9,262.5 901.7,228.5 1202.6,188.5" marker-end="url(#f1-ah-flow)"/><rect class="elabel-bg" x="855.6" y="195.0" width="25.4" height="21.0" rx="3"/><text class="elabel" x="868.3" y="208.0" text-anchor="middle"><tspan x="868.3" dy="0">no</tspan></text></g><g class="edge ek-flow st-added" data-edge="e3" data-from="alert" data-to="approve"><path class="hit" d="M837.6,201.0 C882.3,201.0 892.2,434.0 936.8,434.0"/><path class="line" d="M837.6,201.0 C882.3,201.0 892.2,434.0 936.8,434.0" marker-end="url(#f1-ah-flow)"/></g><g class="edge ek-flow st-added" data-edge="e4" data-from="approve" data-to="pause"><path class="hit" d="M1049.3,454.0 C1110.8,454.0 1124.5,288.0 1186.0,288.0"/><path class="line" d="M1049.3,454.0 C1110.8,454.0 1124.5,288.0 1186.0,288.0" marker-end="url(#f1-ah-flow)"/><rect class="elabel-bg" x="1101.6" y="376.5" width="32.1" height="21.0" rx="3"/><text class="elabel" x="1117.7" y="389.5" text-anchor="middle"><tspan x="1117.7" dy="0">yes</tspan></text></g><g class="edge ek-flow st-added" data-edge="e5" data-from="approve" data-to="watch"><path class="hit" d="M1049.3,414.0 C1118.3,414.0 1133.6,213.5 1202.6,213.5"/><path class="line" d="M1049.3,414.0 C1118.3,414.0 1133.6,213.5 1202.6,213.5" marker-end="url(#f1-ah-flow)"/><rect class="elabel-bg" x="1113.3" y="303.2" width="25.4" height="21.0" rx="3"/><text class="elabel" x="1126.0" y="316.2" text-anchor="middle"><tspan x="1126.0" dy="0">no</tspan></text></g><g class="edge ek-flow st-same" data-edge="e6" data-from="pause" data-to="end"><path class="hit" d="M1354.4,288.0 C1395.9,288.0 1405.1,201.0 1446.7,201.0"/><path class="line" d="M1354.4,288.0 C1395.9,288.0 1405.1,201.0 1446.7,201.0" marker-end="url(#f1-ah-flow)"/></g><g class="edge ek-failure st-added" data-edge="e7" data-from="pause" data-to="fail"><path class="hit" d="M1354.4,316.0 C1394.4,316.0 1398.4,434.0 1438.4,434.0"/><path class="line" d="M1354.4,316.0 C1394.4,316.0 1398.4,434.0 1438.4,434.0" marker-end="url(#f1-ah-failure)"/><rect class="elabel-bg" x="1365.8" y="364.5" width="61.2" height="21.0" rx="3"/><text class="elabel" x="1396.4" y="377.5" text-anchor="middle"><tspan x="1396.4" dy="0">API error</tspan></text></g><g class="edge ek-flow st-removed" data-edge="e8" data-from="low" data-to="spend"><path class="hit" d="M324.0,81.5 C364.0,81.5 371.5,302.0 411.5,302.0"/><path class="line" d="M324.0,81.5 C364.0,81.5 371.5,302.0 411.5,302.0" marker-end="url(#f1-ah-flow)"/></g><g class="edge ek-flow st-removed" data-edge="e9" data-from="spend" data-to="acos"><path class="hit" d="M572.5,302.0 C624.0,302.0 635.4,302.0 686.8,302.0"/><path class="line" d="M572.5,302.0 C624.0,302.0 635.4,302.0 686.8,302.0" marker-end="url(#f1-ah-flow)"/></g><g class="edge ek-flow st-removed" data-edge="e10" data-from="acos" data-to="report"><path class="hit" d="M810.8,302.0 C860.7,302.0 871.8,532.0 921.6,532.0"/><path class="line" d="M810.8,302.0 C860.7,302.0 871.8,532.0 921.6,532.0" marker-end="url(#f1-ah-flow)"/></g><g class="edge ek-flow st-removed" data-edge="e11" data-from="report" data-to="pause"><path class="hit" d="M1102.0,532.0 C1142.0,532.0 1146.0,316.0 1186.0,316.0"/><path class="line" d="M1102.0,532.0 C1142.0,532.0 1146.0,316.0 1186.0,316.0" marker-end="url(#f1-ah-flow)"/></g></g><g class="nodes"><g class="node k-start st-same" data-id="low" tabindex="0" role="button" aria-label="Stock falls low"><rect class="shape" x="174.0" y="44.0" width="149.99920000000003" height="50" rx="25.0"/><text class="label" x="248.99960000000002" y="69.0" text-anchor="middle" dominant-baseline="middle"><tspan x="248.99960000000002" dy="0">Stock falls low</tspan></text></g><g class="node k-decision ev-U st-added" data-id="guard" tabindex="0" role="button" aria-label="Cover below threshold?"><polygon class="shape" points="492.02090000000004,158.0 576.0426,201.0 492.02090000000004,244.0 407.99920000000003,201.0"/><text class="label" x="492.02090000000004" y="192.5" text-anchor="middle" dominant-baseline="middle"><tspan x="492.02090000000004" dy="0">Cover below</tspan><tspan x="492.02090000000004" dy="17">threshold?</tspan></text><g class="badge"><circle cx="540.0317500000001" cy="177.5" r="9"/><text x="540.0317500000001" y="178.0" text-anchor="middle" dominant-baseline="middle">?</text></g><circle class="notedot" cx="446.01005000000004" cy="177.5" r="3.5"/></g><g class="node k-system ev-I st-added" data-id="alert" tabindex="0" role="button" aria-label="Alert with a recommended bid cut"><rect class="shape" x="660.0426" y="173.0" width="177.592" height="56" rx="2"/><rect class="bar" x="660.0426" y="173.0" width="5" height="56"/><text class="label" x="748.8386" y="192.5" text-anchor="middle" dominant-baseline="middle"><tspan x="748.8386" dy="0">Alert with a</tspan><tspan x="748.8386" dy="17">recommended bid cut</tspan></text><g class="badge"><circle cx="835.6346" cy="175.0" r="9"/><text x="835.6346" y="175.5" text-anchor="middle" dominant-baseline="middle">I</text></g><circle class="notedot" cx="662.0426" cy="175.0" r="3.5"/></g><g class="node k-decision st-added" data-id="approve" tabindex="0" role="button" aria-label="Approve?"><polygon class="shape" points="1011.8346,394.0 1086.8346000000001,434.0 1011.8346,474.0 936.8346,434.0"/><text class="label" x="1011.8346" y="434.0" text-anchor="middle" dominant-baseline="middle"><tspan x="1011.8346" dy="0">Approve?</tspan></text></g><g class="node k-system st-changed" data-id="pause" tabindex="0" role="button" aria-label="Bids cut on affected products"><rect class="shape" x="1186.0346" y="274.0" width="168.3256" height="56" rx="2"/><rect class="bar" x="1186.0346" y="274.0" width="5" height="56"/><text class="label" x="1270.1974" y="293.5" text-anchor="middle" dominant-baseline="middle"><tspan x="1270.1974" dy="0">Bids cut on affected</tspan><tspan x="1270.1974" dy="17">products</tspan></text></g><g class="node k-error st-added" data-id="fail" tabindex="0" role="button" aria-label="Bid change rejected, marketer told"><rect class="shape" x="1438.3602" y="406.0" width="171.41440000000006" height="56" rx="10"/><text class="label" x="1524.0674000000001" y="425.5" text-anchor="middle" dominant-baseline="middle"><tspan x="1524.0674000000001" dy="0">Bid change rejected,</tspan><tspan x="1524.0674000000001" dy="17">marketer told</tspan></text></g><g class="node k-wait st-added" data-id="watch" tabindex="0" role="button" aria-label="Keep watching"><rect class="shape" x="1202.6018" y="176.0" width="135.1912" height="50" rx="2"/><circle class="shape-line" cx="1216.6018" cy="190.0" r="6"/><path class="shape-line" d="M1216.6018,186.0 V190.0 H1219.6018"/><text class="label" x="1270.1974" y="201.0" text-anchor="middle" dominant-baseline="middle"><tspan x="1270.1974" dy="0">Keep watching</tspan></text></g><g class="node k-end st-changed" data-id="end" tabindex="0" role="button" aria-label="Spend protected"><rect class="shape" x="1446.681" y="176.0" width="154.77280000000002" height="50" rx="25.0"/><text class="label" x="1524.0674000000001" y="201.0" text-anchor="middle" dominant-baseline="middle"><tspan x="1524.0674000000001" dy="0">Spend protected</tspan></text></g><g class="node k-system ev-I st-removed" data-id="spend" tabindex="0" role="button" aria-label="Ads keep spending"><rect class="shape" x="411.5085" y="277.0" width="161.02480000000003" height="50" rx="2"/><rect class="bar" x="411.5085" y="277.0" width="5" height="50"/><text class="label" x="492.02090000000004" y="302.0" text-anchor="middle" dominant-baseline="middle"><tspan x="492.02090000000004" dy="0">Ads keep spending</tspan></text><g class="badge"><circle cx="570.5333" cy="279.0" r="9"/><text x="570.5333" y="279.5" text-anchor="middle" dominant-baseline="middle">I</text></g><circle class="notedot" cx="413.5085" cy="279.0" r="3.5"/></g><g class="node k-system ev-I st-removed" data-id="acos" tabindex="0" role="button" aria-label="ACOS rises"><rect class="shape" x="686.8386" y="277.0" width="124" height="50" rx="2"/><rect class="bar" x="686.8386" y="277.0" width="5" height="50"/><text class="label" x="748.8386" y="302.0" text-anchor="middle" dominant-baseline="middle"><tspan x="748.8386" dy="0">ACOS rises</tspan></text><g class="badge"><circle cx="808.8386" cy="279.0" r="9"/><text x="808.8386" y="279.5" text-anchor="middle" dominant-baseline="middle">I</text></g><circle class="notedot" cx="688.8386" cy="279.0" r="3.5"/></g><g class="node k-manual ev-U st-removed" data-id="report" tabindex="0" role="button" aria-label="Spotted in the weekly report"><rect class="shape" x="921.6346" y="504.0" width="180.4" height="56" rx="2"/><rect class="bar" x="921.6346" y="504.0" width="5" height="56"/><text class="label" x="1011.8346" y="523.5" text-anchor="middle" dominant-baseline="middle"><tspan x="1011.8346" dy="0">Spotted in the weekly</tspan><tspan x="1011.8346" dy="17">report</tspan></text><g class="badge"><circle cx="1100.0346" cy="506.0" r="9"/><text x="1100.0346" y="506.5" text-anchor="middle" dominant-baseline="middle">?</text></g></g></g></g></svg></div><div class="facts"><div class="changes"><div><h4>Added (12)</h4><ul><li>Cover below threshold?</li><li>Alert with a recommended bid cut</li><li>Approve?</li><li>Bid change rejected, marketer told</li><li>Keep watching</li><li>Stock falls low → Cover below threshold?</li><li>Cover below threshold? → Alert with a recommended bid cut (yes)</li><li>Cover below threshold? → Keep watching (no)</li><li>Alert with a recommended bid cut → Approve?</li><li>Approve? → Bids cut on affected products (yes)</li><li>Approve? → Keep watching (no)</li><li>Bids cut on affected products → Bid change rejected, marketer told (API error)</li></ul></div><div><h4>Removed (7)</h4><ul><li>Ads keep spending</li><li>ACOS rises</li><li>Spotted in the weekly report</li><li>Stock falls low → Ads keep spending</li><li>Ads keep spending → ACOS rises</li><li>ACOS rises → Spotted in the weekly report</li><li>Spotted in the weekly report → Bids cut on affected products</li></ul></div><div><h4>Changed (2)</h4><ul><li>Bids cut on affected products</li><li>Spend protected</li></ul></div></div><p class="hint">Shows what differs. It does not judge impact or safety.</p><div class="row"><div class="legend"><div><svg class="sw" width="30" height="12" aria-hidden="true"><line x1="1" y1="6" x2="29" y2="6" stroke="var(--edge)" stroke-width="2" stroke-dasharray=""/></svg><span>Flow</span></div><div><svg class="sw" width="30" height="12" aria-hidden="true"><line x1="1" y1="6" x2="29" y2="6" stroke="var(--pink)" stroke-width="2" stroke-dasharray="7 5"/></svg><span>Failure path</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><polygon points="15,1 29,8 15,15 1,8" fill="none" stroke="var(--turmeric)" stroke-width="1.6"/></svg><span>Decision</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><rect x="2" y="2" width="26" height="12" rx="3" fill="none" stroke="var(--pink)" stroke-width="1.8"/></svg><span>Failure state</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><rect x="2" y="2" width="26" height="12" fill="none" stroke="var(--muted)" stroke-dasharray="4 3"/></svg><span>Dashed outline: unknown or external</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><rect x="2" y="2" width="26" height="12" fill="none" stroke="var(--jade)" stroke-width="2.4"/></svg><span>Added</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><rect x="2" y="2" width="26" height="12" fill="none" stroke="var(--pink)" stroke-width="2.4"/></svg><span>Removed</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><rect x="2" y="2" width="26" height="12" fill="none" stroke="var(--turmeric)" stroke-width="2.4"/></svg><span>Changed</span></div></div><p class="evline"><span class="ev ev-V"><b>V</b>0 verified</span> <span class="ev ev-I"><b>I</b>3 inferred</span> <span class="ev ev-U"><b>?</b>2 unknown</span></p></div><div class="lists"><div><h4>Unknown, not in context</h4><ul><li>How often advertised products run low on stock</li><li>Who on the client side may approve a spend change</li></ul></div></div><table class="notes"><caption>Every item on this flow that carries evidence, a source or a note.</caption><thead><tr><th>Item</th><th>Evidence</th><th>Source</th><th>Note</th></tr></thead><tbody><tr><td data-l="Item">Cover below threshold?</td><td data-l="Evidence"><span class="ev ev-U"><b>?</b>Unknown, not in context</span></td><td data-l="Source"></td><td data-l="Note">The threshold is a client decision. Not in context</td></tr><tr><td data-l="Item">Alert with a recommended bid cut</td><td data-l="Evidence"><span class="ev ev-I"><b>I</b>Inferred, reasoning stated</span></td><td data-l="Source"></td><td data-l="Note">Inferred from the pattern that agents advise and people approve spend changes</td></tr><tr><td data-l="Item">Ads keep spending</td><td data-l="Evidence"><span class="ev ev-I"><b>I</b>Inferred, reasoning stated</span></td><td data-l="Source"></td><td data-l="Note">Inferred: campaign tools act on bids and budgets, not on stock, unless someone connects them</td></tr><tr><td data-l="Item">ACOS rises</td><td data-l="Evidence"><span class="ev ev-I"><b>I</b>Inferred, reasoning stated</span></td><td data-l="Source"></td><td data-l="Note">Inferred: ACOS is ad spend divided by ad revenue (Amazon Ads guide, in the performance marketing research note), so spend that keeps running while sales fall raises it</td></tr><tr><td data-l="Item">Spotted in the weekly report</td><td data-l="Evidence"><span class="ev ev-U"><b>?</b>Unknown, not in context</span></td><td data-l="Source"></td><td data-l="Note"></td></tr></tbody></table></div></section><section class="flow" id="flow-2" data-title="Performance marketer: the stock alert"><div class="flow-head"><span class="num">2</span><div class="ft"><h2>Performance marketer: the stock alert</h2><p class="q">What does the marketer see and do when the guard fires?</p><p class="meta">userflow</p></div><div class="tools"><button type="button" data-png="2">PNG</button><button type="button" data-svg="2">SVG</button></div></div><div class="canvas" id="canvas-2"><svg style="max-width:1509px;min-width:1056px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1509 321" width="1509" height="321" role="img" aria-label="Performance marketer: the stock alert"><defs><marker id="f2-ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-flow" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f2-ah-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-failure" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f2-ah-async" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-async" d="M0,0 L10,5 L0,10"/></marker><marker id="f2-ah-optional" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-optional" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f2-ah-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-data" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f2-ah-sync" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-sync" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f2-ah-return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-return" d="M0,0 L10,5 L0,10"/></marker></defs><g><g class="lane" data-lane="_user"><rect class="lane-bg" x="0" y="12.0" width="1508.6318" height="253"/><rect class="lane-head" x="0" y="12.0" width="136" height="253"/><text class="lane-label" x="16" y="138.5" dominant-baseline="middle"><tspan x="16" dy="0">User</tspan></text></g><g class="edges"><g class="edge ek-flow" data-edge="e0" data-from="s" data-to="detail"><path class="hit" d="M366.4,87.0 C406.4,87.0 410.4,87.0 450.4,87.0"/><path class="line" d="M366.4,87.0 C406.4,87.0 410.4,87.0 450.4,87.0" marker-end="url(#f2-ah-flow)"/></g><g class="edge ek-flow" data-edge="e1" data-from="detail" data-to="dec"><path class="hit" d="M621.8,87.0 C661.8,87.0 665.8,87.0 705.8,87.0"/><path class="line" d="M621.8,87.0 C661.8,87.0 665.8,87.0 705.8,87.0" marker-end="url(#f2-ah-flow)"/></g><g class="edge ek-flow" data-edge="e2" data-from="dec" data-to="done"><path class="hit" d="M854.7,65.5 C915.1,65.5 928.6,87.0 989.0,87.0"/><path class="line" d="M854.7,65.5 C915.1,65.5 928.6,87.0 989.0,87.0" marker-end="url(#f2-ah-flow)"/><rect class="elabel-bg" x="911.9" y="70.7" width="56.2" height="21.0" rx="3"/><text class="elabel" x="940.0" y="83.7" text-anchor="middle"><tspan x="940.0" dy="0">approve</tspan></text></g><g class="edge ek-flow" data-edge="e3" data-from="dec" data-to="skip"><path class="hit" d="M854.7,108.5 C914.8,108.5 928.2,196.5 988.3,196.5"/><path class="line" d="M854.7,108.5 C914.8,108.5 928.2,196.5 988.3,196.5" marker-end="url(#f2-ah-flow)"/><rect class="elabel-bg" x="892.8" y="142.0" width="57.5" height="21.0" rx="3"/><text class="elabel" x="921.5" y="155.0" text-anchor="middle"><tspan x="921.5" dy="0">dismiss</tspan></text></g><g class="edge ek-flow" data-edge="e4" data-from="done" data-to="restock"><path class="hit" d="M1172.5,72.0 C1212.5,72.0 1217.2,87.0 1257.2,87.0"/><path class="line" d="M1172.5,72.0 C1212.5,72.0 1217.2,87.0 1257.2,87.0" marker-end="url(#f2-ah-flow)"/></g><g class="edge ek-failure" data-edge="e5" data-from="done" data-to="err"><path class="hit" d="M1172.5,102.0 C1215.7,102.0 1225.3,196.5 1268.6,196.5"/><path class="line" d="M1172.5,102.0 C1215.7,102.0 1225.3,196.5 1268.6,196.5" marker-end="url(#f2-ah-failure)"/><rect class="elabel-bg" x="1189.9" y="138.8" width="61.2" height="21.0" rx="3"/><text class="elabel" x="1220.5" y="151.8" text-anchor="middle"><tspan x="1220.5" dy="0">API error</tspan></text></g></g><g class="nodes"><g class="node k-start" data-id="s" tabindex="0" role="button" aria-label="Alert in the dashboard"><rect class="shape" x="174.0" y="62.0" width="192.4" height="50" rx="25.0"/><text class="label" x="270.2" y="87.0" text-anchor="middle" dominant-baseline="middle"><tspan x="270.2" dy="0">Alert in the dashboard</tspan></text></g><g class="node k-screen ev-I" data-id="detail" tabindex="0" role="button" aria-label="Product, stock cover and spend at risk"><rect class="shape" x="450.3999999999999" y="54.0" width="171.4144" height="66" rx="2"/><rect class="bar" x="450.3999999999999" y="54.0" width="171.4144" height="9"/><circle class="pip" cx="458.3999999999999" cy="58.5" r="1.8"/><circle class="pip" cx="465.3999999999999" cy="58.5" r="1.8"/><circle class="pip" cx="472.3999999999999" cy="58.5" r="1.8"/><text class="label" x="536.1071999999999" y="83.5" text-anchor="middle" dominant-baseline="middle"><tspan x="536.1071999999999" dy="0">Product, stock cover</tspan><tspan x="536.1071999999999" dy="17">and spend at risk</tspan></text><g class="badge"><circle cx="619.8144" cy="56.0" r="9"/><text x="619.8144" y="56.5" text-anchor="middle" dominant-baseline="middle">I</text></g><circle class="notedot" cx="452.3999999999999" cy="56.0" r="3.5"/></g><g class="node k-decision" data-id="dec" tabindex="0" role="button" aria-label="Approve the bid cut?"><polygon class="shape" points="805.0695000000001,44.0 904.3246,87.0 805.0695000000001,130.0 705.8144,87.0"/><text class="label" x="805.0695000000001" y="78.5" text-anchor="middle" dominant-baseline="middle"><tspan x="805.0695000000001" dy="0">Approve the bid</tspan><tspan x="805.0695000000001" dy="17">cut?</tspan></text></g><g class="node k-screen" data-id="done" tabindex="0" role="button" aria-label="Confirmation and undo"><rect class="shape" x="989.0265999999999" y="57.0" width="183.4888" height="60" rx="2"/><rect class="bar" x="989.0265999999999" y="57.0" width="183.4888" height="9"/><circle class="pip" cx="997.0265999999999" cy="61.5" r="1.8"/><circle class="pip" cx="1004.0265999999999" cy="61.5" r="1.8"/><circle class="pip" cx="1011.0265999999999" cy="61.5" r="1.8"/><text class="label" x="1080.771" y="92.0" text-anchor="middle" dominant-baseline="middle"><tspan x="1080.771" dy="0">Confirmation and undo</tspan></text></g><g class="node k-screen ev-U" data-id="skip" tabindex="0" role="button" aria-label="Dismiss with a reason"><rect class="shape" x="988.3245999999999" y="166.5" width="184.8928" height="60" rx="2"/><rect class="bar" x="988.3245999999999" y="166.5" width="184.8928" height="9"/><circle class="pip" cx="996.3245999999999" cy="171.0" r="1.8"/><circle class="pip" cx="1003.3245999999999" cy="171.0" r="1.8"/><circle class="pip" cx="1010.3245999999999" cy="171.0" r="1.8"/><text class="label" x="1080.771" y="201.5" text-anchor="middle" dominant-baseline="middle"><tspan x="1080.771" dy="0">Dismiss with a reason</tspan></text><g class="badge"><circle cx="1171.2174" cy="168.5" r="9"/><text x="1171.2174" y="169.0" text-anchor="middle" dominant-baseline="middle">?</text></g></g><g class="node k-end" data-id="restock" tabindex="0" role="button" aria-label="Restock notice, bids restored"><rect class="shape" x="1257.2174" y="59.0" width="183.4144" height="56" rx="28.0"/><text class="label" x="1348.9246" y="78.5" text-anchor="middle" dominant-baseline="middle"><tspan x="1348.9246" dy="0">Restock notice, bids</tspan><tspan x="1348.9246" dy="17">restored</tspan></text></g><g class="node k-error" data-id="err" tabindex="0" role="button" aria-label="Change failed, try again or edit in the console"><rect class="shape" x="1268.5526" y="160.0" width="160.74400000000003" height="73" rx="10"/><text class="label" x="1348.9246" y="179.5" text-anchor="middle" dominant-baseline="middle"><tspan x="1348.9246" dy="0">Change failed, try</tspan><tspan x="1348.9246" dy="17">again or edit in the</tspan><tspan x="1348.9246" dy="17">console</tspan></text></g></g></g></svg></div><div class="facts"><div class="row"><div class="legend"><div><svg class="sw" width="30" height="12" aria-hidden="true"><line x1="1" y1="6" x2="29" y2="6" stroke="var(--edge)" stroke-width="2" stroke-dasharray=""/></svg><span>Flow</span></div><div><svg class="sw" width="30" height="12" aria-hidden="true"><line x1="1" y1="6" x2="29" y2="6" stroke="var(--pink)" stroke-width="2" stroke-dasharray="7 5"/></svg><span>Failure path</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><polygon points="15,1 29,8 15,15 1,8" fill="none" stroke="var(--turmeric)" stroke-width="1.6"/></svg><span>Decision</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><rect x="2" y="2" width="26" height="12" rx="3" fill="none" stroke="var(--pink)" stroke-width="1.8"/></svg><span>Failure state</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><rect x="2" y="2" width="26" height="12" fill="none" stroke="var(--muted)" stroke-dasharray="4 3"/></svg><span>Dashed outline: unknown or external</span></div></div><p class="evline"><span class="ev ev-V"><b>V</b>0 verified</span> <span class="ev ev-I"><b>I</b>1 inferred</span> <span class="ev ev-U"><b>?</b>1 unknown</span></p></div><div class="lists"><div><h4>Unknown, not in context</h4><ul><li>Whether the client wants an automatic restore when stock returns</li></ul></div></div><table class="notes"><caption>Every item on this flow that carries evidence, a source or a note.</caption><thead><tr><th>Item</th><th>Evidence</th><th>Source</th><th>Note</th></tr></thead><tbody><tr><td data-l="Item">Product, stock cover and spend at risk</td><td data-l="Evidence"><span class="ev ev-I"><b>I</b>Inferred, reasoning stated</span></td><td data-l="Source"></td><td data-l="Note">Inferred: the marketer needs cover and spend side by side to decide</td></tr><tr><td data-l="Item">Dismiss with a reason</td><td data-l="Evidence"><span class="ev ev-U"><b>?</b>Unknown, not in context</span></td><td data-l="Source"></td><td data-l="Note"></td></tr></tbody></table></div></section><section class="flow" id="flow-3" data-title="System: who tells whom"><div class="flow-head"><span class="num">3</span><div class="ft"><h2>System: who tells whom</h2><p class="q">What happens, in order, from a stock change to a bid change?</p><p class="meta">sequence</p></div><div class="tools"><button type="button" data-png="3">PNG</button><button type="button" data-svg="3">SVG</button></div></div><div class="canvas" id="canvas-3"><svg style="max-width:811px;min-width:567px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 811 542" width="811" height="542" role="img" aria-label="System: who tells whom"><defs><marker id="f3-ah-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-flow" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f3-ah-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-failure" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f3-ah-async" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-async" d="M0,0 L10,5 L0,10"/></marker><marker id="f3-ah-optional" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-optional" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f3-ah-data" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-data" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f3-ah-sync" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-sync" d="M0,0 L10,5 L0,10 z"/></marker><marker id="f3-ah-return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="ah ah-return" d="M0,0 L10,5 L0,10"/></marker></defs><g><g class="frag" data-frag="0"><rect class="frag-box" x="249.6" y="222.0" width="531.9" height="256.0"/><path class="frag-tab" d="M249.6,222.0 h171.0 v14 l-6,6 H249.6 z"/><text class="frag-label" x="255.6" y="236.0">opt [cover below threshold]</text></g><line class="lifeline" data-part="inv" x1="100.3" y1="68" x2="100.3" y2="512"/><line class="lifeline" data-part="guard" x1="319.6" y1="68" x2="319.6" y2="512"/><line class="lifeline" data-part="mk" x1="541.5" y1="68" x2="541.5" y2="512"/><line class="lifeline" data-part="api" x1="711.5" y1="68" x2="711.5" y2="512"/><g class="note"><rect x="602.5" y="338.0" width="218.0" height="44.0" rx="2"/><text x="612.5" y="356.0"><tspan x="612.5" dy="0">Some channels have no usable</tspan><tspan x="612.5" dy="16">campaign API and run by console</tspan></text></g><g class="msg mk-async" data-msg="0" data-from="inv" data-to="guard" tabindex="0" role="button"><path class="hit" d="M102.3,118.0 H316.6"/><path class="line" d="M102.3,118.0 H316.6" marker-end="url(#f3-ah-async)"/><text class="mlabel" x="210.0" y="110.0" text-anchor="middle">stock and cover per product</text><g class="num"><circle cx="84.3" cy="118.0" r="9"/><text x="84.3" y="118.5" text-anchor="middle" dominant-baseline="middle">1</text></g></g><g class="msg mk-sync" data-msg="1" data-from="guard" data-to="guard" tabindex="0" role="button"><path class="hit" d="M319.6,164.0 h40 v24 H323.6"/><path class="line" d="M319.6,164.0 h40 v24 H323.6" marker-end="url(#f3-ah-sync)"/><text class="mlabel" x="367.6" y="180.0">check cover against threshold</text><g class="num"><circle cx="303.6" cy="164.0" r="9"/><text x="303.6" y="164.5" text-anchor="middle" dominant-baseline="middle">2</text></g></g><g class="msg mk-async" data-msg="2" data-from="guard" data-to="mk" tabindex="0" role="button"><path class="hit" d="M321.6,266.0 H538.5"/><path class="line" d="M321.6,266.0 H538.5" marker-end="url(#f3-ah-async)"/><text class="mlabel" x="430.6" y="258.0" text-anchor="middle">alert with recommended cut</text><g class="num"><circle cx="303.6" cy="266.0" r="9"/><text x="303.6" y="266.5" text-anchor="middle" dominant-baseline="middle">3</text></g></g><g class="msg mk-return" data-msg="3" data-from="mk" data-to="guard" tabindex="0" role="button"><path class="hit" d="M539.5,312.0 H322.6"/><path class="line" d="M539.5,312.0 H322.6" marker-end="url(#f3-ah-return)"/><text class="mlabel" x="430.6" y="304.0" text-anchor="middle">approve</text><g class="num"><circle cx="557.5" cy="312.0" r="9"/><text x="557.5" y="312.5" text-anchor="middle" dominant-baseline="middle">4</text></g></g><g class="msg mk-sync" data-msg="4" data-from="guard" data-to="api" tabindex="0" role="button"><path class="hit" d="M321.6,414.0 H708.5"/><path class="line" d="M321.6,414.0 H708.5" marker-end="url(#f3-ah-sync)"/><text class="mlabel" x="515.6" y="406.0" text-anchor="middle">lower bids on affected products</text><g class="num"><circle cx="303.6" cy="414.0" r="9"/><text x="303.6" y="414.5" text-anchor="middle" dominant-baseline="middle">5</text></g></g><g class="msg mk-return" data-msg="5" data-from="api" data-to="guard" tabindex="0" role="button"><path class="hit" d="M709.5,460.0 H322.6"/><path class="line" d="M709.5,460.0 H322.6" marker-end="url(#f3-ah-return)"/><text class="mlabel" x="515.6" y="452.0" text-anchor="middle">confirmed</text><g class="num"><circle cx="727.5" cy="460.0" r="9"/><text x="727.5" y="460.5" text-anchor="middle" dominant-baseline="middle">6</text></g></g><g class="part pk-external" data-part="inv" tabindex="0" role="button"><rect class="shape" x="40.0" y="16" width="120.7" height="52" rx="2"/><text class="label" x="100.3" y="42.0" text-anchor="middle" dominant-baseline="middle"><tspan x="100.3" dy="0">Inventory feed</tspan></text></g><g class="part pk-service" data-part="guard" tabindex="0" role="button"><rect class="shape" x="260.6" y="16" width="118.0" height="52" rx="2"/><text class="label" x="319.6" y="42.0" text-anchor="middle" dominant-baseline="middle"><tspan x="319.6" dy="0">Stock guard</tspan></text></g><g class="part pk-actor" data-part="mk" tabindex="0" role="button"><rect class="shape" x="482.5" y="16" width="118.0" height="52" rx="10"/><circle class="dot" cx="496.5" cy="30" r="4"/><text class="label" x="541.5" y="34.0" text-anchor="middle" dominant-baseline="middle"><tspan x="541.5" dy="0">Performance</tspan><tspan x="541.5" dy="16">marketer</tspan></text></g><g class="part pk-external" data-part="api" tabindex="0" role="button"><rect class="shape" x="652.5" y="16" width="118.0" height="52" rx="2"/><text class="label" x="711.5" y="42.0" text-anchor="middle" dominant-baseline="middle"><tspan x="711.5" dy="0">Ads API</tspan></text></g></g></svg></div><div class="facts"><div class="row"><div class="legend"><div><svg class="sw" width="30" height="12" aria-hidden="true"><line x1="1" y1="6" x2="29" y2="6" stroke="var(--edge)" stroke-width="2" stroke-dasharray=""/></svg><span>Call</span></div><div><svg class="sw" width="30" height="12" aria-hidden="true"><line x1="1" y1="6" x2="29" y2="6" stroke="var(--edge)" stroke-width="2" stroke-dasharray="6 5"/></svg><span>Return</span></div><div><svg class="sw" width="30" height="12" aria-hidden="true"><line x1="1" y1="6" x2="29" y2="6" stroke="var(--edge)" stroke-width="2" stroke-dasharray="2 5"/></svg><span>Async</span></div><div><svg class="sw" width="30" height="16" aria-hidden="true"><rect x="2" y="2" width="26" height="12" fill="none" stroke="var(--muted)" stroke-dasharray="4 3"/></svg><span>Dashed outline: unknown or external</span></div></div><p class="evline"><span class="ev ev-V"><b>V</b>0 verified</span> <span class="ev ev-I"><b>I</b>0 inferred</span> <span class="ev ev-U"><b>?</b>0 unknown</span></p></div><div class="lists"><div><h4>Unknown, not in context</h4><ul><li>Which of the client&#x27;s ad channels expose a campaign API</li></ul></div></div></div></section></main>
+<footer>Badges: V verified with a quote checked against its file, I inferred, ? unknown. Dashed outlines are unknown or external. Edit the JSON spec beside this file, not this page.</footer>
+<script type="application/json" id="dg-spec">{
+  "title": "Stock guard for ads: every touchpoint",
+  "question": "Which flows change if ads pause on their own when a product is about to run out (option A)? An illustrative example, not a client decision.",
+  "diagrams": [
+    {
+      "type": "compare",
+      "title": "Brand ads team: today against option A",
+      "question": "What changes for the ads team when stock runs low?",
+      "before": {
+        "type": "workflow",
+        "title": "Today",
+        "lanes": [
+          {
+            "id": "stock",
+            "label": "Inventory"
+          },
+          {
+            "id": "ads",
+            "label": "Ads platform"
+          },
+          {
+            "id": "team",
+            "label": "Performance marketer"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "low",
+            "label": "Stock falls low",
+            "lane": "stock",
+            "kind": "start"
+          },
+          {
+            "id": "spend",
+            "label": "Ads keep spending",
+            "lane": "ads",
+            "kind": "system",
+            "evidence": "I",
+            "note": "Inferred: campaign tools act on bids and budgets, not on stock, unless someone connects them"
+          },
+          {
+            "id": "acos",
+            "label": "ACOS rises",
+            "lane": "ads",
+            "kind": "system",
+            "evidence": "I",
+            "note": "Inferred: ACOS is ad spend divided by ad revenue (Amazon Ads guide, in the performance marketing research note), so spend that keeps running while sales fall raises it"
+          },
+          {
+            "id": "report",
+            "label": "Spotted in the weekly report",
+            "lane": "team",
+            "kind": "manual",
+            "evidence": "U"
+          },
+          {
+            "id": "pause",
+            "label": "Pause the campaign by hand",
+            "lane": "team",
+            "kind": "manual"
+          },
+          {
+            "id": "end",
+            "label": "Spend stopped",
+            "lane": "ads",
+            "kind": "end"
+          }
+        ],
+        "edges": [
+          {
+            "from": "low",
+            "to": "spend"
+          },
+          {
+            "from": "spend",
+            "to": "acos"
+          },
+          {
+            "from": "acos",
+            "to": "report"
+          },
+          {
+            "from": "report",
+            "to": "pause"
+          },
+          {
+            "from": "pause",
+            "to": "end"
+          }
+        ],
+        "question": "What happens today when an advertised product runs low?"
+      },
+      "after": {
+        "type": "workflow",
+        "title": "Option A",
+        "lanes": [
+          {
+            "id": "stock",
+            "label": "Inventory"
+          },
+          {
+            "id": "ads",
+            "label": "Ads platform"
+          },
+          {
+            "id": "team",
+            "label": "Performance marketer"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "low",
+            "label": "Stock falls low",
+            "lane": "stock",
+            "kind": "start"
+          },
+          {
+            "id": "guard",
+            "label": "Cover below threshold?",
+            "lane": "ads",
+            "kind": "decision",
+            "evidence": "U",
+            "note": "The threshold is a client decision. Not in context"
+          },
+          {
+            "id": "alert",
+            "label": "Alert with a recommended bid cut",
+            "lane": "ads",
+            "kind": "system",
+            "evidence": "I",
+            "note": "Inferred from the pattern that agents advise and people approve spend changes"
+          },
+          {
+            "id": "approve",
+            "label": "Approve?",
+            "lane": "team",
+            "kind": "decision"
+          },
+          {
+            "id": "pause",
+            "label": "Bids cut on affected products",
+            "lane": "ads",
+            "kind": "system"
+          },
+          {
+            "id": "fail",
+            "label": "Bid change rejected, marketer told",
+            "lane": "team",
+            "kind": "error"
+          },
+          {
+            "id": "watch",
+            "label": "Keep watching",
+            "lane": "ads",
+            "kind": "wait"
+          },
+          {
+            "id": "end",
+            "label": "Spend protected",
+            "lane": "ads",
+            "kind": "end"
+          }
+        ],
+        "edges": [
+          {
+            "from": "low",
+            "to": "guard"
+          },
+          {
+            "from": "guard",
+            "to": "alert",
+            "label": "yes"
+          },
+          {
+            "from": "guard",
+            "to": "watch",
+            "label": "no"
+          },
+          {
+            "from": "alert",
+            "to": "approve"
+          },
+          {
+            "from": "approve",
+            "to": "pause",
+            "label": "yes"
+          },
+          {
+            "from": "approve",
+            "to": "watch",
+            "label": "no"
+          },
+          {
+            "from": "pause",
+            "to": "end"
+          },
+          {
+            "from": "pause",
+            "to": "fail",
+            "label": "API error",
+            "kind": "failure"
+          }
+        ],
+        "question": "What happens under option A when an advertised product runs low?"
+      },
+      "unknowns": [
+        "How often advertised products run low on stock",
+        "Who on the client side may approve a spend change"
+      ]
+    },
+    {
+      "type": "userflow",
+      "title": "Performance marketer: the stock alert",
+      "question": "What does the marketer see and do when the guard fires?",
+      "nodes": [
+        {
+          "id": "s",
+          "label": "Alert in the dashboard",
+          "kind": "start"
+        },
+        {
+          "id": "detail",
+          "label": "Product, stock cover and spend at risk",
+          "kind": "screen",
+          "evidence": "I",
+          "note": "Inferred: the marketer needs cover and spend side by side to decide"
+        },
+        {
+          "id": "dec",
+          "label": "Approve the bid cut?",
+          "kind": "decision"
+        },
+        {
+          "id": "done",
+          "label": "Confirmation and undo",
+          "kind": "screen"
+        },
+        {
+          "id": "skip",
+          "label": "Dismiss with a reason",
+          "kind": "screen",
+          "evidence": "U"
+        },
+        {
+          "id": "restock",
+          "label": "Restock notice, bids restored",
+          "kind": "end"
+        },
+        {
+          "id": "err",
+          "label": "Change failed, try again or edit in the console",
+          "kind": "error"
+        }
+      ],
+      "edges": [
+        {
+          "from": "s",
+          "to": "detail"
+        },
+        {
+          "from": "detail",
+          "to": "dec"
+        },
+        {
+          "from": "dec",
+          "to": "done",
+          "label": "approve"
+        },
+        {
+          "from": "dec",
+          "to": "skip",
+          "label": "dismiss"
+        },
+        {
+          "from": "done",
+          "to": "restock"
+        },
+        {
+          "from": "done",
+          "to": "err",
+          "label": "API error",
+          "kind": "failure"
+        }
+      ],
+      "unknowns": [
+        "Whether the client wants an automatic restore when stock returns"
+      ]
+    },
+    {
+      "type": "sequence",
+      "title": "System: who tells whom",
+      "question": "What happens, in order, from a stock change to a bid change?",
+      "participants": [
+        {
+          "id": "inv",
+          "label": "Inventory feed",
+          "kind": "external"
+        },
+        {
+          "id": "guard",
+          "label": "Stock guard"
+        },
+        {
+          "id": "mk",
+          "label": "Performance marketer",
+          "kind": "actor"
+        },
+        {
+          "id": "api",
+          "label": "Ads API",
+          "kind": "external"
+        }
+      ],
+      "messages": [
+        {
+          "from": "inv",
+          "to": "guard",
+          "label": "stock and cover per product",
+          "kind": "async"
+        },
+        {
+          "from": "guard",
+          "to": "guard",
+          "label": "check cover against threshold"
+        },
+        {
+          "from": "guard",
+          "to": "mk",
+          "label": "alert with recommended cut",
+          "kind": "async"
+        },
+        {
+          "from": "mk",
+          "to": "guard",
+          "label": "approve",
+          "kind": "return"
+        },
+        {
+          "from": "guard",
+          "to": "api",
+          "label": "lower bids on affected products"
+        },
+        {
+          "from": "api",
+          "to": "guard",
+          "label": "confirmed",
+          "kind": "return"
+        }
+      ],
+      "fragments": [
+        {
+          "kind": "opt",
+          "label": "cover below threshold",
+          "start": 3,
+          "end": 6
+        }
+      ],
+      "notes": [
+        {
+          "at": 5,
+          "over": [
+            "api"
+          ],
+          "text": "Some channels have no usable campaign API and run by console"
+        }
+      ],
+      "unknowns": [
+        "Which of the client's ad channels expose a campaign API"
+      ]
+    }
+  ]
+}</script>
+<script>
+(function(){
+function standalone(svg){const W=+svg.getAttribute('width'),H=+svg.getAttribute('height');const c=svg.cloneNode(true);
+ const cs=getComputedStyle(document.documentElement);const vars=['--bg','--surface','--ink','--muted','--line','--wave','--pink','--jade','--turmeric','--sapphire','--amethyst','--node','--node-stroke','--lane','--lane-alt','--lane-head','--edge','--label-bg','--note'];
+ let rules='svg{'+vars.map(v=>v+':'+cs.getPropertyValue(v)).join(';')+'}';
+ for(const sh of document.styleSheets){for(const r of sh.cssRules){const sel=r.selectorText||'';if(sel&&!/^(body|main|h[124]|table|th|td|caption|button|\.page-head|\.tools|\.flow|\.canvas|\.facts|\.legend|\.lists|\.changes|\.notes|\.ev|\.row|\.hint|\.q|\.meta|\.mark|\.ft|\.path|\.evline|\.summary|footer|\*|:root)/.test(sel))rules+=r.cssText;}}
+ const st=document.createElementNS('http://www.w3.org/2000/svg','style');st.textContent=rules;c.insertBefore(st,c.firstChild);
+ const bg=document.createElementNS('http://www.w3.org/2000/svg','rect');bg.setAttribute('width',W);bg.setAttribute('height',H);bg.setAttribute('fill',cs.getPropertyValue('--bg'));c.insertBefore(bg,st.nextSibling);
+ return {text:new XMLSerializer().serializeToString(c),W,H};}
+function save(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
+function slug(t){return (t||'diagram').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.x==='pdf'){window.print();return;}
+ if(b.dataset.x==='json'){save(new Blob([document.getElementById('dg-spec').textContent],{type:'application/json'}),slug(document.title)+'.json');return;}
+ const n=b.dataset.png||b.dataset.svg;if(!n)return;const sec=document.getElementById('flow-'+n),svg=sec.querySelector('.canvas svg');const out=standalone(svg),name=slug(sec.dataset.title);
+ if(b.dataset.svg){save(new Blob([out.text],{type:'image/svg+xml'}),name+'.svg');return;}
+ const img=new Image(),sc=2;img.onload=()=>{const cv=document.createElement('canvas');cv.width=out.W*sc;cv.height=out.H*sc;const g=cv.getContext('2d');g.scale(sc,sc);g.drawImage(img,0,0);cv.toBlob(bl=>save(bl,name+'.png'));};
+ img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(out.text);});
+})();
+</script></body></html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, noai, noimageai">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Failure library | The Retail Product Council</title>
+<meta name="description" content="Retail failure antipatterns, failure modes and real failures by region, used by the Premortem.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003D4F'/%3E%3Cpath d='M18 6h5l-9 20H9z' fill='%23F2617A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/chrome.css">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/retail.css">
+<script>try{var t=localStorage.getItem("council-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<a class="gh-skip" href="#content">Skip to content</a>
+<header class="gh">
+  <div class="gh-in">
+    <a class="gh-brand" href="../index.html"><span class="gh-slash">/</span>The Retail Product Council</a>
+    <button type="button" class="gh-btn gh-menu" id="ghMenu" aria-expanded="false" aria-controls="ghNav">Menu</button>
+    <nav class="gh-nav" id="ghNav" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../use.html">Use it</a>
+      <a href="../commands.html">Commands</a>
+      <a href="../behaviour.html">How it behaves</a>
+      <a href="../knowledge.html">Knowledge</a>
+      <a href="../diagrams.html">Diagrams</a>
+      <a href="../technical.html">Technical</a>
+      <a href="../reference.html">Reference</a>
+      <a href="../retail.html" aria-current="page">Retail base</a>
+    </nav>
+    <button type="button" class="gh-btn" id="themeBtn" aria-label="Switch light or dark theme">Theme</button>
+  </div>
+</header>
+<nav class="subbar" aria-label="Retail base"><div class="subbar-in"><a class="subbar-home" href="../retail.html">Retail base</a><div class="subbar-links"><a href="../retail.html">Overview</a><a href="../retail/areas.html">Areas</a><a href="../retail/cases.html">Case studies</a><a href="../retail/failures.html" aria-current="page">Failure library</a><a href="../retail/glossary.html">Glossary</a></div></div></nav>
+<div class="shell">
+  <nav class="sidebar" id="sidebar" aria-label="On this page">
+    <h2>On this page</h2>
+      <a href="#antipatterns">Seven antipatterns</a>
+      <a href="#selftest">The self-test</a>
+      <a href="#modes">Sixteen failure modes</a>
+      <a href="#checklist">Premortem checklist</a>
+      <a href="#sourced">Sourced failures</a>
+      <a href="#by-region">Failures by region</a>
+      <a href="#flags">Marketplace red flags</a>
+  </nav>
+
+  <main id="content">
+<div class="pagehead"><div class="pagehead-in">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><a href="../retail.html">Retail base</a><span aria-hidden="true">/</span><span aria-current="page">Failure library</span></nav>
+  <h1>Failure library</h1><p>How comparable retail ventures actually died. The Premortem builds its failure story from this, not from imagination.</p>
+</div></div>
+<details class="onpage"><summary>On this page</summary><div>
+      <a href="#antipatterns">Seven antipatterns</a>
+      <a href="#selftest">The self-test</a>
+      <a href="#modes">Sixteen failure modes</a>
+      <a href="#checklist">Premortem checklist</a>
+      <a href="#sourced">Sourced failures</a>
+      <a href="#by-region">Failures by region</a>
+      <a href="#flags">Marketplace red flags</a>
+</div></details>
+<aside class="note warn"><b>Directional, not exact</b><p>Loot Drop describes its content as AI-assisted, and its counts differ between pages. The council uses the ranking and the mechanisms, never a percentage, in a verdict. Shares below are rounded on purpose.</p></aside>
+<section id="antipatterns">
+  <div class="rule"></div>
+  <h2>Seven antipatterns</h2>
+  <p class="intro">The Premortem's first lens. Loot Drop sorts about 1,700 startup failures into seven antipatterns, one primary cause each.</p>
+  <table>
+    <caption>The seven antipatterns, with the failure modes in this base that sit inside each.</caption>
+    <thead><tr><th>Antipattern</th><th>Means</th><th>Share of all failures</th><th>Median lifespan</th><th>Failure modes</th></tr></thead>
+    <tbody>
+      <tr><td>The Crushed</td><td>Outgunned, outspent or out-executed by competition</td><td>About half</td><td>3 years</td><td>F6, F12, F14, F16</td></tr>
+      <tr><td>The Math Problem</td><td>Every sale lost money, at scale</td><td>About 15%</td><td>5 years</td><td>F2, F4, F8, F13</td></tr>
+      <tr><td>The Bonfire</td><td>Spending as if revenue is a formality, then out of cash</td><td>About 12%</td><td>4 years</td><td>F1, F3, F10</td></tr>
+      <tr><td>The Hallucination</td><td>Building for a customer who does not exist</td><td>About 12%</td><td>3 years</td><td>F14</td></tr>
+      <tr><td>The Outlaw</td><td>Regulation was the immovable object</td><td>About 5%</td><td>7 years</td><td>F5, F9, F15</td></tr>
+      <tr><td>The Lemon</td><td>The product could not deliver the promise</td><td>About 4%</td><td>5 years</td><td>none yet</td></tr>
+      <tr><td>The Civil War</td><td>The company destroyed itself from within</td><td>About 1%</td><td>4 years</td><td>F11</td></tr>
+    </tbody>
+  </table>
+  <h3>What it means for retail</h3>
+  <ul class="rich"><li><strong>Competition and unit economics are the retail killers.</strong> In marketplaces, competition caused 51.3% and unit economics 25.1% of 335 failures, and the two feed each other <q class="vq">often intertwines with competition as startups burn capital on customer acquisition and supplier subsidies to fend off rivals</q> <span class="srcpill" title="&quot;often intertwines with competition as startups burn capital on customer acquisition and supplier subsidies to fend off rivals&quot; Loot Drop: deep dives for Marketplace, Financial &amp; Fintech, Consumer Electronics, 2026-10-12">Loot Drop</span>. In the base&#x27;s own classification of 278 retail rows, competition and unit economics again lead (<span class="srcpill" title="Loot Drop: database view, retail and commerce filter, rows 201 to 649, 2026-10-12">Loot Drop</span>, an inference).</li><li><strong>Consumer is the most exposed sector to unit economics.</strong> <q class="vq">Consumer companies were especially vulnerable (101 failures)</q> <span class="srcpill" title="&quot;Consumer companies were especially vulnerable (101 failures)&quot; Loot Drop: Start-Up Learning Framework, 7 antipatterns, risk self-test, sector danger matrix, 2026-10-12">Loot Drop</span>. In the danger matrix the Consumer row is heaviest on Crushed and Math Problem.</li><li><strong>Marketplaces die after traction, not at launch.</strong> <q class="vq">The 5.4-year average lifespan means most marketplaces fail after achieving initial traction, not at launch.</q> <span class="srcpill" title="&quot;The 5.4-year average lifespan means most marketplaces fail after achieving initial traction, not at launch.&quot; Loot Drop: deep dives for Marketplace, Financial &amp; Fintech, Consumer Electronics, 2026-10-12">Loot Drop</span> So a premortem for a live marketplace matters more than one for a new idea.</li><li><strong>Demand is rarely the problem.</strong> <q class="vq">Only 8.4 percent failed from no market need</q> <span class="srcpill" title="&quot;Only 8.4 percent failed from no market need&quot; Loot Drop: deep dives for Marketplace, Financial &amp; Fintech, Consumer Electronics, 2026-10-12">Loot Drop</span>. Proving shoppers want it is not proving you can serve them profitably.</li><li><strong>Regulation kills slowly.</strong> The Outlaw has the longest median lifespan, seven years. Payments, lending, quick commerce labour models and cross-border trade are the retail areas most exposed.</li></ul>
+</section>
+
+<section id="selftest">
+  <div class="rule"></div>
+  <h2>The self-test</h2>
+  <p class="intro">The Premortem answers each question in one line before writing the failure story.</p>
+  <ol class="selftest"><li><strong>Hallucination.</strong> When shoppers or sellers hear about it, do they ask how to start, or only say it sounds interesting?</li><li><strong>Bonfire.</strong> If no new money came, how long until current revenue covers costs?</li><li><strong>Civil War.</strong> When the founders, client sponsors or investors disagree, is there a clear decider?</li><li><strong>Crushed.</strong> Why did the last three lost customers, sellers or brands choose a competitor, and do we know?</li><li><strong>Lemon.</strong> Has the delivery, catalogue, search or payments capability been proven at production volume, or only in a pilot?</li><li><strong>Outlaw.</strong> If every rule were enforced tomorrow (labour, payments, consumer protection, customs), would the model survive?</li><li><strong>Math Problem.</strong> After realistic cost gains, what would shoppers or sellers have to pay for a 20% gross margin, and would they?</li></ol>
+</section>
+
+<section id="modes">
+  <div class="rule"></div>
+  <h2>Sixteen failure modes</h2>
+  <p class="intro">The retail mechanisms inside the antipatterns. Each names real cases, and each fact carries its source. The early signs are inferences.</p>
+  <table class=modes>
+    <caption>Retail failure modes F1 to F16.</caption>
+    <thead><tr><th>#</th><th>Failure mode</th><th>Cases</th><th>What gives it away early</th></tr></thead>
+    <tbody>
+      <tr><td>F1</td><td>Scaling to new markets before the first one works</td><td>Webvan <q class="vq">committed the cardinal sin of retail</q> <a class="srcpill" href="https://yourstory.com/2014/09/webvan-e-tailer" target="_blank" rel="noopener noreferrer" title="&quot;committed the cardinal sin of retail&quot; YourStory: Famous failures: the grocery e-tailer that raised over $800 million and went public before filing for bankruptcy, 2014-09-16">YourStory</a>, Getir <q class="vq">It shows the dangers of throwing so much capital so quickly at an unproven provider.</q> <a class="srcpill" href="https://foodmanufacture.co.uk/Article/2024/04/29/Getir-and-Gorillas-exiting-UK-with-1-500-jobs-at-risk" target="_blank" rel="noopener noreferrer" title="&quot;It shows the dangers of throwing so much capital so quickly at an unproven provider.&quot; Food Manufacture: Getir and Gorillas to exit UK putting 1,500 jobs at risk, 2024-04-29">Food Manufacture</a></td><td>Second city launches while the first city&#x27;s contribution margin is negative</td></tr>
+      <tr><td>F2</td><td>Automation built before order density exists</td><td>Webvan, Kroger and Ocado <q class="vq">has agreed to pay $350 million cash to Ocado</q> <a class="srcpill" href="https://chainstoreage.com/kroger-pay-350-million-automation-partner-it-scales-back-robotic-warehouses" target="_blank" rel="noopener noreferrer" title="&quot;has agreed to pay $350 million cash to Ocado&quot; Chain Store Age: Kroger to pay $350 million to automation partner as it scales back robotic warehouses, 2025-12-08">Chain Store Age</a></td><td>Fulfilment centre utilisation plans depend on demand forecasts, not current orders</td></tr>
+      <tr><td>F3</td><td>Burn far ahead of revenue</td><td>Fast <q class="vq">said to be as high as $10 million per month</q> <a class="srcpill" href="https://techcrunch.com/2022/04/05/fast-shuts-doors-after-slow-growth-high-burn-precluded-fundraising-options" target="_blank" rel="noopener noreferrer" title="&quot;said to be as high as $10 million per month&quot; TechCrunch: Fast shuts doors after slow growth, high burn precluded fundraising options, 2022-04-05">TechCrunch</a>, Dunzo</td><td>Monthly burn is a large multiple of monthly revenue with no dated path to close it</td></tr>
+      <tr><td>F4</td><td>Subsidised demand mistaken for real demand</td><td>ONDC retail orders after incentives fell <q class="vq">from 65 lakh in October 2024 to 45 lakh in February 2025</q> <a class="srcpill" href="https://www.policycircle.org/industry/ondc-faces-growth-pangs-e-commerce/" target="_blank" rel="noopener noreferrer" title="&quot;from 65 lakh in October 2024 to 45 lakh in February 2025&quot; Policy Circle: ONDC faces growth pangs on road to e-commerce revolution, 2025-04-20">Policy Circle</a>, Alibaba&#x27;s instant commerce subsidy <q class="vq">store launch subsidies, product discounts, delivery subsidies, and reduced or waived commissions</q> <a class="srcpill" href="https://www.scmp.com/tech/big-tech/article/3316646/alibabas-us7-billion-subsidy-deepens-chinas-instant-e-commerce-war-jdcom-meituan" target="_blank" rel="noopener noreferrer" title="&quot;store launch subsidies, product discounts, delivery subsidies, and reduced or waived commissions&quot; South China Morning Post: Alibaba&#x27;s US$7 billion subsidy deepens China&#x27;s instant e-commerce war, 2025-07-02">South China Morning Post</a></td><td>Orders drop when discounts pause. Repeat rate is not reported without incentives</td></tr>
+      <tr><td>F5</td><td>Dependence on a trade, tax or platform rule</td><td>Temu after de minimis ended <q class="vq">fell by 48% in May compared to March, according to market intelligence firm Sensor Tower</q> <a class="srcpill" href="https://www.investing.com/news/economy-news/retailer-temus-daily-us-users-nearly-halve-following-end-of-de-minimis-loophole-4081081" target="_blank" rel="noopener noreferrer" title="&quot;fell by 48% in May compared to March, according to market intelligence firm Sensor Tower&quot; Reuters via Investing.com: Retailer Temu&#x27;s daily US users nearly halve following end of de minimis loophole, 2025-06-04">Reuters via Investing.com</a></td><td>The business case only works under a rule a government or platform can change</td></tr>
+      <tr><td>F6</td><td>Concentration on a few large clients or partners</td><td>Criteo retail media <q class="vq">the temporary impact of previously communicated scope changes with two specific Retail Media clients</q> <a class="srcpill" href="https://criteo.investorroom.com/2026-02-11-CRITEO-REPORTS-FOURTH-QUARTER-2025-RESULTS" target="_blank" rel="noopener noreferrer" title="&quot;the temporary impact of previously communicated scope changes with two specific Retail Media clients&quot; Criteo investor relations: Criteo reports fourth quarter 2025 results, 2026-02-11">Criteo investor relations</a></td><td>Top two clients carry a large share of revenue. Clients are building in-house</td></tr>
+      <tr><td>F7</td><td>Channel conflict with partners</td><td>Nike&#x27;s D2C push and return to wholesale <q class="vq">When we&#x27;re driving growth and profitability for our retailers, that&#x27;s how we take market share.</q> <a class="srcpill" href="https://www.sgieurope.com/corporate/nike-wholesale-turnaround-extends-beyond-north-america/119541.article" target="_blank" rel="noopener noreferrer" title="&quot;When we&#x27;re driving growth and profitability for our retailers, that&#x27;s how we take market share.&quot; SGI Europe: Nike wholesale turnaround extends beyond North America, undated">SGI Europe</a></td><td>Partners cut shelf space or assortment depth after a D2C move</td></tr>
+      <tr><td>F8</td><td>D2C economics that fade at scale</td><td>Dollar Shave Club <q class="vq">The sale comes a little over seven years after Unilever bought the buzzy DTC brand for an estimated $1 billion.</q> <a class="srcpill" href="https://www.retailtouchpoints.com/topics/market-news/unilever-sells-dollar-shave-club-as-it-refocuses-on-core-strategic-growth-areas" target="_blank" rel="noopener noreferrer" title="&quot;The sale comes a little over seven years after Unilever bought the buzzy DTC brand for an estimated $1 billion.&quot; Retail TouchPoints: Unilever sells Dollar Shave Club as it refocuses on core strategic growth areas, 2023-10-30">Retail TouchPoints</a></td><td>Acquisition cost rises and subscription retention falls cohort over cohort</td></tr>
+      <tr><td>F9</td><td>Regulators block consolidation</td><td>Kroger and Albertsons <q class="vq">a willful breach of contract for not doing enough to win regulatory approval for the merger</q> <a class="srcpill" href="https://www.boisestatepublicradio.org/2024-12-11/albertsons-sues-kroger-and-ends-failed-grocery-megamerger" target="_blank" rel="noopener noreferrer" title="&quot;a willful breach of contract for not doing enough to win regulatory approval for the merger&quot; Boise State Public Radio (NPR): Albertsons sues Kroger and ends failed grocery megamerger, 2024-12-11">Boise State Public Radio (NPR)</a></td><td>Overlap in local markets, whatever national rivals exist</td></tr>
+      <tr><td>F10</td><td>Footprint over focus</td><td>Jumia exiting Algeria <q class="vq">achieving positive cash flow in the fourth quarter of 2026</q> <a class="srcpill" href="https://www.ecofinagency.com/news-finances/1202-52854-jumia-pulls-out-of-algeria-sets-sights-on-2027-profit" target="_blank" rel="noopener noreferrer" title="&quot;achieving positive cash flow in the fourth quarter of 2026&quot; Ecofin Agency: Jumia pulls out of Algeria, sets sights on 2027 profit, 2026-02-10">Ecofin Agency</a>, Getir exits</td><td>Most markets are loss-making and small. Leadership attention is spread</td></tr>
+      <tr><td>F11</td><td>Investor terms that block a rescue</td><td>Dunzo <q class="vq">Reliance&#x27;s investment although brought in cash, it also gave them veto powers, which allegedly stifled further fundraising.</q> <a class="srcpill" href="https://www.outlookbusiness.com/start-up/e-commerce/dunzos-downfall-explained-what-led-reliance-to-write-off-entire-200-million-stake-in-start-up" target="_blank" rel="noopener noreferrer" title="&quot;Reliance&#x27;s investment although brought in cash, it also gave them veto powers, which allegedly stifled further fundraising.&quot; Outlook Business: Dunzo&#x27;s downfall explained, 2025-08-08">Outlook Business</a></td><td>One investor holds vetoes over future rounds</td></tr>
+      <tr><td>F12</td><td>Better-placed incumbents enter the space</td><td>Getir against delivery platforms <q class="vq">Existing platforms like Deliveroo, Uber Eats and Just Eat were much better placed to move into the rapid grocery market</q> <a class="srcpill" href="https://foodmanufacture.co.uk/Article/2024/04/29/Getir-and-Gorillas-exiting-UK-with-1-500-jobs-at-risk" target="_blank" rel="noopener noreferrer" title="&quot;Existing platforms like Deliveroo, Uber Eats and Just Eat were much better placed to move into the rapid grocery market&quot; Food Manufacture: Getir and Gorillas to exit UK putting 1,500 jobs at risk, 2024-04-29">Food Manufacture</a></td><td>Incumbents already own the customer, riders or supply needed</td></tr>
+      <tr><td>F13</td><td>Human-heavy operations that do not scale</td><td>Loot Drop&#x27;s insights page names Ahalife (human curation and support) and 99dresses (marketplace logistics, inventory and returns) as examples. Read as a summary on 2026-10-11, exact words not captured, so <code>[U]</code> until rechecked against <a class="srcpill" href="https://www.loot-drop.io/insights.html" target="_blank" rel="noopener noreferrer" title="Loot Drop (loot-drop.io): Loot Drop insights: failure causes and sector patterns, accessed 2026-10-11">Loot Drop (loot-drop.io)</a></td><td>Ops headcount grows in step with orders</td></tr>
+      <tr><td>F14</td><td>A model exported to a market it was not built for</td><td>Poshmark UK and Rent the Runway UK lost to local fashion habits and rivals (<span class="srcpill" title="Loot Drop: database view, retail and commerce filter, rows 201 to 649, 2026-10-12">Loot Drop</span>). Getir&#x27;s international expansion (<a class="srcpill" href="https://foodmanufacture.co.uk/Article/2024/04/29/Getir-and-Gorillas-exiting-UK-with-1-500-jobs-at-risk" target="_blank" rel="noopener noreferrer" title="Food Manufacture: Getir and Gorillas to exit UK putting 1,500 jobs at risk, 2024-04-29">Food Manufacture</a>)</td><td>The home-market playbook is copied without a local transfer check</td></tr>
+      <tr><td>F15</td><td>Inflated metrics and governance failure</td><td>Zilingo reported GMV as revenue, GoMechanic inflated transactions (<span class="srcpill" title="Loot Drop: database view, retail and commerce filter, rows 201 to 649, 2026-10-12">Loot Drop</span>)</td><td>Revenue definitions change, or numbers cannot be reconciled to cash</td></tr>
+      <tr><td>F16</td><td>A platform or public rail removes your role</td><td>PayMate after UPI, Qraved after Google Maps and super-apps, Farfetch as brands went direct (<span class="srcpill" title="Loot Drop: database view, retail and commerce filter, rows 201 to 649, 2026-10-12">Loot Drop</span>)</td><td>The value you add is a step a bigger platform or a public rail can absorb</td></tr>
+    </tbody>
+  </table>
+
+</section>
+
+<section id="checklist">
+  <div class="rule"></div>
+  <h2>Premortem checklist</h2>
+  <p class="intro">Answered in one line each, with evidence or unknown, before the story is told.</p>
+  <ol class="selftest"><li>Which antipattern is most likely, using the seven self-test questions in antipatterns.md?</li><li>Which two or three failure modes above are closest to this idea, and which case from the same region is the nearest match (retail-failures-by-region.md)?</li><li>Is demand measured without incentives, or only with them (F4)?</li><li>Does the case depend on a rule, a platform, a public rail or a single partner that someone else controls (F5, F6, F16)?</li><li>Does it require density, automation or headcount before the orders exist (F1, F2, F13)?</li><li>Which side of the product, partner or channel loses if this works (F7)?</li><li>Who could copy it faster because they already own the customer or supply (F12)?</li><li>What is the burn against revenue, and the dated path to close it (F3)?</li><li>Are the reported numbers the ones that reach the bank (F15)?</li><li>Which region&#x27;s case is this borrowed from, and does the transfer check hold here (F14)?</li></ol>
+</section>
+
+<section id="sourced">
+  <div class="rule"></div>
+  <h2>Sourced failures</h2>
+  <p class="intro">Pick the two or three nearest cases before writing a failure story.</p>
+  <h3>Sourced retail cases</h3>
+  <table>
+    <caption>Failures with a source in the manifest.</caption>
+    <thead><tr><th>Case</th><th>Region</th><th>Years</th><th>What happened</th><th>Modes</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Webvan</td><td>United States</td><td>to 2001</td><td>Built automated warehouses and expanded to new cities before proving the first, then went bankrupt</td><td>F1, F2</td><td><a class="srcpill" href="https://yourstory.com/2014/09/webvan-e-tailer" target="_blank" rel="noopener noreferrer" title="YourStory: Famous failures: the grocery e-tailer that raised over $800 million and went public before filing for bankruptcy, 2014-09-16">YourStory</a> (2014, stale)</td></tr>
+      <tr><td>Fast (one-click checkout)</td><td>United States</td><td>to 2022</td><td>Six-figure 2021 revenue against reported burn of up to $10M a month, shut down</td><td>F3</td><td><a class="srcpill" href="https://techcrunch.com/2022/04/05/fast-shuts-doors-after-slow-growth-high-burn-precluded-fundraising-options" target="_blank" rel="noopener noreferrer" title="TechCrunch: Fast shuts doors after slow growth, high burn precluded fundraising options, 2022-04-05">TechCrunch</a> (2022, stale)</td></tr>
+      <tr><td>Dunzo</td><td>India</td><td>2014 to 2025</td><td>Quick commerce pivot, heavy burn, investor vetoes, Reliance wrote off its stake</td><td>F3, F4, F11</td><td><a class="srcpill" href="https://www.outlookbusiness.com/start-up/e-commerce/dunzos-downfall-explained-what-led-reliance-to-write-off-entire-200-million-stake-in-start-up" target="_blank" rel="noopener noreferrer" title="Outlook Business: Dunzo&#x27;s downfall explained, 2025-08-08">Outlook Business</a> (2025, stale)</td></tr>
+      <tr><td>Getir and Gorillas</td><td>UK, Germany, Netherlands, US</td><td>exits announced 2024</td><td>Exited markets worth 7% of revenue after post-pandemic demand fell</td><td>F1, F10, F12</td><td><a class="srcpill" href="https://foodmanufacture.co.uk/Article/2024/04/29/Getir-and-Gorillas-exiting-UK-with-1-500-jobs-at-risk" target="_blank" rel="noopener noreferrer" title="Food Manufacture: Getir and Gorillas to exit UK putting 1,500 jobs at risk, 2024-04-29">Food Manufacture</a> (2024, stale)</td></tr>
+      <tr><td>Kroger automated fulfilment with Ocado</td><td>United States</td><td>to 2026</td><td>Closed three automated centres and paid Ocado $350M</td><td>F2</td><td><a class="srcpill" href="https://chainstoreage.com/kroger-pay-350-million-automation-partner-it-scales-back-robotic-warehouses" target="_blank" rel="noopener noreferrer" title="Chain Store Age: Kroger to pay $350 million to automation partner as it scales back robotic warehouses, 2025-12-08">Chain Store Age</a> (2025, stale)</td></tr>
+      <tr><td>Kroger and Albertsons merger</td><td>United States</td><td>to 2024</td><td>Courts blocked the $24.6B deal</td><td>F9</td><td><a class="srcpill" href="https://www.boisestatepublicradio.org/2024-12-11/albertsons-sues-kroger-and-ends-failed-grocery-megamerger" target="_blank" rel="noopener noreferrer" title="Boise State Public Radio (NPR): Albertsons sues Kroger and ends failed grocery megamerger, 2024-12-11">Boise State Public Radio (NPR)</a> (2024, stale)</td></tr>
+      <tr><td>Dollar Shave Club under Unilever</td><td>United States</td><td>2016 to 2023</td><td>Bought for about $1B, majority sold seven years later</td><td>F8</td><td><a class="srcpill" href="https://www.retailtouchpoints.com/topics/market-news/unilever-sells-dollar-shave-club-as-it-refocuses-on-core-strategic-growth-areas" target="_blank" rel="noopener noreferrer" title="Retail TouchPoints: Unilever sells Dollar Shave Club as it refocuses on core strategic growth areas, 2023-10-30">Retail TouchPoints</a> (2023, stale)</td></tr>
+      <tr><td>Temu after de minimis</td><td>China to United States</td><td>2025</td><td>US daily users fell 48% after the exemption ended</td><td>F5</td><td><a class="srcpill" href="https://www.investing.com/news/economy-news/retailer-temus-daily-us-users-nearly-halve-following-end-of-de-minimis-loophole-4081081" target="_blank" rel="noopener noreferrer" title="Reuters via Investing.com: Retailer Temu&#x27;s daily US users nearly halve following end of de minimis loophole, 2025-06-04">Reuters via Investing.com</a> (2025, stale)</td></tr>
+      <tr><td>Criteo retail media</td><td>Europe, global</td><td>2025 to 2026</td><td>Two clients cut scope and erased a year of segment growth</td><td>F6</td><td><a class="srcpill" href="https://ppc.land/criteos-retail-media-gamble-backfires-as-client-cuts-erase-year-of-growth/" target="_blank" rel="noopener noreferrer" title="PPC Land: Criteo&#x27;s retail media gamble backfires as client cuts erase year of growth, 2026-02-14">PPC Land</a> (2026, stale)</td></tr>
+      <tr><td>ONDC retail</td><td>India</td><td>2024 to 2025</td><td>Retail orders fell after incentives were reduced</td><td>F4</td><td><a class="srcpill" href="https://www.policycircle.org/industry/ondc-faces-growth-pangs-e-commerce/" target="_blank" rel="noopener noreferrer" title="Policy Circle: ONDC faces growth pangs on road to e-commerce revolution, 2025-04-20">Policy Circle</a> (2025, stale)</td></tr>
+      <tr><td>Jumia</td><td>Africa</td><td>2026</td><td>Exited Algeria to focus on profitable markets</td><td>F10</td><td><a class="srcpill" href="https://www.ecofinagency.com/news-finances/1202-52854-jumia-pulls-out-of-algeria-sets-sights-on-2027-profit" target="_blank" rel="noopener noreferrer" title="Ecofin Agency: Jumia pulls out of Algeria, sets sights on 2027 profit, 2026-02-10">Ecofin Agency</a> (2026, stale)</td></tr>
+      <tr><td>Nike D2C push</td><td>Global</td><td>to 2025</td><td>Wholesale rebuilt after rivals gained shelf space</td><td>F7</td><td><a class="srcpill" href="https://www.sgieurope.com/corporate/nike-wholesale-turnaround-extends-beyond-north-america/119541.article" target="_blank" rel="noopener noreferrer" title="SGI Europe: Nike wholesale turnaround extends beyond North America, undated">SGI Europe</a> (undated)</td></tr>
+    </tbody>
+  </table>
+  <h3>Smaller cases from founder-interview lists (Failory)</h3>
+  <table>
+    <caption>Failory's own labels. Reference class only, not verified analysis.</caption>
+    <thead><tr><th>Case</th><th>Country</th><th>Years</th><th>Funding band</th><th>Stated reason</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>Fab</td><td>United States</td><td>2009 to 2013</td><td>over $50M</td><td>Multiple reasons</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Move Loot</td><td>United States</td><td>2013 to 2016</td><td>$10M to $50M</td><td>Bad business model, stockroom costs not considered</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a>, S-261011-QL</td></tr>
+      <tr><td>Juicero</td><td>United States</td><td>2013 to 2017</td><td>over $50M</td><td>Bad business model</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>SpoonRocket</td><td>United States</td><td>2013 to 2016</td><td>$10M to $50M</td><td>Competition</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Totsy</td><td>United States</td><td>2009 to 2013</td><td>$10M to $50M</td><td>Poor product</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Auctionata</td><td>Germany</td><td>2012 to 2017</td><td>over $50M</td><td>Legal challenges</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Shipbeat</td><td>Denmark</td><td>2014 to 2016</td><td>$1M to $10M</td><td>Multiple reasons</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>FreshConnect</td><td>India</td><td>2018 to 2020</td><td>not listed</td><td>Bad management</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Chowdy</td><td>Canada</td><td>2014 to 2016</td><td>not listed</td><td>Legal challenges</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Alikolo</td><td>Indonesia</td><td>2014 to 2015</td><td>under $1M</td><td>Lack of experience</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Ropero</td><td>Mexico</td><td>2005 to 2006</td><td>not listed</td><td>Bad market fit</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>NOX</td><td>Singapore</td><td>2015 to 2018</td><td>not listed</td><td>Mismanagement of funds</td><td><a class="srcpill" href="https://www.failory.com/startups/e-commerce-failures" target="_blank" rel="noopener noreferrer" title="Failory: E-commerce startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>PepperTap</td><td>India</td><td>2014 to 2016</td><td>over $50M</td><td>Poor product, delivery fees too expensive for customers</td><td><a class="srcpill" href="https://www.failory.com/startups/marketplace-failures" target="_blank" rel="noopener noreferrer" title="Failory: Marketplace startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Shyp</td><td>United States</td><td>2013 to 2018</td><td>over $50M</td><td>Multiple reasons, no profitable model found</td><td><a class="srcpill" href="https://www.failory.com/startups/marketplace-failures" target="_blank" rel="noopener noreferrer" title="Failory: Marketplace startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Take Eat Easy</td><td>Belgium</td><td>2013 to 2016</td><td>$10M to $50M</td><td>Competition, margins insufficient</td><td><a class="srcpill" href="https://www.failory.com/startups/marketplace-failures" target="_blank" rel="noopener noreferrer" title="Failory: Marketplace startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Beepi</td><td>United States</td><td>2013 to 2016</td><td>over $50M</td><td>Mismanagement of funds</td><td><a class="srcpill" href="https://www.failory.com/startups/marketplace-failures" target="_blank" rel="noopener noreferrer" title="Failory: Marketplace startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>99dresses</td><td>Australia</td><td>2010 to 2014</td><td>under $1M</td><td>Multiple reasons</td><td><a class="srcpill" href="https://www.failory.com/startups/marketplace-failures" target="_blank" rel="noopener noreferrer" title="Failory: Marketplace startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Stayzilla</td><td>India</td><td>2005 to 2017</td><td>$10M to $50M</td><td>Lack of focus, unsustainable operating costs</td><td><a class="srcpill" href="https://www.failory.com/startups/marketplace-failures" target="_blank" rel="noopener noreferrer" title="Failory: Marketplace startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Karhoo</td><td>United Kingdom</td><td>2014 to 2016</td><td>$10M to $50M</td><td>Poor management and execution</td><td><a class="srcpill" href="https://www.failory.com/startups/marketplace-failures" target="_blank" rel="noopener noreferrer" title="Failory: Marketplace startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+      <tr><td>Dazo</td><td>India</td><td>2015 to 2016</td><td>not listed</td><td>Competition and lack of funding</td><td><a class="srcpill" href="https://www.failory.com/startups/marketplace-failures" target="_blank" rel="noopener noreferrer" title="Failory: Marketplace startup failures, undated, accessed 2026-10-11">Failory</a></td></tr>
+    </tbody>
+  </table>
+
+</section>
+
+<section id="by-region">
+  <div class="rule"></div>
+  <h2>Failures by region</h2>
+  <p class="intro">44 hand-checked retail failures from Loot Drop, grouped so a Premortem can pick failures from the same region as the idea. What killed it is a short paraphrase of Loot Drop's own text, and the modes are this base's inference.</p>
+  <div class="rtabs" role="tablist" aria-label="Regions"><button type="button" role="tab" id="rt-china" aria-controls="rp-china" aria-selected="true" tabindex="0">China <small>7</small></button><button type="button" role="tab" id="rt-india" aria-controls="rp-india" aria-selected="false" tabindex="-1">India <small>7</small></button><button type="button" role="tab" id="rt-southeast-asia" aria-controls="rp-southeast-asia" aria-selected="false" tabindex="-1">Southeast Asia <small>8</small></button><button type="button" role="tab" id="rt-europe-and-the-uk" aria-controls="rp-europe-and-the-uk" aria-selected="false" tabindex="-1">Europe and the UK <small>10</small></button><button type="button" role="tab" id="rt-north-america" aria-controls="rp-north-america" aria-selected="false" tabindex="-1">North America <small>4</small></button><button type="button" role="tab" id="rt-rest-of-the-world" aria-controls="rp-rest-of-the-world" aria-selected="false" tabindex="-1">Rest of the world <small>8</small></button></div>
+<div class="rpane" role="tabpanel" id="rp-china" aria-labelledby="rt-china">  <table>
+    <thead><tr><th>Case</th><th>Years</th><th>Capital</th><th>What killed it</th><th>Modes</th><th>Entry</th></tr></thead>
+    <tbody>
+      <tr><td>Xingsheng Youxuan</td><td>2018 to 2025</td><td>$5.2B</td><td>Community group-buying subsidy war with Pinduoduo and Meituan, then the key growth tactic was banned</td><td>F4, F5, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2408-xingsheng-youxuan" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Kaola</td><td>2015 to 2019</td><td>$2.0B</td><td>Cross-border e-commerce outspent by Alibaba, sold to it</td><td>F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2351-kaola" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Best Express</td><td>2007 to 2021</td><td>$2.0B</td><td>Parcel price wars while Alibaba shifted volume to rivals</td><td>F6, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2136-best-express" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Missfresh</td><td>2014 to 2022</td><td>$1.5B</td><td>Dark warehouses hit order ceilings before density fixed the economics</td><td>F2, F3</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2109-missfresh" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Dingdong Maicai</td><td>2017 to 2024</td><td>$1.5B</td><td>Grocery delivery subsidies against Meituan, no shopper loyalty</td><td>F4, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2374-dingdong-maicai" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Chengxin Youxuan</td><td>2020 to 2021</td><td>$1.2B</td><td>40% discounts in a subsidy war, demand vanished at real prices</td><td>F4</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2326-chengxin-youxuan" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Nice Tuan</td><td>2018 to 2021</td><td>$1.2B</td><td>Thin margins until below-cost selling was banned and funding dried up</td><td>F4, F5</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2104-nice-tuan" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="rpane" role="tabpanel" id="rp-india" aria-labelledby="rt-india" hidden>  <table>
+    <thead><tr><th>Case</th><th>Years</th><th>Capital</th><th>What killed it</th><th>Modes</th><th>Entry</th></tr></thead>
+    <tbody>
+      <tr><td>ShopX</td><td>2015 to 2022</td><td>$60M</td><td>B2B retail ordering against distributor control, acquisition cost above lifetime value</td><td>F12, F8</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2204-shopx" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Trell</td><td>2016 to 2024</td><td>$60M</td><td>Paid creators to drive commerce, collapsed when incentives were cut</td><td>F4</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2150-trell" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Limeroad</td><td>2012 to 2025</td><td>$51M</td><td>Could not balance curation with seller scale, logistics burn</td><td>F3, F13</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2519-limeroad" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Lysto</td><td>2021 to 2024</td><td>$12M</td><td>Low retention against Meesho&#x27;s network and supplier depth</td><td>F8, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2527-lysto" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Dukaan</td><td>2020 to 2024</td><td>$17M</td><td>Low-value merchant base could not pay SaaS prices</td><td>F8</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2425-dukaan" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>PayMate</td><td>2006 to 2025</td><td>$100M</td><td>UPI and digital rails removed the need for its card intermediation</td><td>F16</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2517-paymate" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>GoMechanic</td><td>2016 to 2023</td><td>$100M</td><td>Inflated revenue with fake transactions, exposed in due diligence</td><td>F15</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2072-gomechanic" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="rpane" role="tabpanel" id="rp-southeast-asia" aria-labelledby="rt-southeast-asia" hidden>  <table>
+    <thead><tr><th>Case</th><th>Years</th><th>Capital</th><th>What killed it</th><th>Modes</th><th>Entry</th></tr></thead>
+    <tbody>
+      <tr><td>Zilingo</td><td>2015 to 2022</td><td>$340M</td><td>Reported GMV as revenue, accounting scandal</td><td>F15</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2137-zilingo" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Beb</td><td>2019 to 2023</td><td>$100M</td><td>Subsidised both sides of the marketplace, no later round</td><td>F4, F3</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2223-bebgroup-beb" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>TaniHub</td><td>2016 to 2024</td><td>$94M</td><td>Expanded to 10+ cities before unit economics worked</td><td>F1</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2224-tanihub" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Elevenia</td><td>2014 to 2022</td><td>$60M</td><td>Corporate parents would not fund the fight with Shopee</td><td>F11, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2219-elevenia" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Honestbee</td><td>2015 to 2019</td><td>$50M</td><td>Grocery orders cost more to fulfil than they earned, then more verticals</td><td>F1, F10</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2138-honestbee" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Fabelio</td><td>2015 to 2022</td><td>$20M</td><td>Blitzscaled furniture delivery without the scale it needed</td><td>F1, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2148-fabelio" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Qraved</td><td>2013 to 2021</td><td>$15M</td><td>Google Maps and super-apps absorbed discovery and bookings</td><td>F16</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2233-qraved" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Leflair</td><td>2015 to 2020</td><td>$12M</td><td>Inventory bloat and acquisition cost above order value</td><td>F2, F8</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2147-leflair" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="rpane" role="tabpanel" id="rp-europe-and-the-uk" aria-labelledby="rt-europe-and-the-uk" hidden>  <table>
+    <thead><tr><th>Case</th><th>Years</th><th>Capital</th><th>What killed it</th><th>Modes</th><th>Entry</th></tr></thead>
+    <tbody>
+      <tr><td>Cazoo</td><td>2018 to 2023</td><td>$2.0B</td><td>Thin-margin car retail carrying inventory, delivery and returns</td><td>F2, F3</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2039-cazoo" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Getir international</td><td>2015 to 2024</td><td>$1.8B</td><td>Expanded to nine countries before unit economics worked outside Turkey</td><td>F1, F3</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2276-getir-intl-ops" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Farfetch</td><td>2007 to 2024</td><td>$1.6B</td><td>Luxury brands chose to own their customers over paying a middleman</td><td>F7, F16</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2151-farfetch" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Signa Sports</td><td>2018 to 2023</td><td>$1.0B</td><td>Debt-funded brand roll-up on structural margins</td><td>F3</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2154-signa-sports" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>MatchesFashion</td><td>1987 to 2024</td><td>$600M</td><td>Brands went direct and broke the wholesale model</td><td>F7</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2164-matchesfashion" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>RetailMeNot UK</td><td>2012 to 2020</td><td>$300M</td><td>Coupon and cashback competition</td><td>F4, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/497-retailmenot-uk" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Frontier Car Group</td><td>2016 to 2020</td><td>$170M</td><td>Inventory in six emerging markets at once</td><td>F1, F2, F10</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2075-frontier-car-group" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Poshmark UK</td><td>2012 to 2020</td><td>$153M</td><td>Did not localise for UK fashion</td><td>F14</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/455-poshmark-uk" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Made.com</td><td>2010 to 2022</td><td>$130M</td><td>Left its asset-light model to chase delivery speed</td><td>F2</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2156-madecom" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Rent the Runway UK</td><td>2015 to 2021</td><td>$125M</td><td>Lost to fast fashion and local rivals</td><td>F14</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/493-rent-the-runway-uk" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="rpane" role="tabpanel" id="rp-north-america" aria-labelledby="rt-north-america" hidden>  <table>
+    <thead><tr><th>Case</th><th>Years</th><th>Capital</th><th>What killed it</th><th>Modes</th><th>Entry</th></tr></thead>
+    <tbody>
+      <tr><td>Uber Rush</td><td>2015 to 2020</td><td>$2.5B</td><td>Out-competed in delivery by specialists</td><td>F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/678-uber-rush" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Vroom</td><td>2013 to 2024</td><td>$1.3B</td><td>Inventory risk and logistics cost at scale</td><td>F2</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2434-vroom" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>SmileDirectClub</td><td>2014 to 2023</td><td>$900M</td><td>D2C losses and professional lawsuits</td><td>F8, F5</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2294-smiledirectclub" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Zume</td><td>2015 to 2022</td><td>$445M</td><td>Burn, lost focus, competition</td><td>F3, F10</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/808-zume" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="rpane" role="tabpanel" id="rp-rest-of-the-world" aria-labelledby="rt-rest-of-the-world" hidden>  <table>
+    <thead><tr><th>Case</th><th>Years</th><th>Capital</th><th>What killed it</th><th>Modes</th><th>Entry</th></tr></thead>
+    <tbody>
+      <tr><td>Origami</td><td>Japan</td><td>$80M</td><td>Payments subsidy war with PayPay</td><td>F4, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2229-origami" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Renown</td><td>Japan</td><td>$125M</td><td>Bet on department stores as they declined</td><td>F6</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2249-renown" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Booktopia</td><td>Australia</td><td>$30M</td><td>Built warehouses to fight Amazon&#x27;s scale</td><td>F2, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2336-booktopia" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Shoes of Prey</td><td>Australia</td><td>$25M</td><td>Custom products, very high return rates</td><td>F8</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2191-shoes-of-prey" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>YourGrocer</td><td>Australia</td><td>$1.5M</td><td>Thin margins against supermarket delivery</td><td>F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2341-yourgrocer" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Zulzi</td><td>South Africa</td><td>$2M</td><td>Subsidised orders against a grocer with 280 stores</td><td>F4, F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/2085-zulzi" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>Avo</td><td>Israel</td><td>$4.5M</td><td>Fast delivery against competition and costs</td><td>F12</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/1400-avo" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+      <tr><td>CARUPI</td><td>Brazil</td><td>$3M</td><td>Logistics costs, habits and rivals</td><td>F12, F13</td><td><a class="srcpill" href="https://www.loot-drop.io/startup/913-carupi" target="_blank" rel="noopener noreferrer">Loot Drop</a></td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<section id="flags">
+  <div class="rule"></div>
+  <h2>Marketplace red flags</h2>
+  <p class="intro">From Loot Drop's marketplace deep dive, paraphrased.</p>
+  <ul class="rich"><li><strong>Red flags.</strong> Subsidies with no end date. An advantage that is only first-mover status or more funding. New categories or cities before the core is profitable. Acquisition cost rising with scale. No reason for either side to stay if a rival offers better terms.</li><li><strong>Metrics.</strong> Take rate after all discounts. Cohort lifetime value against fully loaded acquisition cost. Share of listings that transact. Repeat rate. Contribution margin per transaction.</li></ul>
+</section>
+
+<nav class="pager" aria-label="Previous and next page"><a class="prev" href="../retail/cases.html"><small>Previous</small>Global case studies</a><a class="next" href="../retail/glossary.html"><small>Next</small>Retail glossary</a></nav>
+  </main>
+</div>
+<footer class="gf">
+  <div class="gf-in">
+    <div class="gf-brand"><span class="gh-slash">/</span>The Retail Product Council<p>Expert panels for retail product decisions, grounded in evidence from every region.</p></div>
+    <div><h2>Use</h2><a href="../use.html">Get started</a><a href="../commands.html">Commands</a><a href="../behaviour.html">How it behaves</a><a href="../diagrams.html">Diagrams</a></div>
+    <div><h2>Understand</h2><a href="../knowledge.html">Knowledge and context</a><a href="../technical.html">Technical</a><a href="../reference.html">Reference</a></div>
+    <div><h2>Retail base</h2><a href="../retail/areas.html">Thirteen areas</a><a href="../retail/cases.html">Global case studies</a><a href="../retail/failures.html">Failure library</a><a href="../retail/glossary.html">Glossary</a></div>
+  </div>
+  <p class="gf-note">The Retail Product Council 1.0 on the Product Council v3.7.3 engine, updated 18 October 2026. The repository is the source of truth: update these pages in the same pull request as a skill, agent, persona or curated change. Built by Thoughtworks with Claude Code. Public figures named on these pages are reasoning lenses, never quoted and not involved.</p>
+</footer>
+<script src="../assets/chrome.js"></script>
+<script src="../assets/site.js"></script>
+<script src="../assets/retail.js"></script>
+</body>
+</html>

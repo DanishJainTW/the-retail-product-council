@@ -1,0 +1,372 @@
+{
+  "title": "Stock guard for ads: every touchpoint",
+  "question": "Which flows change if ads pause on their own when a product is about to run out (option A)? An illustrative example, not a client decision.",
+  "diagrams": [
+    {
+      "type": "compare",
+      "title": "Brand ads team: today against option A",
+      "question": "What changes for the ads team when stock runs low?",
+      "before": {
+        "type": "workflow",
+        "title": "Today",
+        "lanes": [
+          {
+            "id": "stock",
+            "label": "Inventory"
+          },
+          {
+            "id": "ads",
+            "label": "Ads platform"
+          },
+          {
+            "id": "team",
+            "label": "Performance marketer"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "low",
+            "label": "Stock falls low",
+            "lane": "stock",
+            "kind": "start"
+          },
+          {
+            "id": "spend",
+            "label": "Ads keep spending",
+            "lane": "ads",
+            "kind": "system",
+            "evidence": "I",
+            "note": "Inferred: campaign tools act on bids and budgets, not on stock, unless someone connects them"
+          },
+          {
+            "id": "acos",
+            "label": "ACOS rises",
+            "lane": "ads",
+            "kind": "system",
+            "evidence": "I",
+            "note": "Inferred: ACOS is ad spend divided by ad revenue (Amazon Ads guide, in the performance marketing research note), so spend that keeps running while sales fall raises it"
+          },
+          {
+            "id": "report",
+            "label": "Spotted in the weekly report",
+            "lane": "team",
+            "kind": "manual",
+            "evidence": "U"
+          },
+          {
+            "id": "pause",
+            "label": "Pause the campaign by hand",
+            "lane": "team",
+            "kind": "manual"
+          },
+          {
+            "id": "end",
+            "label": "Spend stopped",
+            "lane": "ads",
+            "kind": "end"
+          }
+        ],
+        "edges": [
+          {
+            "from": "low",
+            "to": "spend"
+          },
+          {
+            "from": "spend",
+            "to": "acos"
+          },
+          {
+            "from": "acos",
+            "to": "report"
+          },
+          {
+            "from": "report",
+            "to": "pause"
+          },
+          {
+            "from": "pause",
+            "to": "end"
+          }
+        ],
+        "question": "What happens today when an advertised product runs low?"
+      },
+      "after": {
+        "type": "workflow",
+        "title": "Option A",
+        "lanes": [
+          {
+            "id": "stock",
+            "label": "Inventory"
+          },
+          {
+            "id": "ads",
+            "label": "Ads platform"
+          },
+          {
+            "id": "team",
+            "label": "Performance marketer"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "low",
+            "label": "Stock falls low",
+            "lane": "stock",
+            "kind": "start"
+          },
+          {
+            "id": "guard",
+            "label": "Cover below threshold?",
+            "lane": "ads",
+            "kind": "decision",
+            "evidence": "U",
+            "note": "The threshold is a client decision. Not in context"
+          },
+          {
+            "id": "alert",
+            "label": "Alert with a recommended bid cut",
+            "lane": "ads",
+            "kind": "system",
+            "evidence": "I",
+            "note": "Inferred from the pattern that agents advise and people approve spend changes"
+          },
+          {
+            "id": "approve",
+            "label": "Approve?",
+            "lane": "team",
+            "kind": "decision"
+          },
+          {
+            "id": "pause",
+            "label": "Bids cut on affected products",
+            "lane": "ads",
+            "kind": "system"
+          },
+          {
+            "id": "fail",
+            "label": "Bid change rejected, marketer told",
+            "lane": "team",
+            "kind": "error"
+          },
+          {
+            "id": "watch",
+            "label": "Keep watching",
+            "lane": "ads",
+            "kind": "wait"
+          },
+          {
+            "id": "end",
+            "label": "Spend protected",
+            "lane": "ads",
+            "kind": "end"
+          }
+        ],
+        "edges": [
+          {
+            "from": "low",
+            "to": "guard"
+          },
+          {
+            "from": "guard",
+            "to": "alert",
+            "label": "yes"
+          },
+          {
+            "from": "guard",
+            "to": "watch",
+            "label": "no"
+          },
+          {
+            "from": "alert",
+            "to": "approve"
+          },
+          {
+            "from": "approve",
+            "to": "pause",
+            "label": "yes"
+          },
+          {
+            "from": "approve",
+            "to": "watch",
+            "label": "no"
+          },
+          {
+            "from": "pause",
+            "to": "end"
+          },
+          {
+            "from": "pause",
+            "to": "fail",
+            "label": "API error",
+            "kind": "failure"
+          }
+        ],
+        "question": "What happens under option A when an advertised product runs low?"
+      },
+      "unknowns": [
+        "How often advertised products run low on stock",
+        "Who on the client side may approve a spend change"
+      ]
+    },
+    {
+      "type": "userflow",
+      "title": "Performance marketer: the stock alert",
+      "question": "What does the marketer see and do when the guard fires?",
+      "nodes": [
+        {
+          "id": "s",
+          "label": "Alert in the dashboard",
+          "kind": "start"
+        },
+        {
+          "id": "detail",
+          "label": "Product, stock cover and spend at risk",
+          "kind": "screen",
+          "evidence": "I",
+          "note": "Inferred: the marketer needs cover and spend side by side to decide"
+        },
+        {
+          "id": "dec",
+          "label": "Approve the bid cut?",
+          "kind": "decision"
+        },
+        {
+          "id": "done",
+          "label": "Confirmation and undo",
+          "kind": "screen"
+        },
+        {
+          "id": "skip",
+          "label": "Dismiss with a reason",
+          "kind": "screen",
+          "evidence": "U"
+        },
+        {
+          "id": "restock",
+          "label": "Restock notice, bids restored",
+          "kind": "end"
+        },
+        {
+          "id": "err",
+          "label": "Change failed, try again or edit in the console",
+          "kind": "error"
+        }
+      ],
+      "edges": [
+        {
+          "from": "s",
+          "to": "detail"
+        },
+        {
+          "from": "detail",
+          "to": "dec"
+        },
+        {
+          "from": "dec",
+          "to": "done",
+          "label": "approve"
+        },
+        {
+          "from": "dec",
+          "to": "skip",
+          "label": "dismiss"
+        },
+        {
+          "from": "done",
+          "to": "restock"
+        },
+        {
+          "from": "done",
+          "to": "err",
+          "label": "API error",
+          "kind": "failure"
+        }
+      ],
+      "unknowns": [
+        "Whether the client wants an automatic restore when stock returns"
+      ]
+    },
+    {
+      "type": "sequence",
+      "title": "System: who tells whom",
+      "question": "What happens, in order, from a stock change to a bid change?",
+      "participants": [
+        {
+          "id": "inv",
+          "label": "Inventory feed",
+          "kind": "external"
+        },
+        {
+          "id": "guard",
+          "label": "Stock guard"
+        },
+        {
+          "id": "mk",
+          "label": "Performance marketer",
+          "kind": "actor"
+        },
+        {
+          "id": "api",
+          "label": "Ads API",
+          "kind": "external"
+        }
+      ],
+      "messages": [
+        {
+          "from": "inv",
+          "to": "guard",
+          "label": "stock and cover per product",
+          "kind": "async"
+        },
+        {
+          "from": "guard",
+          "to": "guard",
+          "label": "check cover against threshold"
+        },
+        {
+          "from": "guard",
+          "to": "mk",
+          "label": "alert with recommended cut",
+          "kind": "async"
+        },
+        {
+          "from": "mk",
+          "to": "guard",
+          "label": "approve",
+          "kind": "return"
+        },
+        {
+          "from": "guard",
+          "to": "api",
+          "label": "lower bids on affected products"
+        },
+        {
+          "from": "api",
+          "to": "guard",
+          "label": "confirmed",
+          "kind": "return"
+        }
+      ],
+      "fragments": [
+        {
+          "kind": "opt",
+          "label": "cover below threshold",
+          "start": 3,
+          "end": 6
+        }
+      ],
+      "notes": [
+        {
+          "at": 5,
+          "over": [
+            "api"
+          ],
+          "text": "Some channels have no usable campaign API and run by console"
+        }
+      ],
+      "unknowns": [
+        "Which of the client's ad channels expose a campaign API"
+      ]
+    }
+  ]
+}
